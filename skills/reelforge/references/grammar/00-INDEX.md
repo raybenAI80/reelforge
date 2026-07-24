@@ -4,7 +4,7 @@ AE(After Effects)식 모션 어휘를 ReelForge 계약(단일 `paused` timeline,
 
 ## 언제 이 폴더를 읽는가
 
-- **D3 (스토리보드+라우팅) 단계**: `STORYBOARD.md`의 각 씬 행에 `refId`(1~2개)를 배정할 때, [WHEN-TO-USE.md](WHEN-TO-USE.md)의 결정 테이블(씬 의도 동사 × intensity 밴드 × 무드)로 후보 기법을 룩업한 뒤, 여기 도메인 문서에서 해당 기법의 계약·선택지·궁합을 확인한다.
+- **D3 (스토리보드+라우팅) 단계**: `STORYBOARD.md`의 각 씬 행에 `refId`(1~2개)를 배정할 때, [ROUTING.md](../gallery/ROUTING.md)의 결정 테이블(씬 의도 동사 × intensity 밴드 × 무드)로 후보 기법을 룩업한 뒤, 여기 도메인 문서에서 해당 기법의 계약·선택지·궁합을 확인한다.
 - **씬 저작 워커**: 배정받은 `refId`의 도메인 문서를 열어 keep(타임라인 페이즈 구조·이징·anchor-exit)과 mutate(카피 슬롯·duration·stagger·액센트) 경계를 읽는다. **빈 캔버스 창작 금지** — 배정 기법의 스케치를 변형한다.
 - 이 폴더는 **읽기 전용 어휘 사전**이다. 씬을 실제로 컴파일·검증하는 것은 갤러리 프래그먼트이며, 여기 코드 스케치는 그 자체로 렌더 대상이 아니다.
 
@@ -14,16 +14,22 @@ AE(After Effects)식 모션 어휘를 ReelForge 계약(단일 `paused` timeline,
 
 ## 도메인 맵 (도메인:개수)
 
-| # | 도메인 | 1줄 요약 | 개수 |
-|---|---|---|---|
-| 01 | [anchor-transform](01-anchor-transform.md) | 앵커포인트(transform-origin)를 회전·스케일의 축으로 다루는 트랜스폼 안무 | 12 |
-| 02 | [easing-graph](02-easing-graph.md) | AE 그래프 에디터(Speed/Value/Velocity/Hold)의 텐션을 코어 이즈로 재현 | 13 |
-| 03 | [camera-3d](03-camera-3d.md) | 씬을 깊이별 plane으로 쪼갠 2.5D/3D + 가상 카메라 무브 | 12 |
-| 04 | [masks-mattes](04-masks-mattes.md) | clip-path·mask-image·트랙매트 관용구로 짓는 리빌·와이프 | 15 |
-| 05 | [text-animator](05-text-animator.md) | AE 텍스트 애니메이터(Range Selector+프로퍼티 축)식 글자 연출 | 12 |
-| 06 | [shapes-strokes](06-shapes-strokes.md) | Trim Paths·스트로크·패스 보간(SVG dashoffset/attr d) | 12 |
-| 07 | [stylize-time](07-stylize-time.md) | Glow·색수차·그레인·Echo·타임 리매핑 등 텍스처·속도 룩 | 13 |
-| 08 | [transitions-advanced](08-transitions-advanced.md) | 씬 경계에서 컷을 숨기거나 서사(연속·인과·대비·챕터)를 부여하는 전환 | 12 |
+| # | 도메인 | 1줄 요약 | 개수 | owner | 입고 상태 |
+|---|---|---|---|---|---|
+| 01 | [anchor-transform](01-anchor-transform.md) | 앵커포인트(transform-origin)를 회전·스케일의 축으로 다루는 트랜스폼 안무 | 12 | local | sketch |
+| 02 | [easing-graph](02-easing-graph.md) | AE 그래프 에디터(Speed/Value/Velocity/Hold)의 텐션을 코어 이즈로 재현 | 13 | local | sketch |
+| 03 | [camera-3d](03-camera-3d.md) | 씬을 깊이별 plane으로 쪼갠 2.5D/3D + 가상 카메라 무브 | 12 | local | sketch |
+| 04 | [masks-mattes](04-masks-mattes.md) | clip-path·mask-image·트랙매트 관용구로 짓는 리빌·와이프 | 15 | local | sketch |
+| 05 | [text-animator](05-text-animator.md) | AE 텍스트 애니메이터(Range Selector+프로퍼티 축)식 글자 연출 | 12 | local | sketch |
+| 06 | [shapes-strokes](06-shapes-strokes.md) | Trim Paths·스트로크·패스 보간(SVG dashoffset/attr d) | 12 | local | sketch |
+| 07 | [stylize-time](07-stylize-time.md) | Glow·색수차·그레인·Echo·타임 리매핑 등 텍스처·속도 룩 | 13 | local | sketch |
+| 08 | [transitions-advanced](08-transitions-advanced.md) | 씬 경계에서 컷을 숨기거나 서사(연속·인과·대비·챕터)를 부여하는 전환 | 12 | local | sketch |
+
+`owner`: `local` = 자체 계약 번역, `hf-anim` = hyperframes-animation 포인터(그래머 기법 ID·101기법 집계 밖).
+
+> 입고 상태 주석: 현재 101기법 전원 `sketch` — 갤러리 verify 통과 시 `verified`로 승격 예정.
+
+인용 규칙: 외부 문서 인용은 파일 라인넘버 금지 — 기법 ID 또는 섹션 헤딩으로만 인용한다(라인은 드리프트함).
 
 **총 101기법.** 도메인 안 코드 스케치는 전부 vendor 코어(CSSPlugin·AttrPlugin·표준 이즈)만 사용하며, SplitText/DrawSVG/MorphSVG/MotionPath/CustomEase는 부재(호출 시 렌더 사망).
 

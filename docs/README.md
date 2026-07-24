@@ -15,7 +15,7 @@ Reference documents for the current engine:
 | [studio.md](studio.md) | Local Studio server: adapter-hosted preview and schema-driven editing |
 | [usage.md](usage.md) | Full `node bin/vf` CLI subcommand reference |
 | [design-presets.md](design-presets.md) | `design-tokens.json` preset catalog for `vf compile --preset` |
-| [motion-design-guide.md](motion-design-guide.md) | Motion grammar for commercial-grade 30s showcases: reveal/transition quality rules with sources |
+| motion grammar (dismantled 2026-07-25) | Now owned by `skills/reelforge/references/`: vocabulary in `grammar/`, routing in `gallery/ROUTING.md`, pacing in `design-direction.md`, QC bans in `strip-qc.md`. Original archived at [history/motion-design-guide-v1.md](history/motion-design-guide-v1.md) |
 | [deck-adapter.md](deck-adapter.md) | `render-manifest.json` to deck-factory `motion-manifest.json` conversion |
 
 ## History

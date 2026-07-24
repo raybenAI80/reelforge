@@ -1,5 +1,14 @@
 # Codex Runner Reference
 
+## Contents
+
+- [Batch shape](#batch-shape)
+- [Batch production pattern](#batch-production-pattern)
+- [Scene worker ownership contract](#scene-worker-ownership-contract)
+- [Worker prompt template](#worker-prompt-template)
+- [Central assembly and gate](#central-assembly-and-gate)
+- [Image runner contract](#image-runner-contract)
+
 Use this reference for batch ReelForge production: many briefs in, many finished
 motion-graphic projects out. A batch is not a parallel `scene_specs.json` writing job.
 For every project, the production spine is **Direction Freeze -> Scene Swarm -> Assemble
@@ -114,15 +123,22 @@ Use the ReelForge skill to author exactly one v6 Scene Swarm fragment.
 
 PROJECT_DIR: <projectDir>
 FILE YOU OWN: <projectDir>/scenes-src/<sceneId>-free.html
-SCENE: <the single frozen STORYBOARD row>
-FROZEN CONTEXT: direction/frame.md, direction/copy.md, direction/STORYBOARD.md
-HOUSE STYLE: <approved pilot fragment, when this is a fan-out scene>
+WORKER INJECTIONS:
+- YOUR STORYBOARD ROW: <the single frozen STORYBOARD row>
+- NEIGHBOR HANDOFF ROWS: <previous and next scene refId and handoffAnchor rows>
+- ASSIGNED REFERENCE: <full assigned gallery fragment when its stamp exists; otherwise
+  the assigned technique section from references/grammar/0N-*.md>
+- KEEP/MUTATE CONTRACT: <the assigned keep/mutate contract>
+- FRAME: direction/frame.md
+- COPY: <this scene's portion of direction/copy.md>
 
 Author only FILE YOU OWN. It is a full free-scene HTML fragment: one template, a unique
 free-<sceneId> composition id, exactly one synchronous paused GSAP timeline registered at
 window.__timelines["free-<sceneId>"], and tl.seek(0). Use only --rf-* colors with
 fallbacks. Make the entrance complete within 0.4s and leave visible filter/opacity living
 motion for the 1fps strip.
+
+빈 캔버스 창작 금지 — 배정 레퍼런스를 변형하라
 
 Do not edit direction files, scene_specs.json, audio_meta.json, image manifests, another
 scene, build output, schemas, or batch files. Do not run compile, pipeline, Studio, or a
@@ -205,12 +221,4 @@ arrive.
 
 ## Appendix — Optional Data Blocks
 
-The eight legacy layouts (`bar`, `pie`, `line`, `list`, `numbered`, `statistic`, `compare`,
-and `quote`) are an optional appendix for a genuinely quantitative scene. They are not the
-batch default, not a Scene Swarm assignment pattern, and not a reason to start from a
-brief-to-`scene_specs.json` block workflow. Default production is zero block scenes.
-
-Use a block only when a real data moment is materially clearer than an authored free
-fragment; it must remain full-bleed and avoid card chrome. See `scene-authoring.md` for the
-legacy block contract and validation details. The full-eight fixture is a compile smoke
-path, not a production template.
+→ blocks 계약 정본: references/scene-authoring.md Appendix

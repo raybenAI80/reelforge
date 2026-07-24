@@ -1,12 +1,35 @@
-# WHEN-TO-USE — 그래머 결정 테이블
+# ROUTING — 라우팅 유일 정본
 
-D3 라우팅에서 씬 하나에 `refId`를 배정할 때 쓰는 **룩업 전용** 문서다. 판정 절차는 3축이며, 산문 판단이 아니라 값 매칭이다:
+그래머는 안정 어휘를 담은 사전이고, ROUTING은 그 어휘를 언제 고를지 정하는 선택 문법이며, 갤러리는 렌더를 통과한 검증 실물이다. 이 세 역할의 서술 정본은 이 파일이며, 검증 상태의 단독 소유자는 `gallery-index.json`이다.
 
-1. **씬 의도 동사**를 7종 중 하나로 확정 → §A 행 선택
-2. **intensity 밴드**를 3종 중 하나로 확정(아크 프리셋이 씬에 배정한 스칼라를 0-40/40-70/70-100으로 양자화) → §A 열 선택
-3. 교차 셀의 후보 2~4개를 §B 무드 궁합·금지로 필터 → §C 예산으로 반복 상한 확인 → §D 조합 규칙으로 충돌 제거
+## Contents
 
-셀 값이 남으면 그대로 배정. 남는 값이 0이면 밴드를 한 단계 낮춰 재룩업(피크 기법이 무드에서 전멸한 경우). ID 뒤 괄호는 도메인 번호.
+- [§0 아크 문법](#0-아크-문법)
+- [§A 의도 동사 × intensity 밴드 매트릭스](#a-의도-동사--intensity-밴드-매트릭스)
+- [§B 무드별 궁합·금지](#b-무드별-궁합금지)
+- [§C 예산 규칙](#c-예산-규칙-영상-단위-반복-상한)
+- [§D 조합 규칙](#d-조합-규칙-씬-내-충돌-제거)
+- [§해석 규칙](#해석-규칙)
+- [부록: reveal 3자 매핑](#부록-구-reveal-enum--grammar-기법-id--named-text-effect)
+
+## §0 아크 문법
+
+`intensity`는 씬의 운동량·시각 밀도·서사 압력을 합산한 0~100 스칼라다. D2에서 아크 프리셋을 고르고 각 구간의 envelope 안에서 씬 값을 확정한 뒤, §A의 0-40/40-70/70-100 열로 양자화한다.
+
+| 아크 프리셋 | hook | build | peak | resolve |
+|---|---:|---:|---:|---:|
+| `ramp` | 15-30 | 35-55 | 75-95 | 35-50 |
+| `double-peak` | 25-45 | 60-80 (1차 피크) | 85-100 (2차 피크) | 40-55 |
+| `cliff` | 15-30 | 30-45 | 90-100 | 20-35 |
+| `steady-pulse` | 40-55 | 50-65 | 65-80 | 45-60 |
+
+| intensity 밴드 | §B 무드 에스컬레이션 대응 무드 태그 | 에스컬레이션 규칙 |
+|---|---|---|
+| 0-40 | `차분` | 절제·여운; 피크 어휘 배정 금지 |
+| 40-70 | `테크`, `럭셔리` | 정보 밀도 또는 무게감만 올린다 |
+| 70-100 | `하이프` | 드롭·임팩트 전용; §C 피크 예산을 소비한다 |
+
+**BPM 그리드 계약:** BGM이 있으면 씬 경계는 마디의 정수배에 맞추고, peak는 드롭 온셋에 둔다. 무음 프로젝트는 이 계약을 강제하지 않으며 씬 길이 기본값은 2~4.5s다.
 
 ---
 
@@ -73,3 +96,28 @@ D3 라우팅에서 씬 하나에 `refId`를 배정할 때 쓰는 **룩업 전용
 8. **모션 벡터 승계는 상시 원칙.** `motion-vector-inheritance`(08)는 특정 셰이프가 아니라 모든 컷백 위의 체크리스트 — exit의 in계열 이즈와 enter의 out계열 이즈를 한 곡선으로 짝지어라(왼쪽으로 나갔으면 왼쪽에서 들어온다).
 9. **preserve-3d 씬 안전.** 3D 중첩 씬은 perspective를 최상위 1개에만, 매 계층 preserve-3d, opacity/filter는 3D 자손을 가진 요소가 아니라 바깥 래퍼에(`preserve-3d-layer-safety` 4항).
 10. **무한 루프는 CSS만.** 리빙모션(브리딩/드리프트/흐름)은 CSS keyframes `infinite alternate` + `--rf-scene-start` delay로. GSAP `repeat:-1` 금지(시크 클럭 불일치).
+## §해석 규칙
+
+- 셀 값은 안정 어휘인 grammar 기법 ID이며, 검증 상태를 담지 않는다.
+- `direction-lint`는 D5 동결 시 각 `refId`를 `gallery-index.json`의 `implementsGrammar`로 해석한다.
+- 스탬프된 실물 프래그먼트가 있으면 그 프래그먼트로 라우팅하고 워커는 `keep`/`mutate` 경계를 변형한다.
+- 없으면 `RF-DIR-001`이 “sketch-authored · strip QC 강화 대상”을 경고한다. 차단하지 않으며 워커는 배정 grammar 스케치를 변형한다.
+
+## 부록: 구 reveal enum ↔ grammar 기법 ID ↔ named text effect
+
+구 enum 12종은 삭제 전 scene-authoring 페어링 표에서 실측했다(원본은 `docs/history/motion-design-guide-v1.md` §E와 `src/compiler/compiler.mjs` revealTween 분기). grammar ID는 `grammar/00-INDEX.md`의 전체 리스트에서 골랐고, named text effect 24종은 `/home/seunghyeong/.claude/skills/hyperframes-animation/adapters/animate-text.md`의 목록을 실측해 인용했다. 이 표는 구 enum을 새 라우팅 어휘로 옮기는 매핑이며, 효과 구현 정본은 외부 `animate-text`다.
+
+| 구 reveal enum | 대응 grammar 기법 ID | hyperframes-animation named text effect ID |
+|---|---|---|
+| `fade_in` | `blur-dissolve-in` | `micro-scale-fade` |
+| `stagger` | `range-selector-stagger-map` | `per-character-rise` |
+| `stagger_then_flash` | `scale-jump-stairstep` | `shimmer-sweep` |
+| `cascade` | `offset-cascade-wave` | `stagger-from-edges` |
+| `count_up` | `easy-ease-linear-hold-usage` | `spring-scale-in` |
+| `typewriter` | `typewriter-vs-fade-sequence` | `typewriter` |
+| `spotlight` | `mask-spotlight-drift` | `focus-blur-resolve` |
+| `split_reveal` | `word-clip-stagger` | `mask-reveal-up` |
+| `zoom_in` | `multiplane-dolly-push` | `scale-down-fade` |
+| `build_up` | `netflix-title-converge` | `kinetic-center-build` |
+| `dramatic_pause` | `hold-keyframe-stepped-values` | `fade-through` |
+| `parallel` | `dual-layer-counter-move` | `shared-axis-y` |

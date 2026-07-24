@@ -1,5 +1,7 @@
 # 03 — 레이어 분해 2.5D/3D + 가상 카메라
 
+> 이 문서의 코드 스케치는 렌더 대상이 아니다 — 검증 실물은 references/gallery/fragments/, 이 파일은 통째 로딩 금지(배정 기법 섹션만 부분 로딩).
+
 씬을 깊이별 plane으로 쪼개고 가상 카메라(월드/리그)를 움직여 입체감을 만드는 기법 12종.
 모든 스케치는 RF-FRAGMENT v1.0 계약 준수: core GSAP만(vendor에 플러그인 없음), `paused:true` 타임라인, arbitrary-seek 결정적, `Math.random`/`Date.now`/fetch 금지.
 

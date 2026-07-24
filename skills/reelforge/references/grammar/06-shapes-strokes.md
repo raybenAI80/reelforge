@@ -1,5 +1,7 @@
 # 06 — 셰이프·트림패스·스트로크
 
+> 이 문서의 코드 스케치는 렌더 대상이 아니다 — 검증 실물은 references/gallery/fragments/, 이 파일은 통째 로딩 금지(배정 기법 섹션만 부분 로딩).
+
 AE의 Trim Paths / 셰이프 마스크 / Path 보간 관용구를 ReelForge 계약(GSAP core-only,
 seek-safe, RF-FRAGMENT 린트) 안에서 구현하는 기법 카탈로그. 총 12기법.
 

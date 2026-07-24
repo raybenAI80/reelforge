@@ -1,5 +1,7 @@
 # 키프레임 텐션·그래프 에디터 (Keyframe Tension & Graph Editor)
 
+> 이 문서의 코드 스케치는 렌더 대상이 아니다 — 검증 실물은 references/gallery/fragments/, 이 파일은 통째 로딩 금지(배정 기법 섹션만 부분 로딩).
+
 AE 그래프 에디터(Speed/Value Graph, Keyframe Velocity, Easy Ease/Hold)의 텐션 제어를 HyperFrames 계약(단일 paused timeline, seek-safe, GSAP 코어 전용) 위에서 재현하는 13기법 레퍼런스. "곡선의 모양 = 감정의 모양"이라는 사고방식이 공통 골격이다.
 
 **vendor 전제**: `/vendor/gsap/3.14.2/`에는 gsap.min.js(코어)만 존재한다(실측). 코어 등록 이즈 — power0~4, sine, expo, circ, back(N), elastic(a,p), bounce, steps(N), none — 만 사용하라. CustomEase·EasePack(RoughEase/SlowMo)·MotionPathPlugin 등 외부 플러그인은 없다 — 문자열로 호출하면 렌더가 죽는다. 임의 곡선은 `(p)=>number` 순수 함수로 authored(코어 네이티브 지원).
@@ -41,15 +43,7 @@ tl.fromTo('#hero', { scale: 0.85, opacity: 0 },
 
 단조 이즈라 opacity 결합 안전. duration 0.5~0.6s는 등장창(0.4s)을 넘지만 주인공/보조 위계 연출 의도로 허용 범위.
 
-**선택지**
-
-| 파라미터 | 옵션 |
-|---|---|
-| 패밀리 | power1(완만) / power2 / power3(house 기본) / power4(급격) / expo(더 급격) |
-| 방향 | .in(가속 시작) / .out(감속 도착) / .inOut(대칭) |
-
-**쓸 때**: 한 씬 안에서 주인공과 보조 요소의 위계를 이징 강도만으로 구분할 때. 강조 요소만 power4/expo로 올리고 배경 요소는 power1/2로 낮춘다.
-**피할 때**: 오버슈트·탄성이 필요한 장난스러운 순간 — back/elastic 몫.
+→ hyperframes-animation Easing 참조
 
 - intensity: 40-70
 - pairs: `weighted-deceleration-mass`, `separate-dimensions-axis-ease`
@@ -143,15 +137,7 @@ tl.to(counter, {
 
 steps(42)는 값 1당 스냅 1회가 되도록 목표값과 스텝 수를 일치시킨 것. 1.2s는 카운트업 하우스 상한 준수.
 
-**선택지**
-
-| 파라미터 | 옵션 |
-|---|---|
-| 보간 | Easy Ease(자연) / Linear(기계) / Hold(스냅) |
-| Hold 스텝 수 N | 목표 정수값과 일치시키면 1단위 스냅 |
-
-**쓸 때**: Linear=카메라 팬·틱 카운터·컨베이어 같은 '감정 없는 등속'. Hold=디지털 카운터·타자기 커서·데이터 스냅·stop-motion/로파이 톤.
-**피할 때**: 사람이 만지는 듯한 자연스러운 도착 — Linear/Hold 둘 다 부적합, Easy Ease 계열을 쓴다.
+→ hyperframes-animation Easing Vocabulary (character & mood) 참조
 
 - intensity: 40-70
 - pairs: `hold-keyframe-stepped-values`
@@ -267,15 +253,7 @@ tl.fromTo('#pin', { scale: 0 },
 
 0.8s는 등장창을 넘지만 elastic 잔진동 특성상 의도된 연출 시간.
 
-**선택지**
-
-| 파라미터 | 옵션 |
-|---|---|
-| amplitude | 0.6-1.4 (진폭 크기) |
-| period | 0.2-0.5 (짧을수록 잔진동 많음) |
-
-**쓸 때**: 지도 핀 착지, 알림 뱃지, 장난감 같은 캐릭터 UI — 명시적으로 코믹/장난스러운 톤일 때만.
-**피할 때**: 제품/엔터프라이즈 톤 — 기본값이 아니며 독트린상 '드문 예외'.
+→ hyperframes-animation Easing Vocabulary (character & mood) 참조
 
 - intensity: 70-100
 - pairs: `value-graph-overshoot-settle`
@@ -295,15 +273,7 @@ tl.fromTo('#chip', { opacity: 0 },
   { opacity: 1, duration: 0.25, ease: 'power2.out' }, 0.1);
 ```
 
-**선택지**
-
-| 파라미터 | 옵션 |
-|---|---|
-| duration | 길수록 더 높은 곳에서 떨어진 느낌 |
-| y from | 낙하 높이 |
-
-**쓸 때**: 물리적 낙하 코미디 register(칩/토큰/아이콘이 실제로 떨어지는 장면)에서만.
-**피할 때**: 일반 카드/텍스트 등장 — 그건 house 기본값 power3.out.
+→ hyperframes-animation Easing Vocabulary (character & mood) 참조
 
 - intensity: 70-100
 - pairs: `elastic-amplitude-period`

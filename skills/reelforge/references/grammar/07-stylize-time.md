@@ -1,5 +1,7 @@
 # 스타일라이즈 이펙트 + 속도 연출 (Stylize & Time Manipulation)
 
+> 이 문서의 코드 스케치는 렌더 대상이 아니다 — 검증 실물은 references/gallery/fragments/, 이 파일은 통째 로딩 금지(배정 기법 섹션만 부분 로딩).
+
 AE의 Stylize/Time 계열 이펙트(Glow·채널 분리·그레인·타임 리매핑·Echo·Posterize Time)를 HyperFrames 계약(단일 paused timeline, seek-safe, GSAP 코어 전용) 위에서 재현하는 13기법 레퍼런스. 텍스처는 "정적 레이어 + 결정론적 토글", 속도감은 "이즈 곡선·이벤트 밀도"로 만드는 것이 공통 골격이다.
 
 **vendor 전제**: `/vendor/gsap/3.14.2/`에는 gsap.min.js(코어)만 존재한다. `steps(n)`(SteppedEase)·함수형 ease·`gsap.utils.toArray`·CSSPlugin(clipPath/filter/mix-blend 포함)은 코어에 실재하지만, CustomEase·MotionPathPlugin·SplitText·RoughEase/SlowMo는 없다 — 커스텀 곡선은 순수 함수 ease로, 경로는 x/y 배열 보간으로 대체하라.

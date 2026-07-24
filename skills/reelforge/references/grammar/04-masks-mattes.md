@@ -1,5 +1,7 @@
 # 04 — 마스크·트랙매트·리빌 (Masks & Mattes)
 
+> 이 문서의 코드 스케치는 렌더 대상이 아니다 — 검증 실물은 references/gallery/fragments/, 이 파일은 통째 로딩 금지(배정 기법 섹션만 부분 로딩).
+
 AE의 Mask Path / Track Matte 관용구를 ReelForge 계약(코어 GSAP 단일·seek-safe·결정론 렌더) 위에서 재현하는 기법 카탈로그. vendor 실측 전제: `vendor/gsap/3.14.2` 코어 단일 번들 — CSSPlugin·AttrPlugin·전 표준 이즈 포함, SplitText/DrawSVG/MorphSVG/MotionPath **부재**. clip-path·mask·background-position·CSS 커스텀 프로퍼티는 CSSPlugin 복합문자열 보간으로 코어만으로 트윈 가능하다.
 
 ## Contents
@@ -86,7 +88,7 @@ intensity: 70-100 · pairs: `line-sweep-diagonal-stripes`
 
 AE 원리: 원형 매트를 0→100% 확장하는 필름 아이리스 트랜지션. 원점을 특정 지점으로 옮기면 "그 지점에서 세계가 열리는" 방향성이 생긴다.
 
-기본 `circle(0%→100%)` 확장 리빌은 → hyperframes-animation `techniques.md`(397행대)·`transitions/css-radial.md` 참조. 여기서는 **원점 좌표를 옮기는 방향성 확장판**만 다룬다.
+기본 `circle(0%→100%)` 확장 리빌은 → hyperframes-animation `techniques.md`의 “12. Clip-Path Reveal Masks”·`transitions/css-radial.md`의 “Circle Iris” 참조. 여기서는 **원점 좌표를 옮기는 방향성 확장판**만 다룬다.
 
 **구현** — `at X% Y%` 좌표는 시작·종료 동일하게 고정하고 반지름만 보간한다.
 

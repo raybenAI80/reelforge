@@ -1,5 +1,7 @@
 # 앵커포인트·트랜스폼 안무 (Anchor & Transform Choreography)
 
+> 이 문서의 코드 스케치는 렌더 대상이 아니다 — 검증 실물은 references/gallery/fragments/, 이 파일은 통째 로딩 금지(배정 기법 섹션만 부분 로딩).
+
 AE의 Anchor Point 사고방식을 HyperFrames 계약(단일 paused timeline, seek-safe, GSAP 코어 전용) 위에서 재현하는 12기법 레퍼런스. `transform-origin`을 회전·스케일의 "축"으로 다루는 법이 공통 골격이다.
 
 **vendor 전제**: `/vendor/gsap/3.14.2/`에는 gsap.min.js(코어)만 존재한다. CSSPlugin(코어 번들)이 x/y/rotation/rotateX/rotateY/scale/skewX/skewY/autoAlpha/transformOrigin을 전부 처리하고, 이징은 코어(power0~4, sine, expo, circ, back, elastic, bounce, steps, none)만 사용하라. SplitText·CustomEase·MotionPathPlugin 등 유료/외부 플러그인은 없다 — 호출하면 렌더가 죽는다.

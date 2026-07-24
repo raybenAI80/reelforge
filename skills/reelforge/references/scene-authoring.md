@@ -1,5 +1,13 @@
 # Scene Authoring Reference
 
+## Contents
+
+- [Free Scene Fragment Contract](#free-scene-fragment-contract)
+- [Thin Manifest Field Reference](#thin-manifest-field-reference)
+- [Silent Or Music-Only Scene Timing](#silent-or-music-only-scene-timing)
+- [Korean TTS Preprocessing](#korean-tts-preprocessing)
+- [Appendix: optional data blocks](#appendix-optional-data-blocks)
+
 Use this reference after Direction Freeze, when each Scene Swarm worker authors one
 full-bleed ReelForge scene. The default video contains **zero data-block scenes**:
 each scene is an authored `layout: "free"` HTML fragment. `scene_specs.json` is the
@@ -170,21 +178,7 @@ The compiler verifies that every `audio_meta.scenes[].sourceHash` equals
 scene's speech/alignment, then recompile global timing. Place project BGM at
 `assets/audio/bgm.mp3`; the compiler wires it when any scene requests OST.
 
-## Mood And Reveal Pairing
-
-| Intent | Mood | Reveal | Emphasis |
-|---|---|---|---|
-| Neutral explanation | `informative` | `stagger` or `fade_in` | `keyword` |
-| Urgent next step | `urgent` | `stagger_then_flash` or `cascade` | `count` or `sequence` |
-| Serious cost/risk | `somber` | `cascade` or `dramatic_pause` | `contrast` |
-| Reflective user insight | `contemplative` | `typewriter` or `fade_in` | `quote` |
-| Suspense before result | `suspense` | `split_reveal` or `dramatic_pause` | `contrast` |
-| Win or growth | `triumphant` | `build_up` or `zoom_in` | `number` |
-| Big metric | `dramatic` | `count_up` or `spotlight` | `number` |
-
-Available reveals are `fade_in`, `stagger`, `stagger_then_flash`, `cascade`, `count_up`,
-`typewriter`, `spotlight`, `split_reveal`, `zoom_in`, `build_up`, `dramatic_pause`, and
-`parallel`.
+free 씬의 reveal/emphasis는 고정값(reveal:"fade_in", emphasis:"keyword")으로만 기입한다 — 이 필드들은 디렉션 운반체가 아니며(fade_in은 컴파일러의 block-host 래퍼 리빌을 중립으로 만드는 값 — zoom_in 등 다른 값은 프래그먼트 위에 래퍼 트윈을 주입하므로 쓰지 않는다), 씬의 실제 연출은 STORYBOARD의 refId 배정(references/gallery/ROUTING.md)이 소유한다.
 
 ## Transitions
 

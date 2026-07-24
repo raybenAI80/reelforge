@@ -1,5 +1,7 @@
 # 08 — 고급 씬 전환 문법 (Advanced Transitions)
 
+> 이 문서의 코드 스케치는 렌더 대상이 아니다 — 검증 실물은 references/gallery/fragments/, 이 파일은 통째 로딩 금지(배정 기법 섹션만 부분 로딩).
+
 씬 경계에서 컷을 숨기거나 서사(연속·인과·대비·챕터)를 부여하는 12기법 레퍼런스.
 모든 스케치는 vendor gsap.min.js 3.14.2 코어(CSSPlugin+AttrPlugin)만 사용 — 플러그인 파일 0개 실측 기준.
 개별 씬 내부 모션 규칙·블루프린트는 이 문서 소관이 아니다 → hyperframes-animation 참조.
