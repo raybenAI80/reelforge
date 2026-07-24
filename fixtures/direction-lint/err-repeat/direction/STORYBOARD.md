@@ -1,0 +1,7 @@
+# Repeated grammar fixture
+
+| sceneId | duration | intent | intensity | refId |
+| --- | --- | --- | --- | --- |
+| s01 | 5s | introduce | 50 | anchor-corner-swing |
+| s02 | 5s | explain | 50 | anchor-corner-swing |
+| s03 | 5s | resolve | 50 | anchor-corner-swing |

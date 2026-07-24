@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://video-factory.local/schemas/gallery-index.schema.json",
+  "title": "ReelForge gallery-index.json",
+  "description": "Verified gallery fragment routing metadata. The verified stamp is the sole source of fragment verification state.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "entries"],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    }
+  },
+  "$defs": {
+    "intensityBand": {
+      "type": "string",
+      "enum": ["0-40", "40-70", "70-100"]
+    },
+    "arcSegment": {
+      "type": "string",
+      "enum": ["hook", "build", "peak", "resolve"]
+    },
+    "slot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "maxChars"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "maxChars": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "anchorGeometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "scale"],
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "scale": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "verified": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contractVersion", "renderHash", "checkedAt"],
+      "properties": {
+        "contractVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "renderHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "checkedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "family",
+        "implementsGrammar",
+        "intensityBand",
+        "arcFit",
+        "durationRange",
+        "slots",
+        "mutate",
+        "keep"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "family": {
+          "type": "string",
+          "enum": ["typo", "camera", "data", "object", "atmo", "seal", "pairs"]
+        },
+        "implementsGrammar": {
+          "type": "string",
+          "minLength": 1
+        },
+        "intensityBand": {
+          "$ref": "#/$defs/intensityBand"
+        },
+        "arcFit": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/arcSegment"
+          }
+        },
+        "durationRange": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "number",
+              "minimum": 0
+            }
+          ]
+        },
+        "slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/slot"
+          }
+        },
+        "mutate": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "keep": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "pairWith": {
+          "type": "string",
+          "minLength": 1
+        },
+        "anchorGeometry": {
+          "$ref": "#/$defs/anchorGeometry"
+        },
+        "verified": {
+          "$ref": "#/$defs/verified"
+        }
+      }
+    }
+  }
+}
