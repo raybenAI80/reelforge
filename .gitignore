@@ -9,3 +9,5 @@ npm-debug.log*
 tmp/
 fixtures/golden-specs/*/build/
 .omc/
+reports/
+demos/**/renders/

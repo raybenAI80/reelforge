@@ -3,7 +3,7 @@
  * craft-contact-sheet.mjs
  *
  * Block x Preset contact-sheet QC harness for the 2607-craft block/preset surgery
- * (see ops/2607-craft/briefs/00-frozen-contract.md).
+ * (2607-craft block/preset surgery; original brief archived off-repo).
  *
  * Captures 3 PNG frames (t ~= 0.6s, 2.0s, 3.6s into each block's own scene) for every
  * requested block x preset combination, WITHOUT rendering a full mp4 — this is what makes

@@ -40,7 +40,7 @@
 | 4 | research 삭제 — **배제 레시피 순서 고정**: `git rm -r research` → `git checkout HEAD -- research/06-plan/VERIFICATION-PLAN.md research/08-audit/RESOLUTION.md`(p5 게이트 inputSet 해시 리터럴: p5-l2-8-anchors.mjs:200-201 · p5-l3-12-long-video.mjs:367-368 · p5-l2-dense-visual.mjs:311-312) → p5 게이트 그린 확인 후 다음 단계 | 109파일 3.5MB |
 | 4b | **design-presets.md 인바운드 링크 수술(같은 커밋 필수)**: `docs/design-presets.md:17~32`가 `research/12-video-design/` 6문서로 거는 Research Basis 링크 16개를 아카이브 각주 1줄("원문 리서치: /mnt/d/reelforge-archive/research/12-video-design/")로 대체 — 이거 없으면 #4가 C2 완료판정("잔존 참조 0")을 스스로 깨뜨림 | 16링크 |
 | 5 | `git mv LOOP-STATE.md docs/history/loop-state-final.md` · `git mv briefs docs/history/briefs` · P1~P4-review → `docs/history/reviews/` | 12파일 |
-| 6 | `git mv reports/l0-1-report.json fixtures/verify-report-sample.json` + `tests/vf-selftest.mjs` 90·102·103행 경로 수정 → `git rm -r reports/` | 35파일 |
+| 6 | `git rm -r reports/` 전체 — **[실행 중 실측 정정]** l0-1-report.json 픽스처 이동은 불필요·불가능으로 판명: verify-report가 report.gitCommit↔HEAD를 대조(bin/vf:455)하므로 정적 픽스처는 영원히 FAIL하며, vf-selftest는 `vf gate l0-1`을 직접 실행해 리포트를 매회 재생성 후 왕복 검증하는 구조(reports/는 gitignore 후 런타임 재생성). selftest 경로 수정도 불필요 | 36파일 |
 | 7 | `.gitignore` 추가: `reports/` `demos/**/renders/` | — |
 | 8 | `scripts/craft-contact-sheet.mjs:6` 죽은 ops/ 주석 포인터 제거 | 1줄 |
 

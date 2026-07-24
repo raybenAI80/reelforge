@@ -14,24 +14,26 @@ node bin/vf compile <projectDir> --preset fixtures/presets/<preset>.json
 
 | Preset | Best Use | Mood / Grammar | Research Basis |
 |---|---|---|---|
-| `linear` | Dark technical SaaS, product dashboards, premium developer tooling. | Video-safe near-black `#0a0b0e`, lavender-blue focus, wider dark surface ladder, hairlines lifted for compression. | [color-texture](../research/12-video-design/color-texture.md) |
-| `linear-demo` | Linear-style demo renders where subtitles should not cover the frame. | Same video-safe Linear palette, stronger but layered glow, `subtitle.visible=false`. | [color-texture](../research/12-video-design/color-texture.md) |
-| `vercel` | Minimal developer docs, infrastructure explainers, code-first dashboards. | Near-white canvas, ink CTA, softened magenta/red/cyan for 4:2:0 safety, glow disabled on light backgrounds. | [color-texture](../research/12-video-design/color-texture.md) |
-| `stripe` | Fintech, B2B SaaS landing reels, pricing or growth stories. | Off-white canvas, indigo CTA, softened ruby/magenta; mesh-gradient colors reserved for large areas. | [color-texture](../research/12-video-design/color-texture.md) |
-| `notion` | Docs, education, wiki/productivity, warm workspace narratives. | Lifted navy hero panel, stronger pastel card tints, safer hairlines. | [color-texture](../research/12-video-design/color-texture.md) |
-| `apple` | Premium product showcase, keynote-style reels, low-density gallery scenes. | Product-first light canvas, dark tile ladder with visible deltas, large dark-on-light typography. | [color-texture](../research/12-video-design/color-texture.md) |
-| `nebula-pop` | Optimistic science explainers, bright educational reels. | Kurzgesagt-like space navy, neon cyan/pink/yellow, smooth object-first motion. | [youtube-channels](../research/12-video-design/youtube-channels.md) |
-| `pressroom` | Vox / Johnny Harris style journalism, maps, documentary explainers. | Paper cream, ink navy, signal red, highlight yellow, grain/print texture semantics. | [youtube-channels](../research/12-video-design/youtube-channels.md) |
-| `neon-terminal` | Fast tech explainers, code reels, developer launch beats. | Video-safe terminal black, code cyan, flame orange, hot pink; high-chroma colors for large hits only. | [youtube-channels](../research/12-video-design/youtube-channels.md), [color-texture](../research/12-video-design/color-texture.md) |
-| `broadcast-news` | Global news packages, lower thirds, live updates, sports-adjacent explainers. | Dark studio panels, red as status signal, yellow secondary alert, tabular data tone. | [broadcast-news](../research/12-video-design/broadcast-news.md) |
-| `data-journal` | FT/Economist/NYT style charts, statistics, source-backed explainers. | FT paper, Economist red tagbar, direct-label chart palette, flat/no-glow treatment. | [broadcast-news](../research/12-video-design/broadcast-news.md) |
-| `cinematic-trailer` | Brand intros, title cards, blockbuster trailer text hits. | Teal-black, warm title white, orange impact, letterbox/grain/glow vocabulary. | [cinematic-trailer](../research/12-video-design/cinematic-trailer.md) |
-| `mono-impact` | Noir campaign cards, black/white hard-cut statements, one-word impact reels. | Warm monochrome, red accent only for large emphasis, no glow, no particles. | [cinematic-trailer](../research/12-video-design/cinematic-trailer.md), [color-texture](../research/12-video-design/color-texture.md) |
-| `wrapped-bold` | Rankings, recaps, metrics, social-stat cards. | Spotify Wrapped-like four-color discipline, huge condensed type, grain/scratch texture. | [studio-trends](../research/12-video-design/studio-trends.md) |
-| `k-variety` | Korean variety captions, YouTube entertainment edits, reaction-heavy clips. | White caption text with black stroke, yellow keywords, dense syllable-pop/shout grammar. | [korean-video](../research/12-video-design/korean-video.md) |
-| `k-broadcast` | Korean news, election/count-up graphics, information YouTube panels. | Dark navy broadcast band, flat breaking red, yellow headline emphasis, tabular count grammar. | [korean-video](../research/12-video-design/korean-video.md), [broadcast-news](../research/12-video-design/broadcast-news.md) |
+| `linear` | Dark technical SaaS, product dashboards, premium developer tooling. | Video-safe near-black `#0a0b0e`, lavender-blue focus, wider dark surface ladder, hairlines lifted for compression. | color-texture |
+| `linear-demo` | Linear-style demo renders where subtitles should not cover the frame. | Same video-safe Linear palette, stronger but layered glow, `subtitle.visible=false`. | color-texture |
+| `vercel` | Minimal developer docs, infrastructure explainers, code-first dashboards. | Near-white canvas, ink CTA, softened magenta/red/cyan for 4:2:0 safety, glow disabled on light backgrounds. | color-texture |
+| `stripe` | Fintech, B2B SaaS landing reels, pricing or growth stories. | Off-white canvas, indigo CTA, softened ruby/magenta; mesh-gradient colors reserved for large areas. | color-texture |
+| `notion` | Docs, education, wiki/productivity, warm workspace narratives. | Lifted navy hero panel, stronger pastel card tints, safer hairlines. | color-texture |
+| `apple` | Premium product showcase, keynote-style reels, low-density gallery scenes. | Product-first light canvas, dark tile ladder with visible deltas, large dark-on-light typography. | color-texture |
+| `nebula-pop` | Optimistic science explainers, bright educational reels. | Kurzgesagt-like space navy, neon cyan/pink/yellow, smooth object-first motion. | youtube-channels |
+| `pressroom` | Vox / Johnny Harris style journalism, maps, documentary explainers. | Paper cream, ink navy, signal red, highlight yellow, grain/print texture semantics. | youtube-channels |
+| `neon-terminal` | Fast tech explainers, code reels, developer launch beats. | Video-safe terminal black, code cyan, flame orange, hot pink; high-chroma colors for large hits only. | youtube-channels, color-texture |
+| `broadcast-news` | Global news packages, lower thirds, live updates, sports-adjacent explainers. | Dark studio panels, red as status signal, yellow secondary alert, tabular data tone. | broadcast-news |
+| `data-journal` | FT/Economist/NYT style charts, statistics, source-backed explainers. | FT paper, Economist red tagbar, direct-label chart palette, flat/no-glow treatment. | broadcast-news |
+| `cinematic-trailer` | Brand intros, title cards, blockbuster trailer text hits. | Teal-black, warm title white, orange impact, letterbox/grain/glow vocabulary. | cinematic-trailer |
+| `mono-impact` | Noir campaign cards, black/white hard-cut statements, one-word impact reels. | Warm monochrome, red accent only for large emphasis, no glow, no particles. | cinematic-trailer, color-texture |
+| `wrapped-bold` | Rankings, recaps, metrics, social-stat cards. | Spotify Wrapped-like four-color discipline, huge condensed type, grain/scratch texture. | studio-trends |
+| `k-variety` | Korean variety captions, YouTube entertainment edits, reaction-heavy clips. | White caption text with black stroke, yellow keywords, dense syllable-pop/shout grammar. | korean-video |
+| `k-broadcast` | Korean news, election/count-up graphics, information YouTube panels. | Dark navy broadcast band, flat breaking red, yellow headline emphasis, tabular count grammar. | korean-video, broadcast-news |
 
 ## Video-Safe Notes
+
+> Research Basis 원문 문서는 레포에서 제거되었으며 `/mnt/d/reelforge-archive/research/12-video-design/`에 보관되어 있다. 표의 명칭은 그 아카이브의 파일명이다.
 
 The `color-texture` correction table is applied to the preset source values, not as an extra top-level `videoSafe` object, because `schemas/design-tokens.schema.json` permits only `version`, `presetId`, `colors`, `moods`, `subtitle`, and `fonts`.
 
