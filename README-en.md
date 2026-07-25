@@ -1,35 +1,54 @@
 <p align="center"><a href="README.md">한국어</a> | English | <a href="README-ja.md">日本語</a></p>
 
-<p align="center"><img src="docs/assets/hero.gif" alt="ReelForge demo highlights" width="720"></p>
+<p align="center"><img src="docs/assets/hero.gif" alt="ReelForge v7 showcase" width="720"></p>
 
-<p align="center"><strong>ReelForge is a keyless AI video-generation loop that turns a one-line brief into a full-bleed motion-graphics video.</strong></p>
+<p align="center"><strong>ReelForge is a keyless AI video system that turns a one-line brief into a cinematic motion-graphic film.</strong></p>
 
-The output is a video, not a slide deck.
-Kinetic typography, mood-driven color systems, and continuous living motion are its default language,
-and every scene is an HTML motion-graphics fragment authored directly by an agent (or a person).
+The GIF above is not a mockup — it is the official 22.9-second showcase produced by the
+v7 pipeline itself. Slide grammar (cards, panels, bullets) is banned at the system level;
+a gallery of render-verified choreography supplies the typography, camera, data, and
+transition direction.
 
-## [loop] Core Loop (v6)
+## [loop] Core loop (v7 — Gallery-First)
 
 ```
-One-line brief
-  → 1. Freeze direction       Establish the feel as a contract first: frame (palette, type, mood arc) + copy + storyboard
-  → 2. Scene swarm            One worker per scene authors a free HTML fragment directly (in parallel)
-  → 3. Assemble and validate  Thin manifest → compile → deterministic lint (blocks wall-clock and nondeterministic code)
-  → 4. Render                 Deterministic headless-Chrome render (multi-worker and GPU options)
-  → 5. Strip QC               Mechanical inspection of the full 1 fps strip + viewer review → reauthor only failed scenes locally
+one-line brief
+  → D1 Concept     direction before copy: dominant object, world metaphor, one named visual event per scene
+  → D2 Arc         intensity 0–100 curve + arc presets (ramp/double-peak/cliff/steady-pulse) + beat grid
+  → D3 Routing     every scene gets its choreography from the gallery decision table — no blank-canvas authoring
+  → D4 Copy        copy is laid on top of frozen direction (slot budgets enforced)
+  → D5 Freeze      the direction-lint gate (RF-DIR-001..008) must pass before authoring starts
+  → Scene swarm    workers only transform verified fragments under a keep/mutate contract
+  → Pilot Gate     the engine refuses full compilation until one peak scene passes a solo render
+  → Render + QC    deterministic render → full 1fps strip machine checks + viewer review → re-author failures only
+  → Reharvest      new choreography that survives QC is stamped into the gallery (flywheel)
 ```
 
-Design principle: direction—the feel—comes before the data contract.
-Scenes are authored works, not automatically generated layouts; the engine owns only timing, captions, transitions, tokens, and validation.
-See [docs/v6-architecture.md](docs/v6-architecture.md) for the complete design and what was discarded from v5, and why.
+Core principle: **what is not verified is not vocabulary.** Every gallery entry has passed
+real renders across 3 presets (blank / frozen-motion / low-contrast checks).
+
+## [showcase] Official showcase
+
+The full version of the hero GIF lives at [`demos/v7-showcase`](demos/v7-showcase) —
+12 scenes in 22.9 seconds on a 160 bpm beat grid, running 13 gallery techniques:
+letter-storm convergence → stripe reveal → strike-through draw-on → stepped counter rush →
+overshoot slam → multiplane dolly → camera diving through a letter (zoom portal) →
+glitch "click" swap → 3-depth parallax → checkmark seal.
+
+Every frame obeys the project's design-rule document
+([`demos/v7-showcase/direction/DESIGN-RULES.md`](demos/v7-showcase/direction/DESIGN-RULES.md)):
+a 3-tier type scale, a total ban on boxes/cards/panels, no data-viz widgets
+(the screen itself is the graph), exactly one accent locus per scene, and the success
+color appearing exactly once — at the final seal.
 
 ## [quick-start] Quick Start
 
-Recommended agent path: open this repository in Claude Code, register `skills/reelforge/SKILL.md` as a skill,
-then make a request such as “Create a 30-second brand intro with ReelForge.”
-The skill runs the loop above exactly as written, from freezing the direction through strip QC.
+Agent path (recommended): open this repo in Claude Code, register
+`skills/reelforge/SKILL.md` as a skill, then ask for something like
+"make a 30-second brand intro with ReelForge". The skill drives the whole loop above,
+from D1 concept to strip QC and reharvest.
 
-Local smoke test (to verify the pipeline):
+Local smoke test:
 
 ```bash
 cd <repo>
@@ -44,59 +63,51 @@ node bin/vf pipeline run "$PROJECT_DIR" --profile mock
 node bin/vf studio "$PROJECT_DIR" --port 4317
 ```
 
-The final video is created at `$PROJECT_DIR/out/main.mp4`.
+## [gallery] The choreography gallery — the heart of the system
 
-## [features] Key Features
+[`skills/reelforge/references/gallery/`](skills/reelforge/references/gallery/) holds
+**31 render-verified choreography entries**
+(typo 9 · camera 4 · data 3 · object 4 · atmo 2 · seal 2 · transition pairs 4).
 
-### Free scenes — the motion-graphics authoring unit
-Each scene is an authored HTML fragment (`layout: "free"` + `sourceHtml`).
-Paused GSAP timelines and CSS living loops are safe for deterministic seek rendering,
-and consuming color solely through preset tokens (`--rf-*`) lets the same scene render again in any preset.
+- Vocabulary: [`references/grammar/`](skills/reelforge/references/grammar/00-INDEX.md) —
+  101 AE-style motion techniques across 8 domains, translated to a GSAP-core contract
+- Grammar of choice: [`gallery/ROUTING.md`](skills/reelforge/references/gallery/ROUTING.md) —
+  a scene-intent × intensity × mood decision table
+- Verified reality: `gallery/fragments/` + `gallery-index.json` — intake only through
+  `scripts/gallery-verify.mjs` (3-preset real renders → stamp)
+- Gate: `scripts/direction-lint.mjs` — blocks unknown vocabulary, enforces intensity
+  bands, slot budgets, arc consistency, and transition-pair adjacency. Sketch authoring
+  is allowed but loudly marked "sketch-authored"
 
-### Seventeen design presets
-From linear, vercel, stripe, and apple to dark-hype and Korean broadcast/variety-show tones.
-A single preset controls the surface ladder, hairlines, mood-specific accents and glows, and caption tokens,
-while a minimum contrast threshold is enforced at compile time. See the catalog in [docs/design-presets.md](docs/design-presets.md).
+## [rules] Quality is legislated
 
-### Deterministic rendering and validation
-Rendering is seek-based and deterministic, so identical inputs produce identical pixels.
-render-lint rejects fetch, Math.random, Date.now, performance.now, and non-paused timelines,
-while mechanical inspection of the 1 fps strip (blank frames, low contrast, frozen motion) underpins the QC loop.
-
-### Audio-authoritative timing
-Audio metadata is the sole authority for scene duration.
-With narration, TTS determines scene boundaries; for music-led work, a beat grid or silent mock does.
-The default stack is reproducible without API keys using mock TTS and local Chrome/ffmpeg.
-
-### Studio editing loop
-Use `vf studio` to preview scenes and refine them with guidance on the scope of a change: E1 expression, E2 dialogue, or E3 structure.
-
-### Appendix — eight data blocks (optional)
-An option only for the rare scene that truly needs quantitative data (`bar`, `pie`, `line`, `list`,
-`numbered`, `statistic`, `compare`, `quote` — full-bleed render). The default is zero blocks;
-do not start body scenes with blocks.
+Scene workers are not trusted to have taste. Each project freezes a design-rule document
+(type scale, grid, color, box/data-viz bans, beat grid, handoffs) and the full text is
+embedded into every worker prompt. After rendering, the full 1fps strip is judged twice —
+machine checks (blank / low-contrast / frozen motion) and viewer review — and only
+failing scenes are re-dispatched with reasons (max 2 rounds per scene). Rendering is
+seek-based and deterministic: same input, same pixels; render-lint rejects
+Math.random, Date.now, and fetch.
 
 ## [demos] Demos
 
-| Demo | Purpose | Release |
-|---|---|---|
-| D1 Usage | Usage-flow tutorial | [d1-usage.mp4](https://github.com/kimsh-1/reelforge/releases/download/v0.1.0/reelforge-d1-usage.mp4) |
-| D2 Engine | Introduction to compilation, determinism, and gates | [d2-engine.mp4](https://github.com/kimsh-1/reelforge/releases/download/v0.1.0/reelforge-d2-engine.mp4) |
-| D3 Intro | Brand/product intro | [d3-intro.mp4](https://github.com/kimsh-1/reelforge/releases/download/v0.1.0/reelforge-d3-intro.mp4) |
+| Demo | What it is |
+|---|---|
+| [v7-showcase](demos/v7-showcase) | **Official showcase** — 12-scene maximal cut, source of the hero GIF |
+| [pilot-usage-v7](demos/pilot-usage-v7) | A/B pilot — same copy & timing, direction swapped; 3:0 unanimous judge win |
+| [docs/baseline](docs/baseline) | before/after 1fps strip evidence (old slide-style vs v7) |
 
-The current release is an output of the v5 pipeline. It will be replaced as soon as demos generated with the v6 loop are ready.
+The d1–d3 demos in the v0.1.0 release are legacy-pipeline output, kept as history.
 
-## [reference] Configuration Reference
+## [reference] Reference
 
-For CLI options and configuration, see [docs/usage.md](docs/usage.md); for Studio details, see [docs/studio.md](docs/studio.md);
-for pipeline resumption and the dirty guard, see [docs/pipeline.md](docs/pipeline.md); and for the compiler contract (blocks and the free interface),
-see [docs/compiler.md](docs/compiler.md).
+CLI and configuration: [docs/usage.md](docs/usage.md) · Studio: [docs/studio.md](docs/studio.md) ·
+pipeline resume: [docs/pipeline.md](docs/pipeline.md) · compiler contract:
+[docs/compiler.md](docs/compiler.md) · preset catalog: [docs/design-presets.md](docs/design-presets.md) ·
+gallery operations: [GALLERY.md](skills/reelforge/references/gallery/GALLERY.md).
 
-## [validation] How the Project Was Validated
+## [license-disclaimer] License & disclaimer
 
-P0–P3 proof results, gate details, and architecture records are in [docs/history/build-journey.md](docs/history/build-journey.md).
-
-## [license-disclaimer] License and Disclaimer
-
-The code is Apache-2.0. Fonts, audio, images, and TTS outputs follow their respective licenses and service terms;
-check project-level provenance before public distribution or commercial use.
+Code is Apache-2.0. Fonts, music, images, and TTS output follow their own licenses and
+terms; check per-project provenance before public distribution or commercial use.
+The showcase BGM is produced by our own keyless generation pipeline.
