@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>ReelForge v7 — s03 verified choreography</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        .v7s-s03 {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+        }
+
+        .v7s-s03 .s03-stage {
+          position: absolute;
+          inset: 0;
+          background: var(--rf-bg, #08090d);
+        }
+
+        .v7s-s03 .s03-chrome-label,
+        .v7s-s03 .s03-meter-caption {
+          margin: 0;
+          color: var(--rf-ink-subtle, #8a8f98);
+          font-family: var(--rf-font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+          font-size: 13px;
+          font-weight: 400;
+          letter-spacing: 0.14em;
+          line-height: 1;
+          white-space: nowrap;
+        }
+
+        .v7s-s03 .s03-chrome-label {
+          position: absolute;
+          top: 8%;
+          left: 7.4%;
+        }
+
+        .v7s-s03 .s03-verified-label {
+          position: absolute;
+          top: calc(64% - 33.4vh);
+          left: 7.4%;
+          margin: 0;
+          color: var(--rf-ink-subtle, #8a8f98);
+          font-family: var(--rf-font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+          font-size: 21px;
+          font-weight: 600;
+          letter-spacing: 0.14em;
+          line-height: 1;
+          white-space: nowrap;
+        }
+
+        .v7s-s03 .s03-counter {
+          position: absolute;
+          top: calc(64% - 30.4vh);
+          left: 7.4%;
+          z-index: 2;
+          margin: 0;
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: 38vh;
+          font-weight: 800;
+          font-variant-numeric: tabular-nums;
+          letter-spacing: -0.06em;
+          line-height: 0.96;
+          transform-origin: left 80%;
+          white-space: nowrap;
+          word-break: keep-all;
+          animation: v7s-s03-counter-breathe 1.02s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
+          will-change: filter, transform;
+        }
+
+        .v7s-s03 .s03-energy-column {
+          position: absolute;
+          top: 34.6%;
+          left: 43.8%;
+          width: 28px;
+          height: 34%;
+          display: grid;
+          grid-template-rows: repeat(31, 1fr);
+          z-index: 1;
+        }
+
+        .v7s-s03 .s03-energy-tick {
+          display: block;
+          align-self: center;
+          width: 28px;
+          height: 1px;
+          background: var(--rf-hairline, rgba(255, 255, 255, 0.14));
+          opacity: 0.28;
+        }
+
+        .v7s-s03 .s03-meter,
+        .v7s-s03 .s03-progress {
+          position: absolute;
+          right: 0;
+          left: 0;
+          height: 1px;
+          background: var(--rf-hairline, rgba(255, 255, 255, 0.14));
+        }
+
+        .v7s-s03 .s03-meter {
+          top: 78%;
+        }
+
+        .v7s-s03 .s03-meter-tick,
+        .v7s-s03 .s03-meter-marker,
+        .v7s-s03 .s03-progress-marker {
+          position: absolute;
+          display: block;
+          transform: translateX(-50%);
+        }
+
+        .v7s-s03 .s03-meter-tick {
+          top: -4px;
+          width: 1px;
+          height: 9px;
+          background: var(--rf-hairline, rgba(255, 255, 255, 0.14));
+        }
+
+        .v7s-s03 .s03-meter-marker {
+          top: -8px;
+          left: 0;
+          width: 4px;
+          height: 17px;
+          background: var(--rf-accent, #a98cff);
+          will-change: transform;
+        }
+
+        .v7s-s03 .s03-meter-caption {
+          position: absolute;
+          top: calc(78% + 18px);
+          left: 7.4%;
+        }
+
+        .v7s-s03 .s03-progress {
+          top: 92%;
+        }
+
+        .v7s-s03 .s03-progress-marker {
+          top: -7px;
+          left: 37.5%;
+          width: 2px;
+          height: 15px;
+          background: var(--rf-text, #ffffff);
+        }
+
+        @keyframes v7s-s03-counter-breathe {
+          from {
+            filter: brightness(1);
+          }
+          to {
+            filter: brightness(1.22);
+          }
+        }
+      </style>
+
+      <main class="v7s-s03" data-rf-fragment-version="1.0" data-composition-id="v7s-s03">
+        <div class="s03-stage" aria-hidden="true"></div>
+        <p class="s03-chrome-label">03 — GALLERY</p>
+        <p class="s03-verified-label">검증된 안무,</p>
+        <h1 class="s03-counter" data-target="31">0</h1>
+
+        <div class="s03-energy-column" aria-hidden="true">
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+          <span class="s03-energy-tick"></span>
+        </div>
+
+        <div class="s03-meter" aria-hidden="true">
+          <span class="s03-meter-tick" style="left: 0%"></span>
+          <span class="s03-meter-tick" style="left: calc(1 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(2 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(3 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(4 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(5 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(6 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(7 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(8 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(9 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(10 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(11 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(12 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(13 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(14 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(15 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(16 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(17 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(18 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(19 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(20 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(21 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(22 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(23 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(24 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(25 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(26 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(27 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(28 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(29 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: calc(30 * 100% / 31)"></span>
+          <span class="s03-meter-tick" style="left: 100%"></span>
+          <span class="s03-meter-marker"></span>
+        </div>
+        <p class="s03-meter-caption">0 — 31 VERIFIED</p>
+
+        <div class="s03-progress" aria-hidden="true"><span class="s03-progress-marker"></span></div>
+      </main>
+
+      <script>
+        (() => {
+          const compositionId = "v7s-s03";
+          const root = document.querySelector(`[data-composition-id="${compositionId}"]`);
+          if (!root) return;
+
+          const chrome = root.querySelector(".s03-chrome-label");
+          const label = root.querySelector(".s03-verified-label");
+          const counter = root.querySelector(".s03-counter");
+          const meter = root.querySelector(".s03-meter");
+          const caption = root.querySelector(".s03-meter-caption");
+          const energyColumn = root.querySelector(".s03-energy-column");
+          const energyTicks = Array.from(root.querySelectorAll(".s03-energy-tick"));
+          const marker = root.querySelector(".s03-meter-marker");
+          const progress = root.querySelector(".s03-progress");
+          const target = Number(counter.getAttribute("data-target")) || 31;
+          const countState = { value: 0 };
+          const markerStops = [0, 495.484, 990.968, 1486.452, 1920];
+
+          const updateCount = () => {
+            const value = Math.max(0, Math.min(target, Math.round(countState.value)));
+            counter.textContent = String(value);
+          };
+
+          updateCount();
+          window.__timelines = window.__timelines || {};
+          const tl = gsap.timeline({ paused: true });
+
+          tl.set([chrome, label, meter, caption, energyColumn, progress], { opacity: 0 })
+            .set(counter, { opacity: 1, y: -43.2, scale: 1, transformOrigin: "left 80%" })
+            .set(marker, { x: markerStops[0] })
+            .set(energyTicks, { opacity: 0.28 })
+            .fromTo(chrome, { opacity: 0, y: -8 }, { opacity: 1, y: 0, duration: 0.2, ease: "power3.out" }, 0)
+            .fromTo(label, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.24, ease: "power3.out" }, 0.04)
+            .to(counter, { y: 0, duration: 0.408, ease: "power3.out" }, 0)
+            .fromTo([meter, caption, energyColumn, progress], { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 0.12)
+            .to(countState, { value: 8, duration: 0.001, ease: "none", onUpdate: updateCount }, 0.5106)
+            .to(marker, { x: markerStops[1], duration: 0.16, ease: "power2.out" }, 0.5106)
+            .to(energyTicks.slice(0, 8), { opacity: 1, duration: 0.001, ease: "none", stagger: 0.022 }, 0.5106)
+            .to(counter, { scale: 1.028, duration: 0.045, ease: "power2.out" }, 0.5106)
+            .to(counter, { scale: 1, duration: 0.13, ease: "expo.out" }, 0.5556)
+            .to(countState, { value: 16, duration: 0.001, ease: "none", onUpdate: updateCount }, 1.0212)
+            .to(marker, { x: markerStops[2], duration: 0.16, ease: "power2.out" }, 1.0212)
+            .to(energyTicks.slice(8, 16), { opacity: 1, duration: 0.001, ease: "none", stagger: 0.022 }, 1.0212)
+            .to(counter, { scale: 1.028, duration: 0.045, ease: "power2.out" }, 1.0212)
+            .to(counter, { scale: 1, duration: 0.13, ease: "expo.out" }, 1.0662)
+            .to(countState, { value: 24, duration: 0.001, ease: "none", onUpdate: updateCount }, 1.5318)
+            .to(marker, { x: markerStops[3], duration: 0.16, ease: "power2.out" }, 1.5318)
+            .to(energyTicks.slice(16, 24), { opacity: 1, duration: 0.001, ease: "none", stagger: 0.022 }, 1.5318)
+            .to(counter, { scale: 1.028, duration: 0.045, ease: "power2.out" }, 1.5318)
+            .to(counter, { scale: 1, duration: 0.13, ease: "expo.out" }, 1.5768)
+            .to(countState, { value: 31, duration: 0.001, ease: "none", onUpdate: updateCount }, 2.0424)
+            .to(marker, { x: markerStops[4], duration: 0.16, ease: "power2.out" }, 2.0424)
+            .to(energyTicks.slice(24, 31), { opacity: 1, duration: 0.001, ease: "none", stagger: 0.022 }, 2.0424)
+            .to(counter, { scale: 1.036, duration: 0.05, ease: "power2.out" }, 2.0424)
+            .to(counter, { scale: 1, duration: 0.18, ease: "expo.out" }, 2.0924);
+
+          window.__timelines[compositionId] = tl;
+          tl.seek(0);
+        })();
+      </script>
+    </template>
+  </body>
+</html>

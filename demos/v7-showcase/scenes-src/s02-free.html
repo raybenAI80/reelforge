@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>ReelForge v7 — BREAK</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        #v7s-s02 {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          color: var(--rf-text, #f7f7f4);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+        }
+
+        #v7s-s02 .s02-stage {
+          position: absolute;
+          inset: 0;
+          background: var(--rf-bg, #090a0e);
+          animation: s02-stage-breathe 1.02s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite;
+          will-change: filter;
+        }
+
+        #v7s-s02 .s02-chrome {
+          position: absolute;
+          z-index: 2;
+          top: 8%;
+          left: 7.4%;
+          color: var(--rf-ink-subtle, #9297a2);
+          font-family: var(--rf-font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+          font-size: 13px;
+          font-weight: 400;
+          letter-spacing: 0.14em;
+          line-height: 1;
+          white-space: nowrap;
+          will-change: opacity, transform;
+        }
+
+        #v7s-s02 .s02-copy {
+          position: absolute;
+          z-index: 2;
+          top: calc(60% - 152px);
+          left: 7.4%;
+          margin: 0;
+          color: var(--rf-text, #f7f7f4);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: clamp(120px, 10vw, 190px);
+          font-weight: 800;
+          letter-spacing: -0.045em;
+          line-height: 0.96;
+          white-space: nowrap;
+          word-break: keep-all;
+          will-change: transform;
+        }
+
+        #v7s-s02 .s02-accent-event {
+          position: absolute;
+          z-index: 3;
+          inset: 0;
+          color: var(--rf-accent, #9c7cff);
+          pointer-events: none;
+        }
+
+        #v7s-s02 .s02-strike {
+          position: absolute;
+          top: calc(60% - 82px);
+          left: 7.4%;
+          width: 38.25vw;
+          height: 20px;
+          transform: translateY(-50%);
+        }
+
+        #v7s-s02 .s02-strike-svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+
+        #v7s-s02 .s02-strike-trace {
+          fill: none;
+          stroke: currentColor;
+          stroke-linecap: square;
+          stroke-width: 2;
+          vector-effect: non-scaling-stroke;
+        }
+
+        #v7s-s02 .s02-strike-fill {
+          fill: currentColor;
+          fill-opacity: 0;
+        }
+
+        #v7s-s02 .s02-end-dot {
+          position: absolute;
+          z-index: 1;
+          top: calc(60% - 82px);
+          left: calc(7.4% + 38.25vw);
+          width: 14px;
+          height: 14px;
+          margin: -7px 0 0 -7px;
+          background: currentColor;
+          clip-path: circle(50%);
+          opacity: 0;
+          pointer-events: none;
+          will-change: opacity, transform;
+        }
+
+        #v7s-s02 .s02-progress {
+          position: absolute;
+          z-index: 2;
+          top: 92%;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background: var(--rf-hairline, rgba(255, 255, 255, 0.13));
+          will-change: opacity;
+        }
+
+        #v7s-s02 .s02-progress-marker {
+          position: absolute;
+          top: 50%;
+          left: 25%;
+          width: 1px;
+          height: 13px;
+          background: var(--rf-text, #f7f7f4);
+          transform: translate(-50%, -50%);
+        }
+
+        @keyframes s02-stage-breathe {
+          0%,
+          100% {
+            filter: brightness(1);
+          }
+          50% {
+            filter: brightness(1.22);
+          }
+        }
+      </style>
+      <main
+        id="v7s-s02"
+        data-rf-fragment-version="1.0"
+        data-composition-id="v7s-s02"
+      >
+        <div class="s02-stage" aria-hidden="true"></div>
+        <div class="s02-chrome">02 — BREAK</div>
+        <h1 class="s02-copy"><span>슬라이드는</span> 죽었다</h1>
+        <div class="s02-accent-event" aria-hidden="true">
+          <div class="s02-strike">
+            <svg class="s02-strike-svg" viewBox="0 0 1000 20" preserveAspectRatio="none">
+              <path class="s02-strike-trace" d="M2 11L998 7" />
+              <path class="s02-strike-fill" d="M0 7L1000 3L1000 14L0 18Z" />
+            </svg>
+          </div>
+          <div class="s02-end-dot"></div>
+        </div>
+        <div class="s02-progress" aria-hidden="true">
+          <div class="s02-progress-marker"></div>
+        </div>
+      </main>
+      <script>
+        (() => {
+          const compositionId = "v7s-s02";
+          const root = document.querySelector(`[data-composition-id="${compositionId}"]`);
+          if (!root) return;
+
+          const chrome = root.querySelector(".s02-chrome");
+          const copy = root.querySelector(".s02-copy");
+          const trace = root.querySelector(".s02-strike-trace");
+          const fill = root.querySelector(".s02-strike-fill");
+          const endDot = root.querySelector(".s02-end-dot");
+          const progress = root.querySelector(".s02-progress");
+
+          root.querySelectorAll(".s02-strike-trace").forEach((path) => {
+            const length = path.getTotalLength();
+            path.style.strokeDasharray = length;
+            path.style.strokeDashoffset = length;
+          });
+
+          window.__timelines = window.__timelines || {};
+          const tl = gsap.timeline({ paused: true });
+
+          tl.set([chrome, progress], { opacity: 0 })
+            .set(copy, { x: -42, y: 18 })
+            .set(fill, { fillOpacity: 0 })
+            .set(endDot, { opacity: 0, x: 0, y: 0, scale: 1, transformOrigin: "50% 50%" })
+            .fromTo(chrome, { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.22, ease: "power3.out" }, 0)
+            .fromTo(progress, { opacity: 0 }, { opacity: 1, duration: 0.22, ease: "power3.out" }, 0)
+            .to(copy, { x: 0, y: 0, duration: 0.42, ease: "power3.out" }, 0)
+            .to(trace, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, 0.5106)
+            .to(fill, { fillOpacity: 1, duration: 0.28, ease: "power1.out" }, 1.0212)
+            .to(endDot, { opacity: 1, duration: 0.12, ease: "power2.out" }, 1.0212)
+            .to(endDot, { x: -734.4, y: 82, scale: 1, duration: 0.4, ease: "power2.inOut" }, 3.174);
+
+          window.__timelines[compositionId] = tl;
+          tl.seek(0);
+        })();
+      </script>
+    </template>
+  </body>
+</html>

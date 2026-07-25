@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>ReelForge v7 seal</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        #v7s-s08 {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+        }
+
+        #v7s-s08 .s08-field {
+          position: absolute;
+          inset: 0;
+          background: var(--rf-bg, #010102);
+          overflow: hidden;
+        }
+
+        #v7s-s08 .s08-measure-stripe {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 34%;
+          height: 100%;
+          background: var(--rf-surface-2, #121317);
+          clip-path: polygon(38% 0, 100% 0, 100% 100%, 0 100%);
+          filter: brightness(1);
+          opacity: 0.09;
+          animation: s08-measure-breathe 1.0212s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
+        }
+
+        #v7s-s08 .s08-chrome {
+          position: absolute;
+          top: 8%;
+          left: 7.4%;
+          z-index: 2;
+          margin: 0;
+          color: var(--rf-ink-subtle, #8a8f98);
+          font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
+          font-size: 13px;
+          font-weight: 400;
+          letter-spacing: 0.14em;
+          line-height: 1;
+          white-space: nowrap;
+        }
+
+        #v7s-s08 .s08-lockup {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+        }
+
+        #v7s-s08 .s08-check {
+          position: absolute;
+          top: 29.7%;
+          left: 50%;
+          width: 160px;
+          height: 128px;
+          overflow: visible;
+          transform: translateX(-50%);
+          will-change: transform, opacity;
+        }
+
+        #v7s-s08 .s08-check path {
+          fill: none;
+          stroke: var(--rf-success, #3fb950);
+          stroke-linecap: square;
+          stroke-linejoin: miter;
+          stroke-width: 22;
+          will-change: stroke-dashoffset;
+        }
+
+        #v7s-s08 .s08-hero {
+          position: absolute;
+          top: 51.7%;
+          left: 50%;
+          width: max-content;
+          margin: 0;
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: clamp(120px, 10vw, 190px);
+          font-weight: 800;
+          letter-spacing: -0.045em;
+          line-height: 0.96;
+          text-align: center;
+          white-space: nowrap;
+          word-break: keep-all;
+          transform: translateX(-50%);
+          will-change: transform, opacity;
+        }
+
+        #v7s-s08 .s08-source {
+          position: absolute;
+          top: 68.2%;
+          left: 50%;
+          margin: 0;
+          color: var(--rf-ink-subtle, #8a8f98);
+          font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
+          font-size: 13px;
+          font-weight: 400;
+          letter-spacing: 0;
+          line-height: 1;
+          white-space: nowrap;
+          transform: translateX(-50%);
+          will-change: transform, opacity;
+        }
+
+        #v7s-s08 .s08-progress {
+          position: absolute;
+          right: 0;
+          bottom: 8%;
+          left: 0;
+          z-index: 2;
+          height: 1px;
+          background: var(--rf-hairline, #26272e);
+        }
+
+        #v7s-s08 .s08-progress-marker {
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 2px;
+          height: 9px;
+          background: var(--rf-text, #ffffff);
+          opacity: 0;
+          will-change: left, opacity;
+        }
+
+        #v7s-s08 .s08-progress-label {
+          position: absolute;
+          right: 12px;
+          bottom: 15px;
+          margin: 0;
+          color: var(--rf-ink-subtle, #8a8f98);
+          font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
+          font-size: 13px;
+          font-weight: 400;
+          letter-spacing: 0.14em;
+          line-height: 1;
+          white-space: nowrap;
+        }
+
+        @keyframes s08-measure-breathe {
+          from {
+            filter: brightness(1);
+            opacity: 0.09;
+          }
+          to {
+            filter: brightness(1.24);
+            opacity: 0.16;
+          }
+        }
+      </style>
+      <main id="v7s-s08" data-rf-fragment-version="1.0" data-composition-id="v7s-s08">
+        <div class="s08-field" aria-hidden="true">
+          <div class="s08-measure-stripe"></div>
+        </div>
+        <p class="s08-chrome">08 — SEAL</p>
+        <section class="s08-lockup" aria-label="ReelForge v7">
+          <svg class="s08-check" viewBox="0 0 160 128" aria-hidden="true">
+            <path class="s08-check-short" d="M15 64 L59 108"></path>
+            <path class="s08-check-long" d="M59 108 L145 20"></path>
+          </svg>
+          <h1 class="s08-hero">ReelForge v7</h1>
+          <p class="s08-source">github.com/kimsh-1/reelforge</p>
+        </section>
+        <div class="s08-progress" aria-hidden="true">
+          <span class="s08-progress-marker"></span>
+          <p class="s08-progress-label">08/08</p>
+        </div>
+      </main>
+      <script>
+        (() => {
+          const compositionId = "v7s-s08";
+          const root = document.querySelector(`[data-composition-id="${compositionId}"]`);
+          if (!root) return;
+
+          const beat = 0.5106;
+          const seal = root.querySelector(".s08-check");
+          const checkShort = root.querySelector(".s08-check-short");
+          const checkLong = root.querySelector(".s08-check-long");
+          const hero = root.querySelector(".s08-hero");
+          const source = root.querySelector(".s08-source");
+          const marker = root.querySelector(".s08-progress-marker");
+
+          [checkShort, checkLong].forEach((path) => {
+            const length = path.getTotalLength();
+            path.style.strokeDasharray = length;
+            path.style.strokeDashoffset = length;
+          });
+
+          window.__timelines = window.__timelines || {};
+          const tl = gsap.timeline({ paused: true });
+
+          tl.set([seal, hero, source, marker], { opacity: 0 })
+            .set(seal, { scale: 0.9, transformOrigin: "50% 50%" })
+            .set(marker, { left: "0%" })
+            .fromTo(seal, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: beat * 0.58, ease: "power3.out" }, 0)
+            .to(checkShort, { strokeDashoffset: 0, duration: beat * 0.45, ease: "power2.out" }, beat * 0.12)
+            .to(checkLong, { strokeDashoffset: 0, duration: beat * 0.58, ease: "power2.out" }, beat * 0.42)
+            .to(seal, { scale: 1.035, duration: beat * 0.14, ease: "back.out(2)" }, beat * 0.72)
+            .to(seal, { scale: 1, duration: beat * 0.14, ease: "power2.inOut" }, beat * 0.86)
+            .fromTo(hero, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: beat * 0.65, ease: "power4.out" }, beat * 0.35)
+            .fromTo(source, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: beat * 0.32, ease: "power3.out" }, beat * 0.68)
+            .fromTo(marker, { opacity: 0, left: "0%" }, { opacity: 1, left: "100%", duration: beat, ease: "power2.inOut" }, 0);
+
+          window.__timelines[compositionId] = tl;
+          tl.seek(0);
+        })();
+      </script>
+    </template>
+  </body>
+</html>

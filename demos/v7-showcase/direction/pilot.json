@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "sceneId": "s07",
+  "status": "passed",
+  "checkedAt": "2026-07-25T07:15:33Z",
+  "evidence": {
+    "strip": "renders/gate-strip",
+    "notes": "2차 피크 단독 렌더 513KB, 3fps 12프레임 — 디자인 규칙 R1~R7 준수(3단 타이포·크롬 규격·액센트 1곳·박스 0), 글리치 스왑+마침표 팝 확인"
+  }
+}

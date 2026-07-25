@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>ReelForge v7 — Click</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        #rf-v7s-s07 {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          isolation: isolate;
+        }
+
+        #rf-v7s-s07 .s07-surface {
+          position: absolute;
+          inset: 0;
+          background: var(--rf-bg, #010102);
+          animation: v7s-s07-stage-breathe 1.0212s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
+        }
+
+        #rf-v7s-s07 .s07-stage {
+          position: absolute;
+          inset: 0;
+          will-change: transform;
+        }
+
+        #rf-v7s-s07 .s07-chrome {
+          position: absolute;
+          top: 8%;
+          left: 7.4%;
+          margin: 0;
+          color: var(--rf-ink-subtle, #8a8f98);
+          font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
+          font-size: 13px;
+          font-weight: 400;
+          letter-spacing: 0.14em;
+          line-height: 1;
+          white-space: nowrap;
+        }
+
+        #rf-v7s-s07 .s07-hero {
+          position: absolute;
+          top: 60%;
+          left: 7.4%;
+          display: flex;
+          align-items: baseline;
+          margin: 0;
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: clamp(120px, 10vw, 190px);
+          font-weight: 800;
+          letter-spacing: -0.045em;
+          line-height: 0.96;
+          white-space: nowrap;
+          word-break: keep-all;
+          transform: translateY(-0.8em);
+        }
+
+        #rf-v7s-s07 .s07-prefix,
+        #rf-v7s-s07 .s07-click,
+        #rf-v7s-s07 .s07-scramble,
+        #rf-v7s-s07 .s07-period {
+          display: inline-block;
+          will-change: transform, opacity;
+        }
+
+        #rf-v7s-s07 .s07-click-wrap {
+          position: relative;
+          display: inline-block;
+          margin-left: 0.15em;
+        }
+
+        #rf-v7s-s07 .s07-scramble {
+          position: absolute;
+          top: 0;
+          left: 0;
+          color: var(--rf-ink-subtle, #8a8f98);
+          clip-path: inset(6% 0 8% 0);
+        }
+
+        #rf-v7s-s07 .s07-period {
+          margin-left: 0.018em;
+          color: var(--rf-accent, #ff48a0);
+          transform-origin: 50% 76%;
+        }
+
+        #rf-v7s-s07 .s07-progress {
+          position: absolute;
+          right: 0;
+          bottom: 8%;
+          left: 0;
+          height: 1px;
+          background: var(--rf-hairline, #26272e);
+        }
+
+        #rf-v7s-s07 .s07-marker {
+          position: absolute;
+          top: -6px;
+          left: calc(87.5% - 0.5px);
+          width: 1px;
+          height: 13px;
+          background: var(--rf-text, #ffffff);
+          transform-origin: 50% 50%;
+          will-change: transform, opacity;
+        }
+
+        #rf-v7s-s07 .s07-micro-copy {
+          position: absolute;
+          right: 7.4%;
+          bottom: calc(8% + 17px);
+          display: grid;
+          gap: 6px;
+          color: var(--rf-ink-subtle, #8a8f98);
+          font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
+          font-size: 13px;
+          font-weight: 400;
+          letter-spacing: 0.14em;
+          line-height: 1;
+          text-align: right;
+          white-space: nowrap;
+        }
+
+        @keyframes v7s-s07-stage-breathe {
+          from {
+            filter: brightness(1);
+            opacity: 0.86;
+          }
+
+          to {
+            filter: brightness(1.22);
+            opacity: 1;
+          }
+        }
+      </style>
+
+      <main
+        id="rf-v7s-s07"
+        data-rf-fragment-version="1.0"
+        data-composition-id="v7s-s07"
+      >
+        <div class="s07-surface" aria-hidden="true"></div>
+        <div class="s07-stage">
+          <p class="s07-chrome">07 — CLICK</p>
+          <h1 class="s07-hero">
+            <span class="s07-prefix">렌더까지,</span>
+            <span class="s07-click-wrap">
+              <span class="s07-scramble" aria-hidden="true">ㄸㅏ⌁ㄲㅏㄱ</span>
+              <span class="s07-click">딸깍</span><span class="s07-period" aria-hidden="true">.</span>
+            </span>
+          </h1>
+          <div class="s07-micro-copy">
+            <span>ONE LINE IN</span>
+            <span>ONE FILM OUT</span>
+          </div>
+          <div class="s07-progress" aria-hidden="true"><span class="s07-marker"></span></div>
+        </div>
+      </main>
+
+      <script>
+        (() => {
+          const root = document.querySelector('[data-composition-id="v7s-s07"]');
+          if (!root) return;
+
+          const compositionId = root.dataset.compositionId;
+          const stage = root.querySelector(".s07-stage");
+          const chrome = root.querySelector(".s07-chrome");
+          const prefix = root.querySelector(".s07-prefix");
+          const click = root.querySelector(".s07-click");
+          const scramble = root.querySelector(".s07-scramble");
+          const period = root.querySelector(".s07-period");
+          const marker = root.querySelector(".s07-marker");
+          const microCopy = root.querySelector(".s07-micro-copy");
+          const progress = root.querySelector(".s07-progress");
+
+          window.__timelines = window.__timelines || {};
+          const tl = gsap.timeline({ paused: true });
+
+          tl.set([chrome, microCopy, progress], { opacity: 0 })
+            .set(prefix, { y: 14, transformOrigin: "left baseline" })
+            .set(click, { opacity: 0, x: -54, scaleX: 0.82, skewX: -8, transformOrigin: "left center" })
+            .set(scramble, { opacity: 0, x: -18 })
+            .set(period, { scale: 0, transformOrigin: "50% 76%" })
+            .set(marker, { opacity: 0, scaleY: 0, transformOrigin: "50% 50%" })
+            .fromTo(chrome, { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.22, ease: "power3.out" }, 0)
+            .fromTo(microCopy, { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.24, ease: "power3.out" }, 0.04)
+            .fromTo(progress, { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.28, ease: "power3.out" }, 0.02)
+            .to(marker, { opacity: 1, scaleY: 1, duration: 0.18, ease: "power3.out" }, 0.12)
+            .to(prefix, { y: 0, duration: 0.26, ease: "power4.out" }, 0)
+            .to(scramble, { opacity: 1, x: 0, duration: 0.08, ease: "steps(2)" }, 0.30636)
+            .to(scramble, { opacity: 0, x: 18, duration: 0.07, ease: "steps(2)" }, 0.40848)
+            .to(click, { opacity: 1, x: 0, scaleX: 1, skewX: 0, duration: 0.1, ease: "power4.out" }, 0.5106)
+            .to(period, { scale: 1.32, duration: 0.08, ease: "power4.out" }, 0.5106)
+            .to(period, { scale: 1, duration: 0.03, ease: "back.out(3)" }, 0.5906)
+            .to(stage, { x: -15, y: 5, duration: 0.025, ease: "none" }, 0.5106)
+            .to(stage, { x: 12, y: -4, duration: 0.025, ease: "none" }, 0.5356)
+            .to(stage, { x: -6, y: 2, duration: 0.025, ease: "none" }, 0.5606)
+            .to(stage, { x: 0, y: 0, duration: 0.04, ease: "power2.out" }, 0.5856);
+
+          window.__timelines[compositionId] = tl;
+          tl.seek(0);
+        })();
+      </script>
+    </template>
+  </body>
+</html>

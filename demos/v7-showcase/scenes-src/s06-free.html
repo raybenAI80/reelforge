@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+  <body>
+    <template>
+      <style>
+        .v7s-s06 {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          isolation: isolate;
+          background: var(--rf-bg, #010102);
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+        }
+
+        .v7s-s06 .s06-orbit-stage,
+        .v7s-s06 .s06-orbit-rig {
+          position: absolute;
+          inset: 0;
+        }
+
+        .v7s-s06 .s06-orbit-stage {
+          perspective: 1180px;
+          perspective-origin: 50% 49%;
+        }
+
+        .v7s-s06 .s06-orbit-rig,
+        .v7s-s06 .s06-hero-plane {
+          transform-style: preserve-3d;
+        }
+
+        .v7s-s06 .s06-stripe {
+          position: absolute;
+          top: 0;
+          right: -1px;
+          width: 15.2%;
+          height: 100%;
+          background: var(--rf-surface-2, #121317);
+          filter: brightness(1);
+          opacity: 0.82;
+          will-change: transform, filter, opacity;
+          animation: s06-stripe-breathe 1.02s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
+        }
+
+        .v7s-s06 .s06-hero-plane {
+          position: absolute;
+          top: 28.9%;
+          left: 7.4%;
+          transform-origin: 50% 55%;
+          will-change: transform;
+        }
+
+        .v7s-s06 .s06-hero {
+          margin: 0;
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: clamp(120px, 10vw, 190px);
+          font-weight: 800;
+          letter-spacing: -0.045em;
+          line-height: 0.96;
+          white-space: nowrap;
+          word-break: keep-all;
+          backface-visibility: hidden;
+          will-change: transform, opacity;
+        }
+
+        .v7s-s06 .s06-hero-line {
+          display: block;
+        }
+
+        .v7s-s06 .s06-chrome-label {
+          position: absolute;
+          top: 8%;
+          left: 7.4%;
+          margin: 0;
+          color: var(--rf-ink-subtle, #8a8f98);
+          font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
+          font-size: 13px;
+          font-weight: 400;
+          letter-spacing: 0.14em;
+          line-height: 1;
+          white-space: nowrap;
+          will-change: opacity;
+        }
+
+        .v7s-s06 .s06-progress {
+          position: absolute;
+          top: 92%;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background: var(--rf-hairline, #26272e);
+          will-change: opacity;
+        }
+
+        .v7s-s06 .s06-progress-marker {
+          position: absolute;
+          top: -6px;
+          left: 75%;
+          width: 1px;
+          height: 13px;
+          background: var(--rf-accent, #5e6ad2);
+          transform-origin: 50% 50%;
+          will-change: transform, opacity;
+        }
+
+        @keyframes s06-stripe-breathe {
+          from {
+            transform: translateX(0);
+            filter: brightness(1);
+            opacity: 0.82;
+          }
+          to {
+            transform: translateX(-18px);
+            filter: brightness(1.24);
+            opacity: 1;
+          }
+        }
+      </style>
+
+      <main class="v7s-s06" data-rf-fragment-version="1.0" data-composition-id="v7s-s06">
+        <div class="s06-stripe" aria-hidden="true"></div>
+        <div class="s06-orbit-stage">
+          <div class="s06-orbit-rig">
+            <div class="s06-hero-plane">
+              <h1 class="s06-hero"><span class="s06-hero-line">전환도</span><span class="s06-hero-line">짜여 있다</span></h1>
+            </div>
+          </div>
+        </div>
+        <p class="s06-chrome-label">06 — WEAVE</p>
+        <div class="s06-progress" aria-hidden="true"><span class="s06-progress-marker"></span></div>
+      </main>
+
+      <script>
+        (() => {
+          const compositionId = "v7s-s06";
+          const root = document.querySelector(`[data-composition-id="${compositionId}"]`);
+          if (!root) return;
+
+          const orbitRig = root.querySelector(".s06-orbit-rig");
+          const hero = root.querySelector(".s06-hero");
+          const chrome = root.querySelectorAll(".s06-chrome-label, .s06-progress");
+          const marker = root.querySelector(".s06-progress-marker");
+
+          window.__timelines = window.__timelines || {};
+          const tl = gsap.timeline({ paused: true });
+
+          tl.set(orbitRig, { rotationY: -44, y: 28, transformStyle: "preserve-3d", transformOrigin: "center center" }, 0)
+            .set(hero, { opacity: 0, x: -34, transformStyle: "preserve-3d", transformOrigin: "50% 55%" }, 0)
+            .set(chrome, { opacity: 0 }, 0)
+            .set(marker, { opacity: 0, scaleY: 0.5 }, 0)
+            .to(hero, { opacity: 1, x: 0, duration: 0.38, ease: "power3.out" }, 0)
+            .to(chrome, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0.08)
+            .to(marker, { opacity: 1, scaleY: 1, duration: 0.24, ease: "power2.out" }, 0.18)
+            .to(orbitRig, { rotationY: 16, y: 0, duration: 1.56, ease: "power1.inOut" }, 0.22)
+            .to(orbitRig, { rotationY: 0, duration: 0.26, ease: "power2.out" }, 1.92);
+
+          window.__timelines[compositionId] = tl;
+          tl.seek(0);
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,242 @@
+{
+  "version": "1.0.0",
+  "projectId": "v7-showcase",
+  "scenes": [
+    {
+      "sceneId": "s01",
+      "sceneNumber": 1,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s01-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "흩어진 글자가 좌기준선 베이스라인 위 한 문장으로 수렴한다",
+      "mood": "dramatic",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "한 줄이면 된다",
+      "items": [],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    },
+    {
+      "sceneId": "s02",
+      "sceneNumber": 2,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s02-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "취소선이 스트로크로 그어지고 채워지며, 액센트 마커가 앵커로 이동해 멈춘다",
+      "mood": "urgent",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "슬라이드는 죽었다",
+      "items": [],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    },
+    {
+      "sceneId": "s03",
+      "sceneNumber": 3,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s03-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "같은 앵커에서 카운터가 0에서 31로 스텝 점프하고 눈금 마커가 달린다",
+      "mood": "informative",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "검증된 안무, 31",
+      "items": [],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    },
+    {
+      "sceneId": "s04",
+      "sceneNumber": 4,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s04-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "타이포 레이어 사이로 돌리 푸시, 끝에서 스테이지가 오른쪽으로 휩쓸려 나간다",
+      "mood": "dramatic",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "글자 사이로 카메라가 간다",
+      "items": [],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    },
+    {
+      "sceneId": "s05",
+      "sceneNumber": 5,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s05-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "같은 방향 휩으로 들어와 문장이 오버슛 슬램, 스트로브 1회",
+      "mood": "urgent",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "비트 위에서 잘린다",
+      "items": [],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    },
+    {
+      "sceneId": "s06",
+      "sceneNumber": 6,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s06-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "문장이 궤도를 돌아 다음 베이스라인 자리로 되돌아온다",
+      "mood": "contemplative",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "전환도 짜여 있다",
+      "items": [],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    },
+    {
+      "sceneId": "s07",
+      "sceneNumber": 7,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s07-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "스크램블 글리치가 딸깍 스왑 슬램으로 박히고 셰이크 1회",
+      "mood": "urgent",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "렌더까지, 딸깍",
+      "items": [],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    },
+    {
+      "sceneId": "s08",
+      "sceneNumber": 8,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s08-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "체크마크가 드로우되고 성공색 록업이 중앙에 봉인된다",
+      "mood": "triumphant",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "ReelForge v7",
+      "items": [],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    }
+  ],
+  "transitions": [
+    {
+      "from": "s01",
+      "to": "s02",
+      "type": "cut",
+      "duration": 0
+    },
+    {
+      "from": "s02",
+      "to": "s03",
+      "type": "cut",
+      "duration": 0
+    },
+    {
+      "from": "s03",
+      "to": "s04",
+      "type": "cut",
+      "duration": 0
+    },
+    {
+      "from": "s04",
+      "to": "s05",
+      "type": "cut",
+      "duration": 0
+    },
+    {
+      "from": "s05",
+      "to": "s06",
+      "type": "cut",
+      "duration": 0
+    },
+    {
+      "from": "s06",
+      "to": "s07",
+      "type": "flash-cut",
+      "duration": 0.2
+    },
+    {
+      "from": "s07",
+      "to": "s08",
+      "type": "cut",
+      "duration": 0
+    }
+  ]
+}
