@@ -1,0 +1,365 @@
+<!-- rf-gallery v1 | data/progress-ring | progress-ring-radial | mutate=copy,duration,accent-color,data-values | keep=ring-fill-counter-sync,entry-orbit-scale,arc-end-marker,breathing-halo -->
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Progress Ring</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        .rf-progress-ring {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: var(--rf-bg, #0a0b0e);
+          color: var(--rf-text, #f7f8f8);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+        }
+
+        .rf-progress-ring .prr-backdrop,
+        .rf-progress-ring .prr-vignette,
+        .rf-progress-ring .prr-grid {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+        }
+
+        .rf-progress-ring .prr-backdrop {
+          background:
+            radial-gradient(ellipse 54% 72% at 76% 45%, var(--rf-surface-3, #22242a) 0%, var(--rf-bg, #0a0b0e) 68%),
+            linear-gradient(112deg, var(--rf-bg, #0a0b0e) 0%, var(--rf-surface-2, #121317) 52%, var(--rf-bg, #0a0b0e) 100%);
+        }
+
+        .rf-progress-ring .prr-grid {
+          background-image:
+            linear-gradient(90deg, transparent 0%, transparent 49.8%, var(--rf-hairline, #34363e) 49.9%, transparent 50.1%),
+            linear-gradient(0deg, transparent 0%, transparent 49.8%, var(--rf-hairline, #34363e) 49.9%, transparent 50.1%);
+          background-size: 16vw 16vw;
+          mask-image: linear-gradient(90deg, transparent 0%, var(--rf-on-accent, #ffffff) 48%, var(--rf-on-accent, #ffffff) 100%);
+          opacity: 0.19;
+        }
+
+        .rf-progress-ring .prr-vignette {
+          box-shadow: inset 0 0 13vw 3vw var(--rf-shadow, #010102);
+        }
+
+        .rf-progress-ring .prr-halo,
+        .rf-progress-ring .prr-right-glow {
+          position: absolute;
+          border-radius: 50%;
+          background: var(--rf-accent, #5e6ad2);
+          pointer-events: none;
+          will-change: filter, opacity;
+        }
+
+        .rf-progress-ring .prr-halo {
+          top: 50%;
+          left: 27%;
+          width: 64vw;
+          height: 64vw;
+          filter: blur(118px) brightness(1);
+          opacity: 0.15;
+          transform: translate(-50%, -50%);
+          animation: prr-breathe 1.3s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
+        }
+
+        .rf-progress-ring .prr-right-glow {
+          top: 50%;
+          left: 79%;
+          width: 46vw;
+          height: 56vw;
+          filter: blur(142px) brightness(1);
+          opacity: 0.18;
+          transform: translate(-50%, -50%);
+          animation: prr-breathe 1.55s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
+        }
+
+        .rf-progress-ring .prr-orbit {
+          position: absolute;
+          top: 50%;
+          left: 27%;
+          width: min(54vw, 950px);
+          height: min(54vw, 950px);
+          transform: translate(-50%, -50%);
+          will-change: transform, opacity;
+        }
+
+        .rf-progress-ring .prr-orbit::before,
+        .rf-progress-ring .prr-orbit::after {
+          position: absolute;
+          border: 1px solid var(--rf-hairline, #34363e);
+          border-radius: 50%;
+          content: "";
+          inset: 8%;
+          opacity: 0.78;
+        }
+
+        .rf-progress-ring .prr-orbit::after {
+          border-color: var(--rf-hairline-strong, #474a54);
+          inset: 18%;
+          opacity: 0.62;
+        }
+
+        .rf-progress-ring .prr-gauge {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+
+        .rf-progress-ring .prr-track {
+          fill: none;
+          stroke: var(--rf-surface-3, #22242a);
+          stroke-width: 34;
+        }
+
+        .rf-progress-ring .prr-progress {
+          fill: none;
+          stroke: var(--rf-accent, #5e6ad2);
+          stroke-linecap: round;
+          stroke-width: 34;
+          filter: var(--rf-glow, none);
+        }
+
+        .rf-progress-ring .prr-marker {
+          fill: var(--rf-on-accent, #ffffff);
+          stroke: var(--rf-accent, #5e6ad2);
+          stroke-width: 7;
+        }
+
+        .rf-progress-ring .prr-core {
+          position: absolute;
+          top: 50%;
+          left: 27%;
+          display: flex;
+          align-items: baseline;
+          justify-content: center;
+          font-size: clamp(116px, 11.2vw, 214px);
+          font-weight: 800;
+          letter-spacing: -0.09em;
+          line-height: 0.82;
+          transform: translate(-50%, -50%);
+          font-variant-numeric: tabular-nums;
+          will-change: transform, opacity;
+        }
+
+        .rf-progress-ring .prr-value {
+          color: var(--rf-text, #f7f8f8);
+        }
+
+        .rf-progress-ring .prr-unit {
+          margin-left: 0.04em;
+          color: var(--rf-accent-alt, #828fff);
+          font-size: 0.38em;
+          font-weight: 700;
+          letter-spacing: -0.04em;
+        }
+
+        .rf-progress-ring .prr-steps {
+          position: absolute;
+          bottom: 8.6%;
+          left: 6.4%;
+          display: flex;
+          align-items: center;
+          gap: clamp(14px, 1.5vw, 30px);
+          padding: 14px 18px;
+          border: 1px solid var(--rf-hairline, #34363e);
+          background: var(--rf-surface-2, #121317);
+          box-shadow: 0 18px 42px var(--rf-shadow, #010102);
+          will-change: transform, opacity;
+        }
+
+        .rf-progress-ring .prr-step {
+          position: relative;
+          color: var(--rf-muted-text, #d0d6e0);
+          font-family: var(--rf-font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+          font-size: clamp(18px, 1.4vw, 27px);
+          font-weight: 700;
+          letter-spacing: -0.05em;
+          line-height: 1;
+          opacity: 0.4;
+          transform: scale(0.96);
+          transform-origin: left center;
+          will-change: transform, opacity, color;
+        }
+
+        .rf-progress-ring .prr-step:not(:last-child)::after {
+          position: absolute;
+          top: 50%;
+          left: calc(100% + clamp(7px, 0.75vw, 15px));
+          width: clamp(7px, 0.75vw, 15px);
+          height: 1px;
+          background: var(--rf-hairline-strong, #474a54);
+          content: "";
+        }
+
+        .rf-progress-ring .prr-copy {
+          position: absolute;
+          top: 25%;
+          right: 5.2%;
+          width: min(39vw, 690px);
+          min-height: 49vh;
+          will-change: transform;
+        }
+
+        .rf-progress-ring .prr-copy::before {
+          position: absolute;
+          top: -7%;
+          left: -4.2%;
+          width: 5px;
+          height: 111%;
+          background: var(--rf-accent, #5e6ad2);
+          box-shadow: var(--rf-glow, none);
+          content: "";
+        }
+
+        .rf-progress-ring .prr-headline {
+          max-width: 3.45em;
+          margin: 0;
+          color: var(--rf-text, #f7f8f8);
+          font-size: clamp(106px, 8.75vw, 168px);
+          font-weight: 800;
+          letter-spacing: -0.09em;
+          line-height: 0.88;
+          text-shadow: 0 0 0.42em var(--rf-shadow, #010102);
+          word-break: keep-all;
+          will-change: transform, filter, opacity;
+          animation: prr-headline-breathe 1.4s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
+        }
+
+        @keyframes prr-breathe {
+          from {
+            filter: blur(118px) brightness(1);
+            opacity: 0.15;
+          }
+          to {
+            filter: blur(118px) brightness(1.28);
+            opacity: 0.3;
+          }
+        }
+
+        @keyframes prr-headline-breathe {
+          from {
+            filter: brightness(1);
+            opacity: 1;
+          }
+          to {
+            filter: brightness(1.22);
+            opacity: 1;
+          }
+        }
+      </style>
+
+      <main
+        class="rf-progress-ring"
+        data-rf-fragment-version="1.0"
+        data-composition-id="pilot-s05"
+      >
+        <div class="prr-backdrop" aria-hidden="true"></div>
+        <div class="prr-grid" aria-hidden="true"></div>
+        <div class="prr-halo" aria-hidden="true"></div>
+        <div class="prr-right-glow" aria-hidden="true"></div>
+        <div class="prr-vignette" aria-hidden="true"></div>
+
+        <div class="prr-orbit">
+          <svg class="prr-gauge" viewBox="0 0 720 720" aria-hidden="true">
+            <g transform="rotate(-90 360 360)">
+              <circle class="prr-track" cx="360" cy="360" r="286"></circle>
+              <circle class="prr-progress" cx="360" cy="360" r="286"></circle>
+            </g>
+            <circle class="prr-marker" cx="360" cy="74" r="15"></circle>
+          </svg>
+        </div>
+
+        <div class="prr-core">
+          <span class="prr-value" data-slot="value" data-target="100">0</span><span class="prr-unit" data-slot="unit">%</span>
+        </div>
+
+        <div class="prr-steps" aria-label="승인 컴파일 렌더">
+          <span class="prr-step">승인</span>
+          <span class="prr-step">컴파일</span>
+          <span class="prr-step">렌더</span>
+        </div>
+
+        <div class="prr-copy">
+          <h1 class="prr-headline" data-slot="headline">누르면 렌더</h1>
+        </div>
+      </main>
+
+      <script>
+        (() => {
+          const compositionId = "pilot-s05";
+          const root = document.querySelector(`[data-composition-id="${compositionId}"]`);
+          if (!root) return;
+
+          const orbit = root.querySelector(".prr-orbit");
+          const progress = root.querySelector(".prr-progress");
+          const marker = root.querySelector(".prr-marker");
+          const core = root.querySelector(".prr-core");
+          const value = root.querySelector(".prr-value");
+          const headline = root.querySelector(".prr-headline");
+          const steps = Array.from(root.querySelectorAll(".prr-step"));
+          const requestedTarget = Number(value.getAttribute("data-target"));
+          const target = Number.isFinite(requestedTarget) ? Math.max(0, Math.min(100, requestedTarget)) : 100;
+          const radius = 286;
+          const circumference = 2 * Math.PI * radius;
+          const counter = { value: 0 };
+          const pointFor = (percentage) => {
+            const angle = percentage * Math.PI * 2 / 100;
+            return {
+              x: 360 + radius * Math.sin(angle),
+              y: 360 - radius * Math.cos(angle)
+            };
+          };
+          const offsetFor = (percentage) => circumference * (1 - percentage / 100);
+          const stageValues = [33, 66, target];
+
+          value.textContent = "0";
+          window.__timelines = window.__timelines || {};
+          const tl = gsap.timeline({ paused: true });
+
+          tl.set(progress, {
+            attr: {
+              "stroke-dasharray": `${circumference} ${circumference}`,
+              "stroke-dashoffset": circumference
+            }
+          })
+            .set(marker, {
+              attr: { cx: pointFor(0).x, cy: pointFor(0).y },
+              opacity: 0,
+              scale: 0.2,
+              transformOrigin: "50% 50%"
+            })
+            .set(orbit, { opacity: 0, scale: 0.84, transformOrigin: "50% 50%" })
+            .set(core, { opacity: 0, scale: 0.82, transformOrigin: "50% 50%" })
+            .set(headline, { opacity: 1, y: 38, scale: 0.96, transformOrigin: "left center" })
+            .set(steps, { opacity: 0.4, scale: 0.96, color: "var(--rf-muted-text, #d0d6e0)" })
+            .set(steps[0], { opacity: 1, scale: 1.06, color: "var(--rf-text, #f7f8f8)" })
+            .fromTo(orbit, { opacity: 0, scale: 0.84 }, { opacity: 1, scale: 1, duration: 0.54, ease: "power3.out" }, 0)
+            .fromTo(core, { opacity: 0, scale: 0.82 }, { opacity: 1, scale: 1, duration: 0.46, ease: "back.out(1.5)" }, 0.16)
+            .to(headline, { y: 0, scale: 1, duration: 0.52, ease: "power3.out" }, 0)
+            .to(marker, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2)" }, 0.24)
+            .to(progress, { attr: { "stroke-dashoffset": offsetFor(stageValues[0]) }, duration: 0.44, ease: "power2.inOut" }, 0.26)
+            .to(marker, { attr: { cx: pointFor(stageValues[0]).x, cy: pointFor(stageValues[0]).y }, duration: 0.44, ease: "power2.inOut" }, 0.26)
+            .to(counter, { value: stageValues[0], duration: 0.44, ease: "power2.inOut", onUpdate: () => { value.textContent = String(Math.round(counter.value)); } }, 0.26)
+            .to(steps[0], { opacity: 0.4, scale: 0.96, color: "var(--rf-muted-text, #d0d6e0)", duration: 0.18, ease: "power2.out" }, 0.7)
+            .to(steps[1], { opacity: 1, scale: 1.06, color: "var(--rf-text, #f7f8f8)", duration: 0.18, ease: "power2.out" }, 0.7)
+            .to(progress, { attr: { "stroke-dashoffset": offsetFor(stageValues[1]) }, duration: 0.44, ease: "power2.inOut" }, 0.7)
+            .to(marker, { attr: { cx: pointFor(stageValues[1]).x, cy: pointFor(stageValues[1]).y }, duration: 0.44, ease: "power2.inOut" }, 0.7)
+            .to(counter, { value: stageValues[1], duration: 0.44, ease: "power2.inOut", onUpdate: () => { value.textContent = String(Math.round(counter.value)); } }, 0.7)
+            .to(steps[1], { opacity: 0.4, scale: 0.96, color: "var(--rf-muted-text, #d0d6e0)", duration: 0.18, ease: "power2.out" }, 1.14)
+            .to(steps[2], { opacity: 1, scale: 1.06, color: "var(--rf-text, #f7f8f8)", duration: 0.18, ease: "power2.out" }, 1.14)
+            .to(progress, { attr: { "stroke-dashoffset": offsetFor(stageValues[2]) }, duration: 0.44, ease: "power2.inOut" }, 1.14)
+            .to(marker, { attr: { cx: pointFor(stageValues[2]).x, cy: pointFor(stageValues[2]).y }, duration: 0.44, ease: "power2.inOut" }, 1.14)
+            .to(counter, { value: stageValues[2], duration: 0.44, ease: "power2.inOut", onUpdate: () => { value.textContent = String(Math.round(counter.value)); } }, 1.14);
+
+          window.__timelines[compositionId] = tl;
+          tl.seek(0);
+        })();
+      </script>
+    </template>
+  </body>
+</html>

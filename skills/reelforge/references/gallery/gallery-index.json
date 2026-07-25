@@ -1768,6 +1768,54 @@
         "renderHash": "c74e1fd44e9d8385eb0850cbceabf0b84add5002e417d2d581ab1fc5b01cf4a9",
         "checkedAt": "2026-07-25T06:07:24.209Z"
       }
+    },
+    {
+      "intensityBand": "70-100",
+      "arcFit": [
+        "build"
+      ],
+      "durationRange": [
+        2.5,
+        4.5
+      ],
+      "slots": [
+        {
+          "name": "headline",
+          "maxChars": 8
+        },
+        {
+          "name": "stripe-one",
+          "maxChars": 7
+        },
+        {
+          "name": "stripe-two",
+          "maxChars": 7
+        },
+        {
+          "name": "stripe-three",
+          "maxChars": 7
+        }
+      ],
+      "mutate": [
+        "copy",
+        "duration",
+        "accent-color"
+      ],
+      "keep": [
+        "timeline-phase-structure",
+        "easing-curves",
+        "blind-stripe-stagger",
+        "row-content-reveal",
+        "living-breathe"
+      ],
+      "id": "object/blinds-stripe-triplet",
+      "family": "object",
+      "implementsGrammar": "blinds-stripe-reveal",
+      "verified": {
+        "contractVersion": "1.0",
+        "renderHash": "92c0c6c2601293f94b323faa5cc5024895bad36899e7a8a176b3335e219bbeb0",
+        "checkedAt": "2026-07-25T06:29:28.888Z"
+      }
     }
   ]
 }

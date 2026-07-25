@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "sceneId": "s08",
+  "status": "passed",
+  "checkedAt": "2026-07-25T06:13:57Z",
+  "evidence": {
+    "strip": "renders/s08-strip",
+    "notes": "2차 피크 씬 단독 렌더 743KB, 2fps 스트립 7프레임 육안 — 오버슛 슬램·스트로브·리빙 모션 확인, 슬라이드 판독 없음"
+  }
+}

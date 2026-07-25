@@ -1,0 +1,307 @@
+{
+  "version": "1.0.0",
+  "projectId": "pilot-usage-v7",
+  "scenes": [
+    {
+      "sceneId": "s01",
+      "sceneNumber": 1,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s01-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "프롬프트 캐럿이 무대 위에서 「한 줄만 던져」를 타이프한다",
+      "mood": "urgent",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "한 줄만 던져",
+      "items": [
+        "요청 한 줄",
+        "톤 고르기",
+        "길이 지정"
+      ],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    },
+    {
+      "sceneId": "s02",
+      "sceneNumber": 2,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s02-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "브리프 카드가 인셋 와이프로 열리며 세 조건이 순차 공개된다",
+      "mood": "contemplative",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "한 줄을 읽는다",
+      "items": [
+        "30초 제품 소개",
+        "차분한 톤",
+        "16:9"
+      ],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    },
+    {
+      "sceneId": "s04",
+      "sceneNumber": 3,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s04-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "「그대로 유지」가 글리치 스왑으로 「한 씬 교체」에 두들겨 바뀐다",
+      "mood": "urgent",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "씬만 콕 수정",
+      "items": [
+        "그대로 유지",
+        "한 씬 교체"
+      ],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    },
+    {
+      "sceneId": "s05",
+      "sceneNumber": 4,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s05-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "렌더 게이지 링이 차오르고 진행 수치가 카운트업된다",
+      "mood": "informative",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "누르면 렌더",
+      "items": [
+        "승인",
+        "컴파일",
+        "렌더"
+      ],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    },
+    {
+      "sceneId": "s03",
+      "sceneNumber": 5,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s03-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "되묻는 세 빈 칸이 커넥터 트리로 뻗어난다",
+      "mood": "informative",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "빈 칸만 되묻기",
+      "items": [
+        "대상 시청자",
+        "영상 길이",
+        "화면 비율"
+      ],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    },
+    {
+      "sceneId": "s07",
+      "sceneNumber": 6,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s07-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "컷 타임라인이 차트 트레이스로 스스로 그어진다",
+      "mood": "informative",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "컷은 알아서",
+      "items": [
+        "컷 1",
+        "컷 2",
+        "컷 3",
+        "컷 4"
+      ],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    },
+    {
+      "sceneId": "s06",
+      "sceneNumber": 7,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s06-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "블라인드 3스트라이프가 열리며 산출물 3종이 공개된다",
+      "mood": "informative",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "한 번에 셋 다",
+      "items": [
+        "mp4 영상",
+        "gif 프리뷰",
+        "문서 조각"
+      ],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    },
+    {
+      "sceneId": "s08",
+      "sceneNumber": 8,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s08-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "두 개의 0이 오버슛 슬램으로 내리꽂히고 스트로브가 친다",
+      "mood": "urgent",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "키도 0, 돈도 0",
+      "items": [
+        "API 키",
+        "월 요금"
+      ],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    },
+    {
+      "sceneId": "s09",
+      "sceneNumber": 9,
+      "layout": "free",
+      "sourceHtml": "scenes-src/s09-free.html",
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "폴더 한 줄에 성공색 밑줄이 그어지며 봉인된다",
+      "mood": "contemplative",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "폴더 하나로 끝",
+      "items": [
+        "영상",
+        "프리뷰",
+        "문서 조각"
+      ],
+      "source": "ReelForge",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1.0,
+        "zoomDirection": "in",
+        "panDirection": "right"
+      },
+      "subtitleMode": "keyword",
+      "ost": 1
+    }
+  ],
+  "transitions": [
+    {
+      "from": "s01",
+      "to": "s02",
+      "type": "zoom-punch",
+      "duration": 0.32
+    },
+    {
+      "from": "s02",
+      "to": "s04",
+      "type": "cut",
+      "duration": 0
+    },
+    {
+      "from": "s04",
+      "to": "s05",
+      "type": "push-wipe",
+      "duration": 0.3
+    },
+    {
+      "from": "s05",
+      "to": "s03",
+      "type": "flash-cut",
+      "duration": 0.2
+    },
+    {
+      "from": "s03",
+      "to": "s07",
+      "type": "cut",
+      "duration": 0
+    },
+    {
+      "from": "s07",
+      "to": "s06",
+      "type": "zoom-punch",
+      "duration": 0.3
+    },
+    {
+      "from": "s06",
+      "to": "s08",
+      "type": "cut",
+      "duration": 0
+    },
+    {
+      "from": "s08",
+      "to": "s09",
+      "type": "push-wipe-right",
+      "duration": 0.3
+    }
+  ]
+}
