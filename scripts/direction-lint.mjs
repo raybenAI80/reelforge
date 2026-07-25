@@ -197,13 +197,21 @@ function inBand(intensity, band) {
   return false;
 }
 
-function maxSlotChars(entry) {
+function totalSlotChars(entry) {
   if (!Array.isArray(entry.slots) || entry.slots.length === 0) return null;
   const values = entry.slots
     .map((slot) => slot?.maxChars)
     .filter((value) => Number.isInteger(value) && value >= 0);
-  return values.length > 0 ? Math.max(...values) : null;
+  return values.length > 0 ? values.reduce((sum, value) => sum + value, 0) : null;
 }
+
+// ROUTING.md §0 아크 프리셋별 구간 intensity 범위 — 라우팅 단일 권위와 동기.
+const ARC_PRESET_RANGES = {
+  "ramp": { hook: [15, 30], build: [35, 55], peak: [75, 95], resolve: [35, 50] },
+  "double-peak": { hook: [25, 45], build: [60, 80], peak: [85, 100], resolve: [40, 55] },
+  "cliff": { hook: [15, 30], build: [30, 45], peak: [90, 100], resolve: [20, 35] },
+  "steady-pulse": { hook: [40, 55], build: [50, 65], peak: [65, 80], resolve: [45, 60] }
+};
 
 function loadArc(projectDir) {
   const arcPath = path.join(projectDir, "direction/arc.json");
@@ -320,18 +328,19 @@ function run(projectDir) {
     }
   }
 
-  // RF-DIR-006: a stamped fragment must expose at least one slot large enough for the scene copy.
+  // RF-DIR-006: scene copy must fit within a stamped fragment's total slot budget
+  // (multi-slot fragments carry copy across slots, so the budget is the sum of maxChars).
   for (const scene of resolvedScenes) {
     const chars = copyLength(copySections, scene.id);
     for (const ref of scene.refs) {
       if (ref.verifiedEntries.length === 0) continue;
-      const limits = ref.verifiedEntries.map(maxSlotChars).filter((limit) => limit !== null);
+      const limits = ref.verifiedEntries.map(totalSlotChars).filter((limit) => limit !== null);
       if (limits.length > 0 && limits.every((limit) => chars > limit)) {
         report(
           "RF-DIR-006",
           "error",
           scene.id,
-          `refId=${ref.id} 카피 ${chars}자가 슬롯 상한 ${Math.max(...limits)}자를 초과함`
+          `refId=${ref.id} 카피 ${chars}자가 슬롯 총예산 ${Math.max(...limits)}자를 초과함`
         );
       }
     }
@@ -361,25 +370,28 @@ function run(projectDir) {
     }
   }
 
-  // RF-DIR-008: arcFit from stamped entries marks hook/peak/resolve sections when arc.json is present.
+  // RF-DIR-008: with arc.json, a scene's intensity must lie inside the envelope of the
+  // ROUTING §0 ranges for its stamped entries' arcFit roles — an entry declared for
+  // hook|build may play either, so the check spans min(range.min)..max(range.max).
   if (arc) {
-    let previousPeak = null;
+    const ranges = ARC_PRESET_RANGES[arc.preset];
     for (const scene of resolvedScenes) {
-      const arcFits = new Set(scene.refs.flatMap((ref) => ref.indexedEntries.flatMap((entry) => (
-        Array.isArray(entry.arcFit) ? entry.arcFit : []
-      ))));
-      if (arcFits.has("hook") && scene.intensity < 85) {
-        report("RF-DIR-008", "error", scene.id, `hook 구간 intensity=${scene.intensity}는 85 이상이어야 함`);
+      for (const ref of scene.refs) {
+        const arcFits = [...new Set(ref.verifiedEntries.flatMap((entry) => (
+          Array.isArray(entry.arcFit) ? entry.arcFit : []
+        )))].filter((section) => ranges[section]);
+        if (arcFits.length === 0) continue;
+        const low = Math.min(...arcFits.map((section) => ranges[section][0]));
+        const high = Math.max(...arcFits.map((section) => ranges[section][1]));
+        if (scene.intensity < low || scene.intensity > high) {
+          report(
+            "RF-DIR-008",
+            "error",
+            scene.id,
+            `refId=${ref.id} intensity=${scene.intensity}가 ${arc.preset} 프리셋의 arcFit(${arcFits.join(",")}) 범위 ${low}-${high} 밖임`
+          );
+        }
       }
-      if (arcFits.has("resolve") && previousPeak && scene.intensity > previousPeak.intensity) {
-        report(
-          "RF-DIR-008",
-          "error",
-          scene.id,
-          `resolve intensity=${scene.intensity}가 직전 peak scene=${previousPeak.id} intensity=${previousPeak.intensity}보다 높음`
-        );
-      }
-      if (arcFits.has("peak")) previousPeak = scene;
     }
   }
 
