@@ -1,4 +1,492 @@
 {
   "schemaVersion": 1,
-  "entries": []
+  "entries": [
+    {
+      "intensityBand": "70-100",
+      "arcFit": [
+        "hook",
+        "peak"
+      ],
+      "durationRange": [
+        2.5,
+        4.5
+      ],
+      "slots": [
+        {
+          "name": "kicker",
+          "maxChars": 18
+        },
+        {
+          "name": "word-one",
+          "maxChars": 8
+        },
+        {
+          "name": "word-two",
+          "maxChars": 8
+        },
+        {
+          "name": "word-three",
+          "maxChars": 8
+        },
+        {
+          "name": "word-four",
+          "maxChars": 8
+        },
+        {
+          "name": "duration-value",
+          "maxChars": 4
+        },
+        {
+          "name": "running-label",
+          "maxChars": 24
+        }
+      ],
+      "mutate": [
+        "copy",
+        "duration",
+        "accent-color",
+        "data-values"
+      ],
+      "keep": [
+        "timeline-phase-structure",
+        "easing-curves",
+        "entry-anchor-geometry",
+        "word-stagger",
+        "strike-sweep",
+        "stage-shake-pattern"
+      ],
+      "id": "typo/scale-slam-strike",
+      "family": "typo",
+      "implementsGrammar": "scale-jump-stairstep",
+      "verified": {
+        "contractVersion": "1.0",
+        "renderHash": "79bdea1c035ec83d5cf53e1edc2bef3fbd0b941f0dac9d30e8f4a286a76add37",
+        "checkedAt": "2026-07-25T05:11:56.611Z"
+      }
+    },
+    {
+      "intensityBand": "70-100",
+      "arcFit": [
+        "hook",
+        "peak"
+      ],
+      "durationRange": [
+        2,
+        4
+      ],
+      "slots": [
+        {
+          "name": "index-mark",
+          "maxChars": 2
+        },
+        {
+          "name": "axis-label",
+          "maxChars": 20
+        },
+        {
+          "name": "kicker",
+          "maxChars": 20
+        },
+        {
+          "name": "primary",
+          "maxChars": 4
+        },
+        {
+          "name": "scramble",
+          "maxChars": 8
+        },
+        {
+          "name": "secondary",
+          "maxChars": 5
+        },
+        {
+          "name": "punctuation",
+          "maxChars": 1
+        },
+        {
+          "name": "running-label",
+          "maxChars": 20
+        }
+      ],
+      "mutate": [
+        "copy",
+        "duration",
+        "accent-color"
+      ],
+      "keep": [
+        "timeline-phase-structure",
+        "easing-curves",
+        "entry-geometry",
+        "impact-shake-pattern"
+      ],
+      "id": "typo/glitch-swap-punch",
+      "family": "typo",
+      "implementsGrammar": "word-swap-crossfade",
+      "verified": {
+        "contractVersion": "1.0",
+        "renderHash": "6d4d1beefa9ebea7dcdcffb78689ccec59295c20202ce9d74ba6bc0683fbb6ca",
+        "checkedAt": "2026-07-25T05:13:07.344Z"
+      }
+    },
+    {
+      "intensityBand": "40-70",
+      "arcFit": [
+        "build"
+      ],
+      "durationRange": [
+        3,
+        5
+      ],
+      "slots": [
+        {
+          "name": "old-value",
+          "maxChars": 3
+        },
+        {
+          "name": "new-value",
+          "maxChars": 3
+        },
+        {
+          "name": "unit-label",
+          "maxChars": 14
+        }
+      ],
+      "mutate": [
+        "copy",
+        "duration",
+        "accent-color",
+        "data-values"
+      ],
+      "keep": [
+        "timeline-phases",
+        "easing",
+        "anchor-exit-geometry",
+        "shake-pattern",
+        "svg-stroke-draw-on",
+        "streak-stagger"
+      ],
+      "id": "typo/demote-promote-arrow",
+      "family": "typo",
+      "implementsGrammar": "svg-stroke-draw-on",
+      "verified": {
+        "contractVersion": "1.0",
+        "renderHash": "036e657c6d8c4ee91401d8f542dceeae16f93ba94ce73037d046cc7e599e5d98",
+        "checkedAt": "2026-07-25T05:14:13.401Z"
+      }
+    },
+    {
+      "intensityBand": "40-70",
+      "arcFit": [
+        "hook",
+        "build"
+      ],
+      "durationRange": [
+        3,
+        5.5
+      ],
+      "slots": [
+        {
+          "name": "eyebrow",
+          "maxChars": 14
+        },
+        {
+          "name": "background-mark",
+          "maxChars": 2
+        },
+        {
+          "name": "headline",
+          "maxChars": 8
+        },
+        {
+          "name": "status",
+          "maxChars": 14
+        }
+      ],
+      "mutate": [
+        "copy",
+        "duration",
+        "accent-color"
+      ],
+      "keep": [
+        "timeline-phase-structure",
+        "easing-curves",
+        "character-stagger",
+        "accent-timing",
+        "stage-shake-pattern"
+      ],
+      "id": "typo/typewriter-stage",
+      "family": "typo",
+      "implementsGrammar": "typewriter-vs-fade-sequence",
+      "verified": {
+        "contractVersion": "1.0",
+        "renderHash": "34ad6312e7c9b790e6a7c355dcc4bf648f5788e48d5cd92df7acc3d20d72222b",
+        "checkedAt": "2026-07-25T05:15:35.966Z"
+      }
+    },
+    {
+      "intensityBand": "70-100",
+      "arcFit": [
+        "peak"
+      ],
+      "durationRange": [
+        2.5,
+        4.5
+      ],
+      "slots": [
+        {
+          "name": "kicker",
+          "maxChars": 14
+        },
+        {
+          "name": "index",
+          "maxChars": 20
+        },
+        {
+          "name": "hero-prompt",
+          "maxChars": 5
+        },
+        {
+          "name": "hero-response",
+          "maxChars": 5
+        },
+        {
+          "name": "swatch-label",
+          "maxChars": 8
+        },
+        {
+          "name": "swatch-count",
+          "maxChars": 7
+        },
+        {
+          "name": "running-label",
+          "maxChars": 14
+        }
+      ],
+      "mutate": [
+        "copy",
+        "duration",
+        "accent-color"
+      ],
+      "keep": [
+        "timeline-phase",
+        "easing",
+        "stagger",
+        "overshoot-geometry",
+        "strobe-pattern",
+        "bloom-settle"
+      ],
+      "id": "object/hero-overshoot-strobe",
+      "family": "object",
+      "implementsGrammar": "value-graph-overshoot-settle",
+      "verified": {
+        "contractVersion": "1.0",
+        "renderHash": "90d01beeb0fd9ea9ad56bea83f9f08d62049087b10b3082f44f4d33d39e886a0",
+        "checkedAt": "2026-07-25T05:16:53.064Z"
+      }
+    },
+    {
+      "intensityBand": "40-70",
+      "arcFit": [
+        "build",
+        "resolve"
+      ],
+      "durationRange": [
+        3,
+        5
+      ],
+      "slots": [
+        {
+          "name": "kicker",
+          "maxChars": 18
+        },
+        {
+          "name": "headline-primary",
+          "maxChars": 9
+        },
+        {
+          "name": "headline-secondary",
+          "maxChars": 8
+        },
+        {
+          "name": "equation",
+          "maxChars": 28
+        },
+        {
+          "name": "pipeline-step-1",
+          "maxChars": 26
+        },
+        {
+          "name": "pipeline-step-2",
+          "maxChars": 22
+        },
+        {
+          "name": "pipeline-step-3",
+          "maxChars": 25
+        },
+        {
+          "name": "pipeline-step-4",
+          "maxChars": 21
+        },
+        {
+          "name": "status",
+          "maxChars": 18
+        }
+      ],
+      "mutate": [
+        "copy",
+        "duration",
+        "accent-color"
+      ],
+      "keep": [
+        "timeline-phase",
+        "easing",
+        "entry-geometry",
+        "connector-stagger",
+        "node-pop",
+        "label-slide"
+      ],
+      "id": "object/connector-tree-cascade",
+      "family": "object",
+      "implementsGrammar": "line-connector-draw",
+      "verified": {
+        "contractVersion": "1.0",
+        "renderHash": "356b918b7dd386156f7a292f312e06fa79750d9d6a5ad3c5f807ddf9f2add030",
+        "checkedAt": "2026-07-25T05:17:59.878Z"
+      }
+    },
+    {
+      "intensityBand": "40-70",
+      "arcFit": [
+        "build",
+        "peak"
+      ],
+      "durationRange": [
+        2.5,
+        4.5
+      ],
+      "slots": [
+        {
+          "name": "headline",
+          "maxChars": 9
+        },
+        {
+          "name": "emphasis",
+          "maxChars": 9
+        },
+        {
+          "name": "value",
+          "maxChars": 4
+        },
+        {
+          "name": "tag-1",
+          "maxChars": 6
+        },
+        {
+          "name": "tag-2",
+          "maxChars": 6
+        },
+        {
+          "name": "tag-3",
+          "maxChars": 6
+        },
+        {
+          "name": "tag-4",
+          "maxChars": 6
+        },
+        {
+          "name": "tag-5",
+          "maxChars": 6
+        },
+        {
+          "name": "tag-6",
+          "maxChars": 6
+        },
+        {
+          "name": "tag-7",
+          "maxChars": 6
+        },
+        {
+          "name": "tag-8",
+          "maxChars": 6
+        }
+      ],
+      "mutate": [
+        "copy",
+        "duration",
+        "accent-color",
+        "data-values"
+      ],
+      "keep": [
+        "timeline-phases",
+        "easing",
+        "entry-geometry",
+        "tag-stagger"
+      ],
+      "id": "data/count-up-punch",
+      "family": "data",
+      "implementsGrammar": "hold-keyframe-stepped-values",
+      "verified": {
+        "contractVersion": "1.0",
+        "renderHash": "8421f812c50828a69711b814a8b0f4ffd4e9021dd29656e86ea9386f8d807600",
+        "checkedAt": "2026-07-25T05:22:56.342Z"
+      }
+    },
+    {
+      "intensityBand": "0-40",
+      "arcFit": [
+        "resolve"
+      ],
+      "durationRange": [
+        2.5,
+        4.5
+      ],
+      "slots": [
+        {
+          "name": "kicker",
+          "maxChars": 18
+        },
+        {
+          "name": "ghost-character",
+          "maxChars": 1
+        },
+        {
+          "name": "headline-line-1",
+          "maxChars": 13
+        },
+        {
+          "name": "headline-line-2",
+          "maxChars": 13
+        },
+        {
+          "name": "destination-url",
+          "maxChars": 32
+        },
+        {
+          "name": "status-label",
+          "maxChars": 18
+        }
+      ],
+      "mutate": [
+        "copy",
+        "duration",
+        "accent-color"
+      ],
+      "keep": [
+        "timeline-phase",
+        "easing",
+        "anchor-geometry",
+        "ghost-rotation",
+        "cta-stagger",
+        "underline-sweep"
+      ],
+      "id": "seal/rail-lockup-sweep",
+      "family": "seal",
+      "implementsGrammar": "underline-emphasis-sweep",
+      "verified": {
+        "contractVersion": "1.0",
+        "renderHash": "b4c7d5aa43ec0bbfb33e641e577a2f2354f035dcd8f2fa3ed08d218d5d28487e",
+        "checkedAt": "2026-07-25T05:25:53.066Z"
+      }
+    }
+  ]
 }
