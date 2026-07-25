@@ -3,269 +3,312 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1920, height=1080" />
-    <title>ReelForge v7 — Camera</title>
+    <title>ReelForge v7 — verified choreography</title>
   </head>
   <body>
     <template>
       <style>
-        .rf-v7s-s04 {
-          position: absolute;
-          inset: 0;
-          overflow: hidden;
-          color: var(--rf-text, #ffffff);
-          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
-        }
-
-        .rf-v7s-s04 .s04-stage {
+        .v7s-s04 {
           position: absolute;
           inset: 0;
           overflow: hidden;
           isolation: isolate;
+          background: var(--rf-bg, #010102);
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+        }
+
+        .v7s-s04 .s04-stage,
+        .v7s-s04 .s04-ghosts,
+        .v7s-s04 .s04-ticks,
+        .v7s-s04 .s04-flash {
+          position: absolute;
+          inset: 0;
+        }
+
+        .v7s-s04 .s04-stage {
+          overflow: hidden;
+          filter: url(#v7s-s04-whip-blur);
           will-change: transform, opacity, filter;
         }
 
-        .rf-v7s-s04 .s04-ground {
+        .v7s-s04 .s04-diagonal-sweep {
           position: absolute;
-          inset: 0;
-          background: var(--rf-bg, #010102);
-        }
-
-        .rf-v7s-s04 .s04-breathe {
-          position: absolute;
-          inset: 0;
+          top: -18%;
+          left: -14%;
+          width: 132%;
+          height: 46%;
           background: var(--rf-surface-2, #121317);
-          opacity: 0.14;
-          filter: brightness(1);
-          animation: s04-breathe 1.02s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
-          will-change: opacity, filter;
+          clip-path: polygon(0 47%, 100% 0, 100% 53%, 0 100%);
+          opacity: 0.42;
+          transform: rotate(-4deg);
+          transform-origin: center;
+          animation: s04-sweep-breathe 1.02s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
+          will-change: filter, opacity;
         }
 
-        .rf-v7s-s04 .s04-camera {
-          position: absolute;
-          inset: 0;
-          perspective: 930px;
-          perspective-origin: 51% 50%;
-        }
-
-        .rf-v7s-s04 .s04-rig,
-        .rf-v7s-s04 .s04-plane,
-        .rf-v7s-s04 .s04-hero {
-          transform-style: preserve-3d;
-        }
-
-        .rf-v7s-s04 .s04-rig,
-        .rf-v7s-s04 .s04-plane,
-        .rf-v7s-s04 .s04-hero {
-          position: absolute;
-          inset: 0;
-        }
-
-        .rf-v7s-s04 .s04-plane {
+        .v7s-s04 .s04-ghosts {
+          z-index: 0;
           pointer-events: none;
+          overflow: hidden;
+        }
+
+        .v7s-s04 .s04-ghost {
+          position: absolute;
+          margin: 0;
+          color: transparent;
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: 47vw;
+          font-weight: 800;
+          letter-spacing: -0.075em;
+          line-height: 0.76;
+          -webkit-text-stroke: 1px var(--rf-hairline, #26272e);
+          opacity: 0.68;
+          white-space: nowrap;
           will-change: transform, opacity;
         }
 
-        .rf-v7s-s04 .s04-rule {
+        .v7s-s04 .s04-ghost--one {
+          top: 4%;
+          left: 40%;
+          transform: rotate(-15deg);
+        }
+
+        .v7s-s04 .s04-ghost--two {
+          top: 41%;
+          left: -15%;
+          transform: rotate(-15deg);
+          opacity: 0.34;
+        }
+
+        .v7s-s04 .s04-ticks {
+          z-index: 1;
+          pointer-events: none;
+        }
+
+        .v7s-s04 .s04-diagonal-rule {
           position: absolute;
-          width: 1px;
-          height: 136%;
-          background: var(--rf-hairline, #26272e);
-        }
-
-        .rf-v7s-s04 .s04-rule--far {
-          top: -18%;
-          left: 49.8%;
-          transform: rotate(7deg);
-        }
-
-        .rf-v7s-s04 .s04-rule--mid {
-          top: -18%;
-          left: 74.2%;
-          transform: rotate(-5deg);
-        }
-
-        .rf-v7s-s04 .s04-cross-rule {
-          position: absolute;
-          top: 38.2%;
+          top: 58%;
           left: -9%;
-          width: 118%;
+          width: 124%;
           height: 1px;
           background: var(--rf-hairline, #26272e);
-          transform: rotate(-3deg);
+          transform: rotate(-24.2deg);
+          transform-origin: left center;
         }
 
-        .rf-v7s-s04 .s04-micro {
+        .v7s-s04 .s04-tick {
           position: absolute;
-          margin: 0;
+          left: var(--x);
+          top: var(--y);
+          width: 1px;
+          height: 34px;
+          background: var(--rf-hairline-strong, #3a3c46);
+          opacity: 0.16;
+          transform: rotate(24.2deg);
+          transform-origin: center;
+          will-change: opacity, transform;
+        }
+
+        .v7s-s04 .s04-tick::after {
+          position: absolute;
+          top: 40px;
+          left: -7px;
           color: var(--rf-ink-subtle, #8a8f98);
-          font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
+          content: attr(data-step);
+          font-family: var(--rf-font-mono, ui-monospace, monospace);
           font-size: 13px;
           font-weight: 400;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.04em;
+          line-height: 1;
+          opacity: 0.78;
+        }
+
+        .v7s-s04 .s04-copy-plane {
+          position: absolute;
+          z-index: 3;
+          inset: 0;
+          pointer-events: none;
+        }
+
+        .v7s-s04 .s04-label {
+          position: absolute;
+          top: 24.2%;
+          left: 7.4%;
+          margin: 0;
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-mono, ui-monospace, monospace);
+          font-size: 21px;
+          font-weight: 600;
+          letter-spacing: 0.14em;
           line-height: 1;
           white-space: nowrap;
         }
 
-        .rf-v7s-s04 .s04-micro--far {
-          top: 17.2%;
-          left: 51.3%;
-          transform: rotate(-3deg);
-        }
-
-        .rf-v7s-s04 .s04-micro--mid {
-          top: 76.1%;
-          left: 75.6%;
-          transform: rotate(-5deg);
-        }
-
-        .rf-v7s-s04 .s04-micro--cross {
-          top: 35.8%;
-          left: 10.2%;
-          transform: rotate(-3deg);
-        }
-
-        .rf-v7s-s04 .s04-hero {
-          z-index: 2;
-          pointer-events: none;
-        }
-
-        .rf-v7s-s04 .s04-hero-line {
+        .v7s-s04 .s04-value {
           position: absolute;
+          top: 29.5%;
           left: 7.4%;
-          display: block;
-          width: max-content;
           margin: 0;
           color: var(--rf-text, #ffffff);
           font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
-          font-size: clamp(120px, 10vw, 190px);
+          font-size: 38vh;
           font-weight: 800;
-          letter-spacing: -0.045em;
-          line-height: 0.96;
+          font-variant-numeric: tabular-nums;
+          letter-spacing: -0.06em;
+          line-height: 0.82;
           white-space: nowrap;
           word-break: keep-all;
           will-change: transform, opacity;
         }
 
-        .rf-v7s-s04 .s04-hero-line--one {
-          top: 30.2%;
-        }
-
-        .rf-v7s-s04 .s04-hero-line--two {
-          top: 47.2%;
-        }
-
-        .rf-v7s-s04 .s04-chrome {
-          position: absolute;
-          z-index: 5;
+        .v7s-s04 .s04-subline,
+        .v7s-s04 .s04-tags,
+        .v7s-s04 .s04-chrome {
+          margin: 0;
           color: var(--rf-ink-subtle, #8a8f98);
-          font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
+          font-family: var(--rf-font-mono, ui-monospace, monospace);
           font-size: 13px;
           font-weight: 400;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.14em;
           line-height: 1;
+          white-space: nowrap;
         }
 
-        .rf-v7s-s04 .s04-section {
+        .v7s-s04 .s04-subline {
+          position: absolute;
+          top: 68.3%;
+          left: 7.4%;
+        }
+
+        .v7s-s04 .s04-tags {
+          position: absolute;
+          top: 76.2%;
+          left: 7.4%;
+          display: flex;
+          gap: 20px;
+        }
+
+        .v7s-s04 .s04-tags span {
+          display: block;
+        }
+
+        .v7s-s04 .s04-runner {
+          position: absolute;
+          z-index: 4;
+          top: 89%;
+          left: 4%;
+          width: 3px;
+          height: 42px;
+          background: var(--rf-accent, #828fff);
+          box-shadow: 0 0 0.35em var(--rf-accent, #828fff);
+          opacity: 0.96;
+          transform: rotate(24.2deg);
+          transform-origin: center;
+          will-change: transform, opacity;
+        }
+
+        .v7s-s04 .s04-flash {
+          z-index: 2;
+          background: var(--rf-text, #ffffff);
+          opacity: 0;
+          pointer-events: none;
+          will-change: opacity;
+        }
+
+        .v7s-s04 .s04-chrome--section {
+          position: absolute;
+          z-index: 5;
           top: 8%;
           left: 7.4%;
-          margin: 0;
         }
 
-        .rf-v7s-s04 .s04-progress {
+        .v7s-s04 .s04-progress {
           position: absolute;
-          right: 7.4%;
-          bottom: 8%;
-          left: 7.4%;
-          height: 13px;
-        }
-
-        .rf-v7s-s04 .s04-progress-line {
-          position: absolute;
+          z-index: 5;
           right: 0;
-          bottom: 0;
+          bottom: 8%;
           left: 0;
           height: 1px;
           background: var(--rf-hairline, #26272e);
         }
 
-        .rf-v7s-s04 .s04-progress-tick {
+        .v7s-s04 .s04-progress-marker {
           position: absolute;
-          bottom: -6px;
-          width: 1px;
-          height: 13px;
-          background: var(--rf-hairline, #26272e);
+          top: -3px;
+          left: calc(50% - 1px);
+          width: 2px;
+          height: 7px;
+          background: var(--rf-text, #ffffff);
         }
 
-        .rf-v7s-s04 .s04-progress-marker {
-          position: absolute;
-          bottom: -8px;
-          left: 50%;
-          width: 1px;
-          height: 17px;
-          background: var(--rf-accent, #828fff);
-          transform: translateX(-0.5px);
-        }
-
-        .rf-v7s-s04 .s04-progress-readout {
-          position: absolute;
-          right: 0;
-          bottom: 17px;
-          margin: 0;
-        }
-
-        @keyframes s04-breathe {
+        @keyframes s04-sweep-breathe {
           from {
-            opacity: 0.14;
             filter: brightness(1);
+            opacity: 0.42;
           }
           to {
-            opacity: 0.22;
-            filter: brightness(1.24);
+            filter: brightness(1.26);
+            opacity: 0.57;
           }
         }
       </style>
-      <main class="rf-v7s-s04" data-rf-fragment-version="1.0" data-composition-id="v7s-s04">
+      <main class="v7s-s04" data-rf-fragment-version="1.0" data-composition-id="v7s-s04">
         <svg aria-hidden="true" style="position: absolute; width: 0; height: 0">
           <filter id="v7s-s04-whip-blur" x="-55%" y="-55%" width="210%" height="210%">
             <feGaussianBlur stdDeviation="0 0"></feGaussianBlur>
           </filter>
         </svg>
         <div class="s04-stage">
-          <div class="s04-ground" aria-hidden="true"></div>
-          <div class="s04-breathe" aria-hidden="true"></div>
-          <div class="s04-camera" aria-hidden="true">
-            <div class="s04-rig">
-              <div class="s04-plane s04-plane--far">
-                <span class="s04-rule s04-rule--far"></span>
-                <p class="s04-micro s04-micro--far">FOCAL / -620</p>
-              </div>
-              <div class="s04-plane s04-plane--mid">
-                <span class="s04-rule s04-rule--mid"></span>
-                <span class="s04-cross-rule"></span>
-                <p class="s04-micro s04-micro--mid">DEPTH / -250</p>
-                <p class="s04-micro s04-micro--cross">CAMERA AXIS / 04</p>
-              </div>
-              <h1 class="s04-hero">
-                <span class="s04-hero-line s04-hero-line--one">글자 사이로</span>
-                <span class="s04-hero-line s04-hero-line--two">카메라가 간다</span>
-              </h1>
-            </div>
+          <div class="s04-diagonal-sweep" aria-hidden="true"></div>
+          <div class="s04-ghosts" aria-hidden="true">
+            <p class="s04-ghost s04-ghost--one">31</p>
+            <p class="s04-ghost s04-ghost--two">31</p>
           </div>
-          <p class="s04-chrome s04-section">04 — CAMERA</p>
-          <div class="s04-progress" aria-label="scene 4 of 8 progress">
-            <p class="s04-chrome s04-progress-readout">04 / 08</p>
-            <span class="s04-progress-line"></span>
-            <span class="s04-progress-tick" style="left: 0%"></span>
-            <span class="s04-progress-tick" style="left: 12.5%"></span>
-            <span class="s04-progress-tick" style="left: 25%"></span>
-            <span class="s04-progress-tick" style="left: 37.5%"></span>
-            <span class="s04-progress-tick" style="left: 50%"></span>
-            <span class="s04-progress-tick" style="left: 62.5%"></span>
-            <span class="s04-progress-tick" style="left: 75%"></span>
-            <span class="s04-progress-tick" style="left: 87.5%"></span>
-            <span class="s04-progress-tick" style="left: 100%"></span>
-            <span class="s04-progress-marker"></span>
+          <div class="s04-ticks" aria-hidden="true">
+            <span class="s04-diagonal-rule"></span>
+            <span class="s04-tick" data-step="01" style="--x: 4%; --y: 89%"></span>
+            <span class="s04-tick" data-step="02" style="--x: 7%; --y: 86.9%"></span>
+            <span class="s04-tick" data-step="03" style="--x: 10%; --y: 84.8%"></span>
+            <span class="s04-tick" data-step="04" style="--x: 13%; --y: 82.7%"></span>
+            <span class="s04-tick" data-step="05" style="--x: 16%; --y: 80.6%"></span>
+            <span class="s04-tick" data-step="06" style="--x: 19%; --y: 78.5%"></span>
+            <span class="s04-tick" data-step="07" style="--x: 22%; --y: 76.4%"></span>
+            <span class="s04-tick" data-step="08" style="--x: 25%; --y: 74.3%"></span>
+            <span class="s04-tick" data-step="09" style="--x: 28%; --y: 72.2%"></span>
+            <span class="s04-tick" data-step="10" style="--x: 31%; --y: 70.1%"></span>
+            <span class="s04-tick" data-step="11" style="--x: 34%; --y: 68%"></span>
+            <span class="s04-tick" data-step="12" style="--x: 37%; --y: 65.9%"></span>
+            <span class="s04-tick" data-step="13" style="--x: 40%; --y: 63.8%"></span>
+            <span class="s04-tick" data-step="14" style="--x: 43%; --y: 61.7%"></span>
+            <span class="s04-tick" data-step="15" style="--x: 46%; --y: 59.6%"></span>
+            <span class="s04-tick" data-step="16" style="--x: 49%; --y: 57.5%"></span>
+            <span class="s04-tick" data-step="17" style="--x: 52%; --y: 55.4%"></span>
+            <span class="s04-tick" data-step="18" style="--x: 55%; --y: 53.3%"></span>
+            <span class="s04-tick" data-step="19" style="--x: 58%; --y: 51.2%"></span>
+            <span class="s04-tick" data-step="20" style="--x: 61%; --y: 49.1%"></span>
+            <span class="s04-tick" data-step="21" style="--x: 64%; --y: 47%"></span>
+            <span class="s04-tick" data-step="22" style="--x: 67%; --y: 44.9%"></span>
+            <span class="s04-tick" data-step="23" style="--x: 70%; --y: 42.8%"></span>
+            <span class="s04-tick" data-step="24" style="--x: 73%; --y: 40.7%"></span>
+            <span class="s04-tick" data-step="25" style="--x: 76%; --y: 38.6%"></span>
+            <span class="s04-tick" data-step="26" style="--x: 79%; --y: 36.5%"></span>
+            <span class="s04-tick" data-step="27" style="--x: 82%; --y: 34.4%"></span>
+            <span class="s04-tick" data-step="28" style="--x: 85%; --y: 32.3%"></span>
+            <span class="s04-tick" data-step="29" style="--x: 88%; --y: 30.2%"></span>
+            <span class="s04-tick" data-step="30" style="--x: 91%; --y: 28.1%"></span>
+            <span class="s04-tick" data-step="31" style="--x: 94%; --y: 26%"></span>
           </div>
+          <div class="s04-flash" aria-hidden="true"></div>
+          <div class="s04-copy-plane">
+            <p class="s04-label">검증된 안무</p>
+            <h1 class="s04-value" aria-label="검증된 안무 31" data-target="31">0</h1>
+            <p class="s04-subline">31 STAGES / FRAME-LOCKED</p>
+            <p class="s04-tags"><span>BEAT / 160</span><span>STEP / 31</span><span>TAKE / 04</span><span>LOCK / ON</span></p>
+            <span class="s04-runner" aria-hidden="true"></span>
+          </div>
+          <p class="s04-chrome s04-chrome--section">04 — GALLERY</p>
+          <div class="s04-progress" aria-label="scene 4 progress"><span class="s04-progress-marker"></span></div>
         </div>
       </main>
       <script>
@@ -274,39 +317,52 @@
           const root = document.querySelector(`[data-composition-id="${compositionId}"]`);
           if (!root) return;
 
-          const blur = root.querySelector("#v7s-s04-whip-blur feGaussianBlur");
           const stage = root.querySelector(".s04-stage");
-          const rig = root.querySelector(".s04-rig");
-          const farPlane = root.querySelector(".s04-plane--far");
-          const midPlane = root.querySelector(".s04-plane--mid");
-          const heroOne = root.querySelector(".s04-hero-line--one");
-          const heroTwo = root.querySelector(".s04-hero-line--two");
+          const blur = root.querySelector("#v7s-s04-whip-blur feGaussianBlur");
+          const value = root.querySelector(".s04-value");
+          const runner = root.querySelector(".s04-runner");
+          const flash = root.querySelector(".s04-flash");
+          const ghosts = Array.from(root.querySelectorAll(".s04-ghost"));
+          const ticks = Array.from(root.querySelectorAll(".s04-tick"));
+          const counter = { value: 0 };
+          const target = Number(value.getAttribute("data-target"));
 
+          value.textContent = "0";
           window.__timelines = window.__timelines || {};
           window.__anchors = window.__anchors || {};
           window.__anchors[compositionId] = {
-            exit: { dir: "right", blurPeak: 40, cx: 0.5, cy: 0.5, handoffAnchor: "right-whip-out" }
+            exit: { dir: "right", blurPeak: 38, x: 0.074, y: 0.6, handoffAnchor: "right-whip-out" }
           };
 
           const tl = gsap.timeline({ paused: true });
 
-          tl.set(stage, { filter: "url(#v7s-s04-whip-blur)", x: 0, skewX: 0, opacity: 1 }, 0)
+          tl.set(stage, { x: 0, skewX: 0, opacity: 1 }, 0)
             .set(blur, { attr: { stdDeviation: "0 0" } }, 0)
-            .set(rig, { z: 0, transformStyle: "preserve-3d" }, 0)
-            .set([farPlane, midPlane], { transformStyle: "preserve-3d" }, 0)
-            .set(farPlane, { z: -620, x: -28, opacity: 0.35 }, 0)
-            .set(midPlane, { z: -250, x: 22, opacity: 0.42 }, 0)
-            .set(heroOne, { z: 0, y: 18, scale: 0.985, opacity: 0.26, transformOrigin: "left center" }, 0)
-            .set(heroTwo, { z: 130, y: 24, scale: 0.98, opacity: 0.26, transformOrigin: "left center" }, 0)
-            .to(rig, { z: 355, duration: 1.78, ease: "power2.inOut" }, 0.14)
-            .to(farPlane, { x: 0, opacity: 0.9, duration: 0.34, ease: "power2.out" }, 0)
-            .to(midPlane, { x: 0, opacity: 0.82, duration: 0.38, ease: "power2.out" }, 0.12)
-            .to(heroOne, { y: 0, scale: 1, opacity: 1, duration: 0.4, ease: "power3.out" }, 0)
-            .to(heroTwo, { y: 0, scale: 1, opacity: 1, duration: 0.36, ease: "power3.out" }, 0.15)
-            .to(stage, { x: -18, duration: 0.12, ease: "power2.in" }, 3.615)
-            .to(blur, { attr: { stdDeviation: "40 2" }, duration: 0.11, ease: "power4.in" }, 3.735)
-            .to(stage, { x: 2320, skewX: -9, duration: 0.35, ease: "power4.in" }, 3.735)
-            .to(stage, { opacity: 0.42, duration: 0.31, ease: "power3.in" }, 3.775);
+            .set(ticks, { opacity: 0.16, scaleY: 0.22, transformOrigin: "center bottom" }, 0)
+            .set(ghosts, { opacity: 0.12, x: -110, y: 64, transformOrigin: "center" }, 0)
+            .set(runner, { x: 0, y: 0, scaleY: 0.34, transformOrigin: "center" }, 0)
+            .set(flash, { opacity: 0 }, 0)
+            .to(ghosts, { opacity: (index) => (index === 0 ? 0.68 : 0.34), x: 0, y: 0, duration: 0.375, ease: "power4.out", stagger: 0.04 }, 0)
+            .to(value, { scale: 1.055, duration: 0.075, ease: "power2.out", transformOrigin: "left 60%" }, 0)
+            .to(value, { scale: 1, duration: 0.3, ease: "expo.out" }, 0.075)
+            .to(counter, {
+              value: target,
+              duration: 0.9,
+              ease: "none",
+              onUpdate: () => {
+                value.textContent = String(Math.min(target, Math.round(counter.value)));
+              }
+            }, 0)
+            .to(ticks, { opacity: 1, scaleY: 1, duration: 0.025, ease: "none", stagger: 0.025 }, 0.125)
+            .to(runner, { x: 1728, y: -680, scaleY: 1, duration: 0.9, ease: "none" }, 0)
+            .to(flash, { opacity: 0.1, duration: 0.025, ease: "none" }, 0.75)
+            .to(flash, { opacity: 0, duration: 0.125, ease: "power2.out" }, 0.775)
+            .to(value, { x: 18, duration: 0.075, ease: "power2.in" }, 0.75)
+            .to(value, { x: 0, duration: 0.075, ease: "power2.out" }, 0.825)
+            .to(stage, { x: -20, duration: 0.075, ease: "power2.in" }, 1.5)
+            .to(blur, { attr: { stdDeviation: "38 2" }, duration: 0.1, ease: "power4.in" }, 1.575)
+            .to(stage, { x: 2360, skewX: -9, duration: 0.325, ease: "power4.in" }, 1.575)
+            .to(stage, { opacity: 0.42, duration: 0.28, ease: "power3.in" }, 1.62);
 
           window.__timelines[compositionId] = tl;
           tl.seek(0);

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1920, height=1080" />
-    <title>ReelForge v7 — Click</title>
+    <title>ReelForge v7 — 비트</title>
   </head>
   <body>
     <template>
@@ -21,22 +21,63 @@
           position: absolute;
           inset: 0;
           background: var(--rf-bg, #010102);
-          animation: v7s-s07-stage-breathe 1.0212s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
+          animation: s07-stage-breathe 1.02s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
+        }
+
+        #rf-v7s-s07 .s07-stage,
+        #rf-v7s-s07 .s07-strobe {
+          position: absolute;
+          inset: 0;
         }
 
         #rf-v7s-s07 .s07-stage {
-          position: absolute;
-          inset: 0;
           will-change: transform;
         }
 
-        #rf-v7s-s07 .s07-chrome {
+        #rf-v7s-s07 .s07-strobe {
+          z-index: 8;
+          pointer-events: none;
+          background: var(--rf-accent, #ff4f87);
+          opacity: 0;
+          will-change: opacity;
+        }
+
+        #rf-v7s-s07 .s07-ghost {
           position: absolute;
-          top: 8%;
-          left: 7.4%;
+          z-index: 0;
+          color: transparent;
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: clamp(960px, 74vw, 1420px);
+          font-weight: 800;
+          letter-spacing: -0.11em;
+          line-height: 0.78;
+          white-space: nowrap;
+          -webkit-text-stroke: 1px var(--rf-hairline-strong, #3a3c46);
+          opacity: 0.42;
+          pointer-events: none;
+          will-change: transform, opacity;
+        }
+
+        #rf-v7s-s07 .s07-ghost--a {
+          top: -24%;
+          left: -7%;
+          clip-path: inset(0 0 52% 0);
+        }
+
+        #rf-v7s-s07 .s07-ghost--b {
+          right: -9%;
+          bottom: -39%;
+          clip-path: inset(47% 0 0 0);
+          opacity: 0.27;
+        }
+
+        #rf-v7s-s07 .s07-chrome,
+        #rf-v7s-s07 .s07-meter-label,
+        #rf-v7s-s07 .s07-progress-label,
+        #rf-v7s-s07 .s07-micro-cluster {
           margin: 0;
           color: var(--rf-ink-subtle, #8a8f98);
-          font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
+          font-family: var(--rf-font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
           font-size: 13px;
           font-weight: 400;
           letter-spacing: 0.14em;
@@ -44,92 +85,135 @@
           white-space: nowrap;
         }
 
-        #rf-v7s-s07 .s07-hero {
+        #rf-v7s-s07 .s07-chrome {
           position: absolute;
+          z-index: 4;
+          top: 8%;
+          left: 7.4%;
+        }
+
+        #rf-v7s-s07 .s07-hero-anchor {
+          position: absolute;
+          z-index: 4;
           top: 60%;
           left: 7.4%;
-          display: flex;
-          align-items: baseline;
+          transform: translateY(-0.76em);
+        }
+
+        #rf-v7s-s07 .s07-hero {
           margin: 0;
           color: var(--rf-text, #ffffff);
           font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
-          font-size: clamp(120px, 10vw, 190px);
+          font-size: clamp(367px, 36vh, 432px);
           font-weight: 800;
-          letter-spacing: -0.045em;
+          font-variant-numeric: tabular-nums;
+          letter-spacing: -0.06em;
           line-height: 0.96;
           white-space: nowrap;
           word-break: keep-all;
-          transform: translateY(-0.8em);
+          will-change: transform, filter;
         }
 
-        #rf-v7s-s07 .s07-prefix,
-        #rf-v7s-s07 .s07-click,
-        #rf-v7s-s07 .s07-scramble,
-        #rf-v7s-s07 .s07-period {
-          display: inline-block;
+        #rf-v7s-s07 .s07-subline {
+          position: absolute;
+          z-index: 4;
+          top: 70.2%;
+          left: 7.4%;
+          margin: 0;
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+          font-size: 21px;
+          font-weight: 600;
+          letter-spacing: 0.14em;
+          line-height: 1;
+          white-space: nowrap;
+        }
+
+        #rf-v7s-s07 .s07-micro-cluster {
+          position: absolute;
+          z-index: 4;
+          top: 74.2%;
+          left: 7.4%;
+          display: flex;
+          gap: 2.1em;
           will-change: transform, opacity;
         }
 
-        #rf-v7s-s07 .s07-click-wrap {
-          position: relative;
-          display: inline-block;
-          margin-left: 0.15em;
-        }
-
-        #rf-v7s-s07 .s07-scramble {
+        #rf-v7s-s07 .s07-meter {
           position: absolute;
-          top: 0;
+          z-index: 2;
+          right: 0;
+          bottom: 11.2%;
           left: 0;
-          color: var(--rf-ink-subtle, #8a8f98);
-          clip-path: inset(6% 0 8% 0);
+          display: flex;
+          align-items: flex-end;
+          height: 15.5%;
+          gap: 0.38%;
+          opacity: 0.88;
+          pointer-events: none;
+          will-change: transform, opacity;
         }
 
-        #rf-v7s-s07 .s07-period {
-          margin-left: 0.018em;
-          color: var(--rf-accent, #ff48a0);
-          transform-origin: 50% 76%;
+        #rf-v7s-s07 .s07-meter::after {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          height: 1px;
+          content: "";
+          background: var(--rf-hairline, #26272e);
+        }
+
+        #rf-v7s-s07 .s07-spike {
+          z-index: 1;
+          flex: 1 1 0;
+          min-width: 1px;
+          background: var(--rf-hairline-strong, #3a3c46);
+          transform-origin: center bottom;
+          will-change: transform, opacity;
+        }
+
+        #rf-v7s-s07 .s07-meter-label {
+          position: absolute;
+          z-index: 3;
+          bottom: calc(100% + 13px);
+          left: 7.4%;
         }
 
         #rf-v7s-s07 .s07-progress {
           position: absolute;
+          z-index: 5;
           right: 0;
           bottom: 8%;
           left: 0;
           height: 1px;
           background: var(--rf-hairline, #26272e);
+          transform-origin: left center;
+          will-change: transform, opacity;
         }
 
         #rf-v7s-s07 .s07-marker {
           position: absolute;
-          top: -6px;
+          top: -7px;
           left: calc(87.5% - 0.5px);
           width: 1px;
-          height: 13px;
+          height: 15px;
           background: var(--rf-text, #ffffff);
-          transform-origin: 50% 50%;
+          transform-origin: center;
           will-change: transform, opacity;
         }
 
-        #rf-v7s-s07 .s07-micro-copy {
+        #rf-v7s-s07 .s07-progress-label {
           position: absolute;
-          right: 7.4%;
-          bottom: calc(8% + 17px);
-          display: grid;
-          gap: 6px;
-          color: var(--rf-ink-subtle, #8a8f98);
-          font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
-          font-size: 13px;
-          font-weight: 400;
-          letter-spacing: 0.14em;
-          line-height: 1;
-          text-align: right;
-          white-space: nowrap;
+          bottom: 14px;
+          left: calc(87.5% + 12px);
+          will-change: transform, opacity;
         }
 
-        @keyframes v7s-s07-stage-breathe {
+        @keyframes s07-stage-breathe {
           from {
             filter: brightness(1);
-            opacity: 0.86;
+            opacity: 0.88;
           }
 
           to {
@@ -146,20 +230,24 @@
       >
         <div class="s07-surface" aria-hidden="true"></div>
         <div class="s07-stage">
-          <p class="s07-chrome">07 — CLICK</p>
-          <h1 class="s07-hero">
-            <span class="s07-prefix">렌더까지,</span>
-            <span class="s07-click-wrap">
-              <span class="s07-scramble" aria-hidden="true">ㄸㅏ⌁ㄲㅏㄱ</span>
-              <span class="s07-click">딸깍</span><span class="s07-period" aria-hidden="true">.</span>
-            </span>
-          </h1>
-          <div class="s07-micro-copy">
-            <span>ONE LINE IN</span>
-            <span>ONE FILM OUT</span>
+          <span class="s07-ghost s07-ghost--a" aria-hidden="true">비트</span>
+          <span class="s07-ghost s07-ghost--b" aria-hidden="true">비트</span>
+
+          <p class="s07-chrome">07 — BEAT</p>
+          <div class="s07-hero-anchor"><h1 class="s07-hero">비트</h1></div>
+          <p class="s07-subline">160 BPM / 01</p>
+          <div class="s07-micro-cluster" aria-label="beat measurement tags">
+            <span>07 / 08</span><span>1.55 S</span><span>SLAM</span>
           </div>
-          <div class="s07-progress" aria-hidden="true"><span class="s07-marker"></span></div>
+
+          <div class="s07-meter" aria-hidden="true">
+            <i class="s07-spike" style="height: 12%"></i><i class="s07-spike" style="height: 33%"></i><i class="s07-spike" style="height: 18%"></i><i class="s07-spike" style="height: 59%"></i><i class="s07-spike" style="height: 24%"></i><i class="s07-spike" style="height: 44%"></i><i class="s07-spike" style="height: 16%"></i><i class="s07-spike" style="height: 74%"></i><i class="s07-spike" style="height: 31%"></i><i class="s07-spike" style="height: 46%"></i><i class="s07-spike" style="height: 22%"></i><i class="s07-spike" style="height: 88%"></i><i class="s07-spike" style="height: 38%"></i><i class="s07-spike" style="height: 57%"></i><i class="s07-spike" style="height: 15%"></i><i class="s07-spike" style="height: 68%"></i><i class="s07-spike" style="height: 29%"></i><i class="s07-spike" style="height: 49%"></i><i class="s07-spike" style="height: 20%"></i><i class="s07-spike" style="height: 93%"></i><i class="s07-spike" style="height: 42%"></i><i class="s07-spike" style="height: 64%"></i><i class="s07-spike" style="height: 27%"></i><i class="s07-spike" style="height: 77%"></i><i class="s07-spike" style="height: 17%"></i><i class="s07-spike" style="height: 54%"></i><i class="s07-spike" style="height: 35%"></i><i class="s07-spike" style="height: 82%"></i><i class="s07-spike" style="height: 23%"></i><i class="s07-spike" style="height: 47%"></i><i class="s07-spike" style="height: 14%"></i><i class="s07-spike" style="height: 71%"></i><i class="s07-spike" style="height: 39%"></i><i class="s07-spike" style="height: 61%"></i><i class="s07-spike" style="height: 25%"></i><i class="s07-spike" style="height: 86%"></i><i class="s07-spike" style="height: 32%"></i><i class="s07-spike" style="height: 52%"></i><i class="s07-spike" style="height: 19%"></i><i class="s07-spike" style="height: 79%"></i><i class="s07-spike" style="height: 28%"></i><i class="s07-spike" style="height: 45%"></i><i class="s07-spike" style="height: 13%"></i><i class="s07-spike" style="height: 67%"></i><i class="s07-spike" style="height: 36%"></i><i class="s07-spike" style="height: 58%"></i><i class="s07-spike" style="height: 21%"></i><i class="s07-spike" style="height: 91%"></i>
+            <p class="s07-meter-label">160 / IMPACT / 07</p>
+          </div>
+
+          <div class="s07-progress" aria-hidden="true"><span class="s07-marker"></span><span class="s07-progress-label">07 / 08</span></div>
         </div>
+        <div class="s07-strobe" aria-hidden="true"></div>
       </main>
 
       <script>
@@ -169,38 +257,50 @@
 
           const compositionId = root.dataset.compositionId;
           const stage = root.querySelector(".s07-stage");
+          const hero = root.querySelector(".s07-hero");
           const chrome = root.querySelector(".s07-chrome");
-          const prefix = root.querySelector(".s07-prefix");
-          const click = root.querySelector(".s07-click");
-          const scramble = root.querySelector(".s07-scramble");
-          const period = root.querySelector(".s07-period");
-          const marker = root.querySelector(".s07-marker");
-          const microCopy = root.querySelector(".s07-micro-copy");
+          const subline = root.querySelector(".s07-subline");
+          const microCluster = root.querySelector(".s07-micro-cluster");
+          const meter = root.querySelector(".s07-meter");
+          const spikes = root.querySelectorAll(".s07-spike");
+          const ghostA = root.querySelector(".s07-ghost--a");
+          const ghostB = root.querySelector(".s07-ghost--b");
           const progress = root.querySelector(".s07-progress");
+          const marker = root.querySelector(".s07-marker");
+          const progressLabel = root.querySelector(".s07-progress-label");
+          const strobe = root.querySelector(".s07-strobe");
 
           window.__timelines = window.__timelines || {};
           const tl = gsap.timeline({ paused: true });
 
-          tl.set([chrome, microCopy, progress], { opacity: 0 })
-            .set(prefix, { y: 14, transformOrigin: "left baseline" })
-            .set(click, { opacity: 0, x: -54, scaleX: 0.82, skewX: -8, transformOrigin: "left center" })
-            .set(scramble, { opacity: 0, x: -18 })
-            .set(period, { scale: 0, transformOrigin: "50% 76%" })
-            .set(marker, { opacity: 0, scaleY: 0, transformOrigin: "50% 50%" })
-            .fromTo(chrome, { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.22, ease: "power3.out" }, 0)
-            .fromTo(microCopy, { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.24, ease: "power3.out" }, 0.04)
-            .fromTo(progress, { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.28, ease: "power3.out" }, 0.02)
-            .to(marker, { opacity: 1, scaleY: 1, duration: 0.18, ease: "power3.out" }, 0.12)
-            .to(prefix, { y: 0, duration: 0.26, ease: "power4.out" }, 0)
-            .to(scramble, { opacity: 1, x: 0, duration: 0.08, ease: "steps(2)" }, 0.30636)
-            .to(scramble, { opacity: 0, x: 18, duration: 0.07, ease: "steps(2)" }, 0.40848)
-            .to(click, { opacity: 1, x: 0, scaleX: 1, skewX: 0, duration: 0.1, ease: "power4.out" }, 0.5106)
-            .to(period, { scale: 1.32, duration: 0.08, ease: "power4.out" }, 0.5106)
-            .to(period, { scale: 1, duration: 0.03, ease: "back.out(3)" }, 0.5906)
-            .to(stage, { x: -15, y: 5, duration: 0.025, ease: "none" }, 0.5106)
-            .to(stage, { x: 12, y: -4, duration: 0.025, ease: "none" }, 0.5356)
-            .to(stage, { x: -6, y: 2, duration: 0.025, ease: "none" }, 0.5606)
-            .to(stage, { x: 0, y: 0, duration: 0.04, ease: "power2.out" }, 0.5856);
+          tl.set(hero, { x: -160, y: 24, scaleX: 1.16, skewX: -8, filter: "blur(12px)", transformOrigin: "left 76%" })
+            .set([chrome, subline, microCluster, progressLabel], { opacity: 0.42 })
+            .set(progress, { opacity: 0.68, scaleX: 0.42 })
+            .set(marker, { opacity: 0.55, scaleY: 0.36 })
+            .set(meter, { opacity: 0.55, y: 20 })
+            .set(spikes, { scaleY: 0.15, opacity: 0.56 })
+            .set(ghostA, { x: -130, opacity: 0.23 })
+            .set(ghostB, { x: 110, opacity: 0.14 })
+            .to(hero, { x: 46, y: -14, scaleX: 1.1, skewX: 4, filter: "blur(0px)", duration: 0.06, ease: "power4.out" }, 0)
+            .to(hero, { x: 0, y: 0, scaleX: 1, skewX: 0, duration: 0.19, ease: "back.out(1.8)" }, 0.06)
+            .to([chrome, subline, microCluster], { opacity: 1, duration: 0.18, ease: "power3.out" }, 0.08)
+            .to(meter, { opacity: 0.88, y: 0, duration: 0.24, ease: "power3.out" }, 0.08)
+            .to(progress, { opacity: 1, scaleX: 1, duration: 0.24, ease: "power3.out" }, 0.1)
+            .to([marker, progressLabel], { opacity: 1, scaleY: 1, duration: 0.14, ease: "power3.out" }, 0.16)
+            .to(ghostA, { x: 0, opacity: 0.42, duration: 0.34, ease: "power3.out" }, 0)
+            .to(ghostB, { x: 0, opacity: 0.27, duration: 0.34, ease: "power3.out" }, 0.04)
+            .to(strobe, { opacity: 0.82, duration: 0.035, ease: "none" }, 0.375)
+            .to(strobe, { opacity: 0, duration: 0.055, ease: "none" }, 0.41)
+            .to(spikes, { scaleY: 1, opacity: 1, duration: 0.095, ease: "power4.out", stagger: { each: 0.006, from: "center" } }, 0.375)
+            .to(spikes, { scaleY: 0.72, opacity: 0.84, duration: 0.2, ease: "power2.out", stagger: { each: 0.003, from: "edges" } }, 0.53)
+            .to(stage, { x: -18, y: 7, duration: 0.025, ease: "none" }, 0.375)
+            .to(stage, { x: 14, y: -5, duration: 0.025, ease: "none" }, 0.4)
+            .to(stage, { x: -8, y: 3, duration: 0.025, ease: "none" }, 0.425)
+            .to(stage, { x: 0, y: 0, duration: 0.05, ease: "power2.out" }, 0.45)
+            .to(ghostA, { x: 38, duration: 0.18, ease: "power2.out" }, 0.56)
+            .to(ghostB, { x: -28, duration: 0.18, ease: "power2.out" }, 0.56)
+            .to([subline, microCluster], { y: -3, duration: 0.12, ease: "power2.out" }, 0.75)
+            .to([subline, microCluster], { y: 0, duration: 0.12, ease: "power2.out" }, 0.87);
 
           window.__timelines[compositionId] = tl;
           tl.seek(0);

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1920, height=1080" />
-    <title>ReelForge v7 seal</title>
+    <title>ReelForge v7 — Data</title>
   </head>
   <body>
     <template>
@@ -12,35 +12,80 @@
           position: absolute;
           inset: 0;
           overflow: hidden;
+          isolation: isolate;
+          background: var(--rf-bg, #010102);
           color: var(--rf-text, #ffffff);
           font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
         }
 
-        #v7s-s08 .s08-field {
+        #v7s-s08 .s08-stage,
+        #v7s-s08 .s08-trace-system {
           position: absolute;
           inset: 0;
-          background: var(--rf-bg, #010102);
+        }
+
+        #v7s-s08 .s08-stage {
           overflow: hidden;
+          will-change: filter, opacity;
+          animation: v7s-s08-breathe 1.02s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
         }
 
         #v7s-s08 .s08-measure-stripe {
           position: absolute;
           top: 0;
           right: 0;
-          width: 34%;
+          width: 31%;
           height: 100%;
           background: var(--rf-surface-2, #121317);
-          clip-path: polygon(38% 0, 100% 0, 100% 100%, 0 100%);
-          filter: brightness(1);
-          opacity: 0.09;
-          animation: s08-measure-breathe 1.0212s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
+          clip-path: polygon(42% 0, 100% 0, 100% 100%, 0 100%);
+          opacity: 0.24;
+        }
+
+        #v7s-s08 .s08-strobe {
+          position: absolute;
+          inset: 0;
+          background: var(--rf-surface-3, #1a1c22);
+          opacity: 0;
+          mix-blend-mode: screen;
+          pointer-events: none;
+          will-change: opacity;
+        }
+
+        #v7s-s08 .s08-ghost {
+          position: absolute;
+          z-index: 0;
+          margin: 0;
+          color: var(--rf-bg, #010102);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: clamp(250px, 23vw, 520px);
+          font-weight: 800;
+          letter-spacing: -0.06em;
+          line-height: 0.76;
+          white-space: nowrap;
+          -webkit-text-stroke: 1px var(--rf-hairline-strong, #3a3c46);
+          opacity: 0.52;
+          pointer-events: none;
+          will-change: transform, opacity;
+        }
+
+        #v7s-s08 .s08-ghost--one {
+          top: 10%;
+          left: -10%;
+          transform: rotate(-7deg);
+        }
+
+        #v7s-s08 .s08-ghost--two {
+          top: 41%;
+          left: -3%;
+          opacity: 0.28;
+          transform: rotate(-7deg);
         }
 
         #v7s-s08 .s08-chrome {
           position: absolute;
+          z-index: 4;
           top: 8%;
           left: 7.4%;
-          z-index: 2;
           margin: 0;
           color: var(--rf-ink-subtle, #8a8f98);
           font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
@@ -49,38 +94,14 @@
           letter-spacing: 0.14em;
           line-height: 1;
           white-space: nowrap;
-        }
-
-        #v7s-s08 .s08-lockup {
-          position: absolute;
-          inset: 0;
-          z-index: 1;
-        }
-
-        #v7s-s08 .s08-check {
-          position: absolute;
-          top: 29.7%;
-          left: 50%;
-          width: 160px;
-          height: 128px;
-          overflow: visible;
-          transform: translateX(-50%);
           will-change: transform, opacity;
-        }
-
-        #v7s-s08 .s08-check path {
-          fill: none;
-          stroke: var(--rf-success, #3fb950);
-          stroke-linecap: square;
-          stroke-linejoin: miter;
-          stroke-width: 22;
-          will-change: stroke-dashoffset;
         }
 
         #v7s-s08 .s08-hero {
           position: absolute;
-          top: 51.7%;
-          left: 50%;
+          z-index: 3;
+          top: 60%;
+          right: 7.4%;
           width: max-content;
           margin: 0;
           color: var(--rf-text, #ffffff);
@@ -89,127 +110,230 @@
           font-weight: 800;
           letter-spacing: -0.045em;
           line-height: 0.96;
-          text-align: center;
+          text-align: right;
           white-space: nowrap;
           word-break: keep-all;
-          transform: translateX(-50%);
+          transform: translateY(-0.96em);
           will-change: transform, opacity;
         }
 
-        #v7s-s08 .s08-source {
+        #v7s-s08 .s08-subline {
           position: absolute;
-          top: 68.2%;
-          left: 50%;
+          z-index: 3;
+          top: 65%;
+          right: 7.4%;
+          display: flex;
+          align-items: center;
+          gap: 0.75em;
           margin: 0;
-          color: var(--rf-ink-subtle, #8a8f98);
+          color: var(--rf-text, #ffffff);
           font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
-          font-size: 13px;
-          font-weight: 400;
-          letter-spacing: 0;
+          font-size: 21px;
+          font-weight: 600;
+          letter-spacing: 0.14em;
           line-height: 1;
+          text-align: right;
           white-space: nowrap;
-          transform: translateX(-50%);
           will-change: transform, opacity;
         }
 
-        #v7s-s08 .s08-progress {
-          position: absolute;
-          right: 0;
-          bottom: 8%;
-          left: 0;
-          z-index: 2;
+        #v7s-s08 .s08-subline::after {
+          width: 72px;
           height: 1px;
-          background: var(--rf-hairline, #26272e);
+          background: var(--rf-hairline-strong, #3a3c46);
+          content: "";
         }
 
-        #v7s-s08 .s08-progress-marker {
+        #v7s-s08 .s08-micro-cluster {
           position: absolute;
-          bottom: -4px;
-          left: 0;
-          width: 2px;
-          height: 9px;
-          background: var(--rf-text, #ffffff);
-          opacity: 0;
-          will-change: left, opacity;
-        }
-
-        #v7s-s08 .s08-progress-label {
-          position: absolute;
-          right: 12px;
-          bottom: 15px;
-          margin: 0;
+          z-index: 3;
+          top: 69.2%;
+          right: 7.4%;
+          display: flex;
+          justify-content: flex-end;
+          gap: 1.35em;
           color: var(--rf-ink-subtle, #8a8f98);
           font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
           font-size: 13px;
           font-weight: 400;
           letter-spacing: 0.14em;
           line-height: 1;
+          text-align: right;
           white-space: nowrap;
+          will-change: transform, opacity;
         }
 
-        @keyframes s08-measure-breathe {
+        #v7s-s08 .s08-micro-cluster span + span {
+          position: relative;
+        }
+
+        #v7s-s08 .s08-micro-cluster span + span::before {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: -0.68em;
+          width: 1px;
+          background: var(--rf-hairline, #26272e);
+          content: "";
+        }
+
+        #v7s-s08 .s08-trace-system {
+          z-index: 2;
+          color: var(--rf-accent, #ff48a0);
+          pointer-events: none;
+        }
+
+        #v7s-s08 .s08-afterglow {
+          position: absolute;
+          top: 77.5%;
+          left: 0;
+          width: 100%;
+          height: 18%;
+          background: currentColor;
+          clip-path: inset(0 100% 0 0);
+          filter: blur(30px);
+          opacity: 0.08;
+          will-change: clip-path;
+        }
+
+        #v7s-s08 .s08-trace-svg {
+          position: absolute;
+          top: calc(76% - 20px);
+          left: 0;
+          width: 100%;
+          height: 40px;
+          overflow: visible;
+        }
+
+        #v7s-s08 .s08-trace-path {
+          fill: none;
+          stroke: currentColor;
+          stroke-width: 2;
+          vector-effect: non-scaling-stroke;
+          will-change: stroke-dashoffset;
+        }
+
+        #v7s-s08 .s08-trace-dot {
+          fill: currentColor;
+          transform-box: fill-box;
+          transform-origin: center;
+          will-change: transform;
+        }
+
+        #v7s-s08 .s08-progress {
+          position: absolute;
+          z-index: 4;
+          right: 0;
+          bottom: 8%;
+          left: 0;
+          height: 1px;
+          background: var(--rf-hairline, #26272e);
+          transform-origin: left center;
+          will-change: transform, opacity;
+        }
+
+        #v7s-s08 .s08-progress-marker {
+          position: absolute;
+          bottom: -6px;
+          left: calc(100% - 1px);
+          width: 1px;
+          height: 13px;
+          background: var(--rf-text, #ffffff);
+          transform-origin: center;
+          will-change: transform, opacity;
+        }
+
+        @keyframes v7s-s08-breathe {
           from {
             filter: brightness(1);
-            opacity: 0.09;
+            opacity: 0.88;
           }
+
           to {
             filter: brightness(1.24);
-            opacity: 0.16;
+            opacity: 1;
           }
         }
       </style>
+
       <main id="v7s-s08" data-rf-fragment-version="1.0" data-composition-id="v7s-s08">
-        <div class="s08-field" aria-hidden="true">
-          <div class="s08-measure-stripe"></div>
-        </div>
-        <p class="s08-chrome">08 — SEAL</p>
-        <section class="s08-lockup" aria-label="ReelForge v7">
-          <svg class="s08-check" viewBox="0 0 160 128" aria-hidden="true">
-            <path class="s08-check-short" d="M15 64 L59 108"></path>
-            <path class="s08-check-long" d="M59 108 L145 20"></path>
-          </svg>
-          <h1 class="s08-hero">ReelForge v7</h1>
-          <p class="s08-source">github.com/kimsh-1/reelforge</p>
-        </section>
-        <div class="s08-progress" aria-hidden="true">
-          <span class="s08-progress-marker"></span>
-          <p class="s08-progress-label">08/08</p>
+        <div class="s08-stage">
+          <div class="s08-measure-stripe" aria-hidden="true"></div>
+          <p class="s08-ghost s08-ghost--one" aria-hidden="true">데이터도 연출이다</p>
+          <p class="s08-ghost s08-ghost--two" aria-hidden="true">데이터도 연출이다</p>
+          <div class="s08-strobe" aria-hidden="true"></div>
+
+          <p class="s08-chrome">08 — DATA</p>
+          <h1 class="s08-hero">데이터도 연출이다</h1>
+          <p class="s08-subline">TRACE BECOMES DIRECTION</p>
+          <div class="s08-micro-cluster" aria-label="trace details">
+            <span>TRACE / 00.900S</span>
+            <span>LEAD / ACTIVE</span>
+            <span>SIGNAL / PASS</span>
+          </div>
+
+          <div class="s08-trace-system" aria-hidden="true">
+            <div class="s08-afterglow"></div>
+            <svg class="s08-trace-svg" viewBox="0 0 1920 40" preserveAspectRatio="none">
+              <path class="s08-trace-path" d="M 0 20 H 1920"></path>
+              <circle class="s08-trace-dot" cx="0" cy="20" r="9"></circle>
+            </svg>
+          </div>
+
+          <div class="s08-progress" aria-hidden="true"><span class="s08-progress-marker"></span></div>
         </div>
       </main>
+
       <script>
         (() => {
           const compositionId = "v7s-s08";
           const root = document.querySelector(`[data-composition-id="${compositionId}"]`);
           if (!root) return;
 
-          const beat = 0.5106;
-          const seal = root.querySelector(".s08-check");
-          const checkShort = root.querySelector(".s08-check-short");
-          const checkLong = root.querySelector(".s08-check-long");
+          const beat = 0.375;
+          const chrome = root.querySelector(".s08-chrome");
           const hero = root.querySelector(".s08-hero");
-          const source = root.querySelector(".s08-source");
+          const subline = root.querySelector(".s08-subline");
+          const microCluster = root.querySelector(".s08-micro-cluster");
+          const tracePath = root.querySelector(".s08-trace-path");
+          const traceDot = root.querySelector(".s08-trace-dot");
+          const afterglow = root.querySelector(".s08-afterglow");
+          const ghostOne = root.querySelector(".s08-ghost--one");
+          const ghostTwo = root.querySelector(".s08-ghost--two");
+          const strobe = root.querySelector(".s08-strobe");
+          const progress = root.querySelector(".s08-progress");
           const marker = root.querySelector(".s08-progress-marker");
-
-          [checkShort, checkLong].forEach((path) => {
-            const length = path.getTotalLength();
-            path.style.strokeDasharray = length;
-            path.style.strokeDashoffset = length;
-          });
+          const fallbackLength = 1920;
+          const measuredLength = typeof tracePath.getTotalLength === "function" ? tracePath.getTotalLength() : fallbackLength;
+          const traceLength = Number.isFinite(measuredLength) && measuredLength > 0 ? measuredLength : fallbackLength;
 
           window.__timelines = window.__timelines || {};
           const tl = gsap.timeline({ paused: true });
 
-          tl.set([seal, hero, source, marker], { opacity: 0 })
-            .set(seal, { scale: 0.9, transformOrigin: "50% 50%" })
-            .set(marker, { left: "0%" })
-            .fromTo(seal, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: beat * 0.58, ease: "power3.out" }, 0)
-            .to(checkShort, { strokeDashoffset: 0, duration: beat * 0.45, ease: "power2.out" }, beat * 0.12)
-            .to(checkLong, { strokeDashoffset: 0, duration: beat * 0.58, ease: "power2.out" }, beat * 0.42)
-            .to(seal, { scale: 1.035, duration: beat * 0.14, ease: "back.out(2)" }, beat * 0.72)
-            .to(seal, { scale: 1, duration: beat * 0.14, ease: "power2.inOut" }, beat * 0.86)
-            .fromTo(hero, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: beat * 0.65, ease: "power4.out" }, beat * 0.35)
-            .fromTo(source, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: beat * 0.32, ease: "power3.out" }, beat * 0.68)
-            .fromTo(marker, { opacity: 0, left: "0%" }, { opacity: 1, left: "100%", duration: beat, ease: "power2.inOut" }, 0);
+          tl.set(hero, { opacity: 0.64, x: 54 })
+            .set([chrome, subline, microCluster, progress], { opacity: 0 })
+            .set(progress, { scaleX: 0 })
+            .set(marker, { opacity: 0, scaleY: 0 })
+            .set(tracePath, { strokeDasharray: traceLength, strokeDashoffset: traceLength })
+            .set(traceDot, { opacity: 0.82, scale: 0.62, transformOrigin: "50% 50%" })
+            .set(afterglow, { clipPath: "inset(0 100% 0 0)" })
+            .set(ghostOne, { x: 88, opacity: 0.18 })
+            .set(ghostTwo, { x: -56, opacity: 0.1 })
+            .to(hero, { opacity: 1, x: 0, duration: 0.3, ease: "power4.out" }, 0)
+            .fromTo(chrome, { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.225, ease: "power3.out" }, 0)
+            .fromTo(progress, { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.3, ease: "power3.out" }, 0)
+            .to(marker, { opacity: 1, scaleY: 1, duration: 0.15, ease: "power3.out" }, 0.15)
+            .fromTo(subline, { opacity: 0, x: 28 }, { opacity: 1, x: 0, duration: 0.225, ease: "power3.out" }, 0.075)
+            .fromTo(microCluster, { opacity: 0, y: 9 }, { opacity: 1, y: 0, duration: 0.225, ease: "power3.out" }, 0.15)
+            .to(tracePath, { strokeDashoffset: 0, duration: 0.9, ease: "power2.out" }, 0)
+            .to(afterglow, { clipPath: "inset(0 0% 0 0)", duration: 0.9, ease: "power2.out" }, 0)
+            .to(traceDot, { attr: { cx: 1920 }, duration: 0.9, ease: "power2.out" }, 0)
+            .to(traceDot, { scale: 1.28, duration: 0.075, ease: "power4.out" }, beat * 2)
+            .to(traceDot, { scale: 1, duration: 0.075, ease: "power2.out" }, beat * 2 + 0.075)
+            .to(strobe, { opacity: 0.16, duration: 0.06, ease: "none" }, beat)
+            .to(strobe, { opacity: 0, duration: 0.09, ease: "power2.out" }, beat + 0.06)
+            .to(ghostOne, { x: 0, opacity: 0.52, duration: beat, ease: "power3.out" }, beat)
+            .to(ghostTwo, { x: 0, opacity: 0.28, duration: beat, ease: "power3.out" }, beat * 2);
 
           window.__timelines[compositionId] = tl;
           tl.seek(0);

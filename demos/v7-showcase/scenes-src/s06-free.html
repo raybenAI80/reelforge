@@ -8,69 +8,114 @@
           inset: 0;
           overflow: hidden;
           isolation: isolate;
-          background: var(--rf-bg, #010102);
           color: var(--rf-text, #ffffff);
           font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
         }
 
-        .v7s-s06 .s06-orbit-stage,
-        .v7s-s06 .s06-orbit-rig {
+        .v7s-s06 .s06-surface,
+        .v7s-s06 .s06-stage,
+        .v7s-s06 .s06-rig,
+        .v7s-s06 .s06-plane {
           position: absolute;
           inset: 0;
         }
 
-        .v7s-s06 .s06-orbit-stage {
-          perspective: 1180px;
-          perspective-origin: 50% 49%;
+        .v7s-s06 .s06-surface {
+          background: var(--rf-bg, #010102);
+          animation: s06-surface-breathe 1.02s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
+          will-change: filter, opacity;
         }
 
-        .v7s-s06 .s06-orbit-rig,
-        .v7s-s06 .s06-hero-plane {
+        .v7s-s06 .s06-stage {
+          perspective: 1040px;
+          perspective-origin: 35% 57%;
+          filter: url(#v7s-s06-push-blur);
+          will-change: transform, filter;
+        }
+
+        .v7s-s06 .s06-rig,
+        .v7s-s06 .s06-plane {
           transform-style: preserve-3d;
         }
 
-        .v7s-s06 .s06-stripe {
-          position: absolute;
-          top: 0;
-          right: -1px;
-          width: 15.2%;
-          height: 100%;
-          background: var(--rf-surface-2, #121317);
-          filter: brightness(1);
-          opacity: 0.82;
-          will-change: transform, filter, opacity;
-          animation: s06-stripe-breathe 1.02s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
-        }
-
-        .v7s-s06 .s06-hero-plane {
-          position: absolute;
-          top: 28.9%;
-          left: 7.4%;
-          transform-origin: 50% 55%;
-          will-change: transform;
-        }
-
-        .v7s-s06 .s06-hero {
-          margin: 0;
-          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
-          font-size: clamp(120px, 10vw, 190px);
-          font-weight: 800;
-          letter-spacing: -0.045em;
-          line-height: 0.96;
-          white-space: nowrap;
-          word-break: keep-all;
-          backface-visibility: hidden;
+        .v7s-s06 .s06-plane {
+          pointer-events: none;
           will-change: transform, opacity;
         }
 
-        .v7s-s06 .s06-hero-line {
-          display: block;
+        .v7s-s06 .s06-plane--far {
+          z-index: 1;
         }
 
-        .v7s-s06 .s06-chrome-label {
+        .v7s-s06 .s06-plane--mid {
+          z-index: 2;
+        }
+
+        .v7s-s06 .s06-plane--near {
+          z-index: 4;
+        }
+
+        .v7s-s06 .s06-ghost {
           position: absolute;
-          top: 8%;
-          left: 7.4%;
+          margin: 0;
+          color: var(--rf-ink-subtle, #8a8f98);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: min(48vw, 920px);
+          font-weight: 800;
+          letter-spacing: -0.07em;
+          line-height: 0.8;
+          white-space: nowrap;
+          -webkit-text-stroke: 1px var(--rf-hairline, #26272e);
+          color: transparent;
+          opacity: 0.18;
+          will-change: transform, opacity;
+        }
+
+        .v7s-s06 .s06-ghost--far {
+          top: 13%;
+          left: -10%;
+        }
+
+        .v7s-s06 .s06-ghost--mid {
+          top: 31%;
+          left: 10%;
+          opacity: 0.12;
+        }
+
+        .v7s-s06 .s06-ghost--near {
+          top: 0;
+          left: 28%;
+          opacity: 0.1;
+        }
+
+        .v7s-s06 .s06-depth-rule {
+          position: absolute;
+          left: -6%;
+          width: 112%;
+          height: 1px;
+          background: var(--rf-hairline, #26272e);
+          transform-origin: left center;
+          will-change: transform, opacity;
+        }
+
+        .v7s-s06 .s06-depth-rule--far {
+          top: 35%;
+          transform: rotate(-8deg);
+        }
+
+        .v7s-s06 .s06-depth-rule--mid {
+          top: 57%;
+          transform: rotate(5deg);
+        }
+
+        .v7s-s06 .s06-depth-rule--near {
+          top: 75%;
+          transform: rotate(-4deg);
+        }
+
+        .v7s-s06 .s06-depth-tag,
+        .v7s-s06 .s06-marker-tag,
+        .v7s-s06 .s06-chrome {
           margin: 0;
           color: var(--rf-ink-subtle, #8a8f98);
           font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
@@ -79,38 +124,118 @@
           letter-spacing: 0.14em;
           line-height: 1;
           white-space: nowrap;
-          will-change: opacity;
+        }
+
+        .v7s-s06 .s06-depth-tag {
+          position: absolute;
+          top: -15px;
+          left: 13.4%;
+          transform-origin: left center;
+          will-change: transform, opacity;
+        }
+
+        .v7s-s06 .s06-depth-tag--mid {
+          left: 62.8%;
+        }
+
+        .v7s-s06 .s06-depth-tag--near {
+          left: 78.2%;
+        }
+
+        .v7s-s06 .s06-hero-plane {
+          position: absolute;
+          z-index: 3;
+          top: 60%;
+          left: 7.4%;
+          transform: translateY(-0.8em);
+          transform-origin: left 80%;
+          will-change: transform, opacity;
+        }
+
+        .v7s-s06 .s06-hero {
+          margin: 0;
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: clamp(120px, 36vh, 432px);
+          font-weight: 800;
+          font-variant-numeric: tabular-nums;
+          letter-spacing: -0.06em;
+          line-height: 0.96;
+          white-space: nowrap;
+          word-break: keep-all;
+          will-change: transform, opacity;
+        }
+
+        .v7s-s06 .s06-subline {
+          margin: 21px 0 0 0.09em;
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
+          font-size: 21px;
+          font-weight: 600;
+          letter-spacing: 0.14em;
+          line-height: 1;
+          white-space: nowrap;
+          will-change: transform, opacity;
+        }
+
+        .v7s-s06 .s06-focus-marker {
+          position: absolute;
+          z-index: 5;
+          top: 60%;
+          left: 7.4%;
+          width: 1px;
+          height: 0;
+          background: var(--rf-accent, #828fff);
+          transform: translateY(-0.8em);
+          transform-origin: 50% 100%;
+          will-change: height, transform, opacity;
+        }
+
+        .v7s-s06 .s06-marker-tag {
+          position: absolute;
+          top: calc(100% + 12px);
+          left: 11px;
+          transform-origin: left center;
+          will-change: transform, opacity;
+        }
+
+        .v7s-s06 .s06-chrome {
+          position: absolute;
+          z-index: 7;
+          top: 8%;
+          left: 7.4%;
+          will-change: transform, opacity;
         }
 
         .v7s-s06 .s06-progress {
           position: absolute;
+          z-index: 7;
           top: 92%;
+          right: 0;
           left: 0;
-          width: 100%;
           height: 1px;
           background: var(--rf-hairline, #26272e);
-          will-change: opacity;
+          transform-origin: left center;
+          will-change: transform, opacity;
         }
 
         .v7s-s06 .s06-progress-marker {
           position: absolute;
           top: -6px;
-          left: 75%;
+          left: calc(75% - 0.5px);
           width: 1px;
           height: 13px;
-          background: var(--rf-accent, #5e6ad2);
+          background: var(--rf-text, #ffffff);
           transform-origin: 50% 50%;
           will-change: transform, opacity;
         }
 
-        @keyframes s06-stripe-breathe {
+        @keyframes s06-surface-breathe {
           from {
-            transform: translateX(0);
             filter: brightness(1);
-            opacity: 0.82;
+            opacity: 0.86;
           }
+
           to {
-            transform: translateX(-18px);
             filter: brightness(1.24);
             opacity: 1;
           }
@@ -118,15 +243,34 @@
       </style>
 
       <main class="v7s-s06" data-rf-fragment-version="1.0" data-composition-id="v7s-s06">
-        <div class="s06-stripe" aria-hidden="true"></div>
-        <div class="s06-orbit-stage">
-          <div class="s06-orbit-rig">
+        <svg aria-hidden="true" style="position: absolute; width: 0; height: 0">
+          <filter id="v7s-s06-push-blur" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="0 0"></feGaussianBlur>
+          </filter>
+        </svg>
+        <div class="s06-surface" aria-hidden="true"></div>
+        <div class="s06-stage">
+          <div class="s06-rig">
+            <div class="s06-plane s06-plane--far" aria-hidden="true">
+              <p class="s06-ghost s06-ghost--far">카메라</p>
+              <div class="s06-depth-rule s06-depth-rule--far"><p class="s06-depth-tag">Z −480 / 36.0</p></div>
+            </div>
+            <div class="s06-plane s06-plane--mid" aria-hidden="true">
+              <p class="s06-ghost s06-ghost--mid">카메라</p>
+              <div class="s06-depth-rule s06-depth-rule--mid"><p class="s06-depth-tag s06-depth-tag--mid">Z −180 / 24.0</p></div>
+            </div>
+            <div class="s06-plane s06-plane--near" aria-hidden="true">
+              <p class="s06-ghost s06-ghost--near">카메라</p>
+              <div class="s06-depth-rule s06-depth-rule--near"><p class="s06-depth-tag s06-depth-tag--near">Z +120 / 12.0</p></div>
+            </div>
             <div class="s06-hero-plane">
-              <h1 class="s06-hero"><span class="s06-hero-line">전환도</span><span class="s06-hero-line">짜여 있다</span></h1>
+              <h1 class="s06-hero">카메라</h1>
+              <p class="s06-subline">FOCAL / PUSH / 036</p>
             </div>
           </div>
         </div>
-        <p class="s06-chrome-label">06 — WEAVE</p>
+        <div class="s06-focus-marker" aria-hidden="true"><p class="s06-marker-tag">Z = 000</p></div>
+        <p class="s06-chrome">06 — CAMERA</p>
         <div class="s06-progress" aria-hidden="true"><span class="s06-progress-marker"></span></div>
       </main>
 
@@ -136,23 +280,64 @@
           const root = document.querySelector(`[data-composition-id="${compositionId}"]`);
           if (!root) return;
 
-          const orbitRig = root.querySelector(".s06-orbit-rig");
+          const blur = root.querySelector("#v7s-s06-push-blur feGaussianBlur");
+          const stage = root.querySelector(".s06-stage");
+          const rig = root.querySelector(".s06-rig");
+          const farPlane = root.querySelector(".s06-plane--far");
+          const midPlane = root.querySelector(".s06-plane--mid");
+          const nearPlane = root.querySelector(".s06-plane--near");
+          const heroPlane = root.querySelector(".s06-hero-plane");
           const hero = root.querySelector(".s06-hero");
-          const chrome = root.querySelectorAll(".s06-chrome-label, .s06-progress");
-          const marker = root.querySelector(".s06-progress-marker");
+          const subline = root.querySelector(".s06-subline");
+          const ghosts = root.querySelectorAll(".s06-ghost");
+          const depthRules = root.querySelectorAll(".s06-depth-rule");
+          const depthTags = root.querySelectorAll(".s06-depth-tag");
+          const focusMarker = root.querySelector(".s06-focus-marker");
+          const markerTag = root.querySelector(".s06-marker-tag");
+          const chrome = root.querySelector(".s06-chrome");
+          const progress = root.querySelector(".s06-progress");
+          const progressMarker = root.querySelector(".s06-progress-marker");
 
           window.__timelines = window.__timelines || {};
           const tl = gsap.timeline({ paused: true });
 
-          tl.set(orbitRig, { rotationY: -44, y: 28, transformStyle: "preserve-3d", transformOrigin: "center center" }, 0)
-            .set(hero, { opacity: 0, x: -34, transformStyle: "preserve-3d", transformOrigin: "50% 55%" }, 0)
-            .set(chrome, { opacity: 0 }, 0)
-            .set(marker, { opacity: 0, scaleY: 0.5 }, 0)
-            .to(hero, { opacity: 1, x: 0, duration: 0.38, ease: "power3.out" }, 0)
-            .to(chrome, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0.08)
-            .to(marker, { opacity: 1, scaleY: 1, duration: 0.24, ease: "power2.out" }, 0.18)
-            .to(orbitRig, { rotationY: 16, y: 0, duration: 1.56, ease: "power1.inOut" }, 0.22)
-            .to(orbitRig, { rotationY: 0, duration: 0.26, ease: "power2.out" }, 1.92);
+          tl.set(rig, { z: -120, transformStyle: "preserve-3d", transformOrigin: "35% 57%" }, 0)
+            .set(farPlane, { z: -520, transformStyle: "preserve-3d" }, 0)
+            .set(midPlane, { z: -210, transformStyle: "preserve-3d" }, 0)
+            .set(nearPlane, { z: 130, transformStyle: "preserve-3d" }, 0)
+            .set([ghosts, depthRules, depthTags], { opacity: 0 }, 0)
+            .set(farPlane, { x: -88, y: 26 }, 0)
+            .set(midPlane, { x: -46, y: 14 }, 0)
+            .set(nearPlane, { x: 28, y: -16 }, 0)
+            .set(heroPlane, { opacity: 0, x: -74, scale: 0.82, transformOrigin: "left 80%" }, 0)
+            .set(hero, { skewX: -7, transformOrigin: "left 80%" }, 0)
+            .set(subline, { opacity: 0, x: -32 }, 0)
+            .set(focusMarker, { height: 0, opacity: 0 }, 0)
+            .set(markerTag, { opacity: 0, x: -12 }, 0)
+            .set([chrome, progress], { opacity: 0 }, 0)
+            .set(progressMarker, { opacity: 0, scaleY: 0.35 }, 0)
+            .to([chrome, progress], { opacity: 1, duration: 0.18, ease: "power2.out" }, 0)
+            .to(progressMarker, { opacity: 1, scaleY: 1, duration: 0.15, ease: "power3.out" }, 0.075)
+            .to(heroPlane, { opacity: 1, x: 0, scale: 1, duration: 0.33, ease: "power4.out" }, 0)
+            .to(hero, { skewX: 0, duration: 0.33, ease: "power4.out" }, 0)
+            .to(subline, { opacity: 1, x: 0, duration: 0.225, ease: "power3.out" }, 0.15)
+            .to(focusMarker, { opacity: 1, height: 178, duration: 0.375, ease: "power3.out" }, 0)
+            .to(markerTag, { opacity: 1, x: 0, duration: 0.15, ease: "power3.out" }, 0.225)
+            .to(farPlane, { opacity: 1, x: 0, y: 0, duration: 0.375, ease: "power3.out" }, 0.375)
+            .to(midPlane, { opacity: 1, x: 0, y: 0, duration: 0.375, ease: "power3.out" }, 0.45)
+            .to(nearPlane, { opacity: 1, x: 0, y: 0, duration: 0.375, ease: "power3.out" }, 0.525)
+            .to([ghosts, depthRules, depthTags], { opacity: 1, duration: 0.225, ease: "power2.out" }, 0.375)
+            .to(rig, { z: 405, duration: 0.75, ease: "power3.in" }, 0.375)
+            .to(heroPlane, { scale: 1.13, duration: 0.75, ease: "power3.in" }, 0.375)
+            .to(farPlane, { x: -66, duration: 0.75, ease: "power2.in" }, 0.375)
+            .to(midPlane, { x: -34, duration: 0.75, ease: "power2.in" }, 0.375)
+            .to(nearPlane, { x: 28, duration: 0.75, ease: "power2.in" }, 0.375)
+            .to(focusMarker, { height: 236, duration: 0.375, ease: "power2.out" }, 0.75)
+            .to(heroPlane, { scale: 1.18, duration: 0.375, ease: "power2.out" }, 0.75)
+            .to(focusMarker, { opacity: 0.72, duration: 0.375, ease: "sine.inOut" }, 1.125)
+            .to(stage, { x: -112, scale: 1.06, duration: 0.3, ease: "power4.in" }, 2)
+            .to(blur, { attr: { stdDeviation: "22 1" }, duration: 0.3, ease: "power4.in" }, 2)
+            .to(heroPlane, { scale: 1.26, duration: 0.3, ease: "power4.in" }, 2);
 
           window.__timelines[compositionId] = tl;
           tl.seek(0);

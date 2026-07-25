@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>ReelForge v7 — 전환은</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        #v7s-s09 {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          isolation: isolate;
+          background: var(--rf-bg, #010102);
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+        }
+
+        #v7s-s09 .s09-stage,
+        #v7s-s09 .s09-world,
+        #v7s-s09 .s09-field,
+        #v7s-s09 .s09-strobe {
+          position: absolute;
+          inset: 0;
+        }
+
+        #v7s-s09 .s09-stage {
+          overflow: hidden;
+          animation: v7s-s09-breathe 1.02s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
+          will-change: filter, opacity;
+        }
+
+        #v7s-s09 .s09-world {
+          overflow: hidden;
+          transform-origin: 60.3% 48.6%;
+          will-change: transform, filter;
+        }
+
+        #v7s-s09 .s09-field {
+          background: var(--rf-bg, #010102);
+        }
+
+        #v7s-s09 .s09-stripe {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          background: var(--rf-surface-2, #121317);
+          opacity: 0.52;
+          will-change: transform, opacity;
+        }
+
+        #v7s-s09 .s09-stripe--west {
+          left: 0;
+          width: 33%;
+          clip-path: polygon(0 0, 68% 0, 100% 100%, 0 100%);
+          opacity: 0.22;
+        }
+
+        #v7s-s09 .s09-stripe--east {
+          right: 0;
+          width: 31%;
+          clip-path: polygon(36% 0, 100% 0, 100% 100%, 0 100%);
+          opacity: 0.34;
+        }
+
+        #v7s-s09 .s09-ghost {
+          position: absolute;
+          z-index: 1;
+          margin: 0;
+          color: transparent;
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: clamp(420px, 35vw, 720px);
+          font-weight: 800;
+          letter-spacing: -0.075em;
+          line-height: 0.8;
+          white-space: nowrap;
+          -webkit-text-stroke: 1px var(--rf-hairline-strong, #3a3c46);
+          opacity: 0.22;
+          pointer-events: none;
+          will-change: transform, opacity;
+        }
+
+        #v7s-s09 .s09-ghost--a {
+          top: -22%;
+          left: -8%;
+          transform: rotate(-8deg);
+        }
+
+        #v7s-s09 .s09-ghost--b {
+          right: -10%;
+          bottom: -31%;
+          opacity: 0.13;
+          transform: rotate(-8deg);
+        }
+
+        #v7s-s09 .s09-chrome,
+        #v7s-s09 .s09-micro-cluster {
+          margin: 0;
+          color: var(--rf-ink-subtle, #8a8f98);
+          font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
+          font-size: 13px;
+          font-weight: 400;
+          letter-spacing: 0.14em;
+          line-height: 1;
+          white-space: nowrap;
+        }
+
+        #v7s-s09 .s09-chrome {
+          position: absolute;
+          z-index: 5;
+          top: 8%;
+          left: 7.4%;
+          will-change: transform, opacity;
+        }
+
+        #v7s-s09 .s09-hero-anchor {
+          position: absolute;
+          z-index: 4;
+          top: 60%;
+          left: 50%;
+          width: max-content;
+          transform: translate(-50%, -0.96em);
+          will-change: transform, opacity;
+        }
+
+        #v7s-s09 .s09-hero {
+          margin: 0;
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: clamp(120px, 10vw, 190px);
+          font-weight: 800;
+          letter-spacing: -0.045em;
+          line-height: 0.96;
+          text-align: center;
+          white-space: nowrap;
+          word-break: keep-all;
+          will-change: transform, filter;
+        }
+
+        #v7s-s09 .s09-eun {
+          position: relative;
+          display: inline-block;
+          transform-origin: 50% 28%;
+          will-change: transform;
+        }
+
+        #v7s-s09 .s09-counter {
+          position: absolute;
+          top: 9%;
+          left: 25%;
+          z-index: 2;
+          width: 44%;
+          height: 40%;
+          background: var(--rf-bg, #010102);
+          clip-path: circle(50% at 50% 50%);
+          pointer-events: none;
+          will-change: transform, opacity;
+        }
+
+        #v7s-s09 .s09-subline {
+          position: absolute;
+          z-index: 4;
+          top: 65.4%;
+          left: 50%;
+          margin: 0;
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
+          font-size: 21px;
+          font-weight: 600;
+          letter-spacing: 0.14em;
+          line-height: 1;
+          text-align: center;
+          white-space: nowrap;
+          transform: translateX(-50%);
+          will-change: transform, opacity;
+        }
+
+        #v7s-s09 .s09-micro-cluster {
+          position: absolute;
+          z-index: 4;
+          top: 69.2%;
+          left: 50%;
+          display: flex;
+          gap: 1.45em;
+          transform: translateX(-50%);
+          will-change: transform, opacity;
+        }
+
+        #v7s-s09 .s09-micro-cluster span + span {
+          position: relative;
+        }
+
+        #v7s-s09 .s09-micro-cluster span + span::before {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: -0.72em;
+          width: 1px;
+          background: var(--rf-hairline, #26272e);
+          content: "";
+        }
+
+        #v7s-s09 .s09-progress {
+          position: absolute;
+          right: 0;
+          bottom: 8%;
+          left: 0;
+          z-index: 6;
+          height: 1px;
+          background: var(--rf-hairline, #26272e);
+          transform-origin: left center;
+          will-change: transform, opacity;
+        }
+
+        #v7s-s09 .s09-progress-marker {
+          position: absolute;
+          top: -7px;
+          left: calc(75% - 0.5px);
+          width: 1px;
+          height: 15px;
+          background: var(--rf-text, #ffffff);
+          transform-origin: center;
+          will-change: transform, opacity;
+        }
+
+        #v7s-s09 .s09-portal-fill {
+          position: absolute;
+          inset: 0;
+          z-index: 5;
+          background: var(--rf-bg, #010102);
+          clip-path: circle(0% at 60.3% 48.6%);
+          opacity: 0.74;
+          pointer-events: none;
+          will-change: clip-path, opacity;
+        }
+
+        #v7s-s09 .s09-strobe {
+          z-index: 8;
+          background: var(--rf-text, #ffffff);
+          opacity: 0;
+          pointer-events: none;
+          will-change: opacity;
+        }
+
+        @keyframes v7s-s09-breathe {
+          from {
+            filter: brightness(1);
+            opacity: 0.9;
+          }
+
+          to {
+            filter: brightness(1.24);
+            opacity: 1;
+          }
+        }
+      </style>
+
+      <main id="v7s-s09" data-rf-fragment-version="1.0" data-composition-id="v7s-s09">
+        <div class="s09-stage">
+          <div class="s09-world">
+            <div class="s09-field" aria-hidden="true">
+              <span class="s09-stripe s09-stripe--west"></span>
+              <span class="s09-stripe s09-stripe--east"></span>
+            </div>
+            <p class="s09-ghost s09-ghost--a" aria-hidden="true">전환은</p>
+            <p class="s09-ghost s09-ghost--b" aria-hidden="true">전환은</p>
+
+            <p class="s09-chrome">09 — WEAVE</p>
+            <div class="s09-hero-anchor">
+              <h1 class="s09-hero">전환<span class="s09-eun">은<span class="s09-counter" aria-hidden="true"></span></span></h1>
+            </div>
+            <p class="s09-subline">ENTER THE COUNTER</p>
+            <div class="s09-micro-cluster" aria-label="portal measurement tags">
+              <span>09 / 12</span><span>CORE / LOCK</span><span>PORTAL / OUT</span>
+            </div>
+
+            <div class="s09-progress" aria-hidden="true"><span class="s09-progress-marker"></span></div>
+            <div class="s09-portal-fill" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="s09-strobe" aria-hidden="true"></div>
+      </main>
+
+      <script>
+        (() => {
+          const compositionId = "v7s-s09";
+          const root = document.querySelector(`[data-composition-id="${compositionId}"]`);
+          if (!root) return;
+
+          const beat = 0.375;
+          const world = root.querySelector(".s09-world");
+          const heroAnchor = root.querySelector(".s09-hero-anchor");
+          const hero = root.querySelector(".s09-hero");
+          const eun = root.querySelector(".s09-eun");
+          const counter = root.querySelector(".s09-counter");
+          const chrome = root.querySelector(".s09-chrome");
+          const subline = root.querySelector(".s09-subline");
+          const microCluster = root.querySelector(".s09-micro-cluster");
+          const ghostA = root.querySelector(".s09-ghost--a");
+          const ghostB = root.querySelector(".s09-ghost--b");
+          const stripeWest = root.querySelector(".s09-stripe--west");
+          const stripeEast = root.querySelector(".s09-stripe--east");
+          const progress = root.querySelector(".s09-progress");
+          const marker = root.querySelector(".s09-progress-marker");
+          const portalFill = root.querySelector(".s09-portal-fill");
+          const strobe = root.querySelector(".s09-strobe");
+
+          window.__timelines = window.__timelines || {};
+          const tl = gsap.timeline({ paused: true });
+
+          tl.set(world, { scale: 0.88, filter: "blur(0px)", transformOrigin: "60.3% 48.6%" })
+            .set(heroAnchor, { opacity: 0.72, y: 36, scale: 0.94, transformOrigin: "50% 50%" })
+            .set(hero, { filter: "blur(10px)" })
+            .set(eun, { scale: 0.82 })
+            .set(counter, { opacity: 0.8, scale: 0.72, transformOrigin: "50% 50%" })
+            .set([chrome, subline, microCluster], { opacity: 0 })
+            .set(progress, { opacity: 0, scaleX: 0 })
+            .set(marker, { opacity: 0, scaleY: 0 })
+            .set(portalFill, { clipPath: "circle(0% at 60.3% 48.6%)", opacity: 0.74 })
+            .set(ghostA, { x: -108, opacity: 0.08 })
+            .set(ghostB, { x: 92, opacity: 0.04 })
+            .set(stripeWest, { xPercent: -28, opacity: 0.08 })
+            .set(stripeEast, { xPercent: 28, opacity: 0.12 })
+            .to(world, { scale: 1, duration: beat, ease: "power3.out" }, 0)
+            .to(heroAnchor, { opacity: 1, y: -8, scale: 1.035, duration: 0.075, ease: "power4.out" }, 0)
+            .to(heroAnchor, { y: 0, scale: 1, duration: 0.225, ease: "back.out(1.7)" }, 0.075)
+            .to(hero, { filter: "blur(0px)", duration: 0.225, ease: "power3.out" }, 0)
+            .to(eun, { scale: 1, duration: 0.225, ease: "back.out(1.7)" }, 0.15)
+            .to(counter, { opacity: 1, scale: 1, duration: 0.15, ease: "power3.out" }, 0.225)
+            .fromTo(chrome, { y: -12 }, { opacity: 1, y: 0, duration: 0.1875, ease: "power3.out" }, 0)
+            .fromTo(subline, { y: 12 }, { opacity: 1, y: 0, duration: 0.1875, ease: "power3.out" }, 0.075)
+            .fromTo(microCluster, { y: 10 }, { opacity: 1, y: 0, duration: 0.1875, ease: "power3.out" }, 0.15)
+            .to(progress, { opacity: 1, scaleX: 1, duration: 0.225, ease: "power3.out" }, 0)
+            .to(marker, { opacity: 1, scaleY: 1, duration: 0.15, ease: "power3.out" }, 0.15)
+            .to(ghostA, { x: 0, opacity: 0.22, duration: beat, ease: "power3.out" }, 0)
+            .to(ghostB, { x: 0, opacity: 0.13, duration: beat, ease: "power3.out" }, 0.075)
+            .to(stripeWest, { xPercent: 0, opacity: 0.22, duration: beat, ease: "power3.out" }, 0)
+            .to(stripeEast, { xPercent: 0, opacity: 0.34, duration: beat, ease: "power3.out" }, 0.075)
+            .to(strobe, { opacity: 0.22, duration: 0.0375, ease: "none" }, beat * 2)
+            .to(strobe, { opacity: 0, duration: 0.075, ease: "power2.out" }, beat * 2 + 0.0375)
+            .to(eun, { scale: 1.08, duration: 0.075, ease: "power4.out" }, beat * 2)
+            .to(eun, { scale: 1, duration: 0.1125, ease: "power2.out" }, beat * 2 + 0.075)
+            .to(world, { scale: 15, filter: "blur(5px)", duration: 0.225, ease: "power3.in" }, beat * 2)
+            .to(portalFill, { clipPath: "circle(150% at 60.3% 48.6%)", duration: 0.225, ease: "power3.in" }, beat * 2)
+            .to(counter, { scale: 1.42, duration: 0.1125, ease: "power2.in" }, beat * 2)
+            .to(ghostA, { x: 36, duration: 0.1875, ease: "power2.out" }, beat * 2 + 0.225)
+            .to(ghostB, { x: -30, duration: 0.1875, ease: "power2.out" }, beat * 2 + 0.225);
+
+          window.__timelines[compositionId] = tl;
+          tl.seek(0);
+        })();
+      </script>
+    </template>
+  </body>
+</html>

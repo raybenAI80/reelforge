@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sceneId": "s07",
+  "sceneId": "s10",
   "status": "passed",
-  "checkedAt": "2026-07-25T07:15:33Z",
+  "checkedAt": "2026-07-25T08:06:48Z",
   "evidence": {
-    "strip": "renders/gate-strip",
-    "notes": "2차 피크 단독 렌더 513KB, 3fps 12프레임 — 디자인 규칙 R1~R7 준수(3단 타이포·크롬 규격·액센트 1곳·박스 0), 글리치 스왑+마침표 팝 확인"
+    "strip": "renders/g10c.png",
+    "notes": "R2 게이트: 클라이맥스 위계 1회 반려 후 재작업 — 딸깍 화면지배 스케일·셋업 카피 잔류·MICRO 충돌 해소 실측"
   }
 }

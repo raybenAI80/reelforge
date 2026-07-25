@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1920, height=1080" />
-    <title>ReelForge v7 — s03 verified choreography</title>
+    <title>ReelForge v7 — BREAK</title>
   </head>
   <body>
     <template>
@@ -14,16 +14,85 @@
           overflow: hidden;
           color: var(--rf-text, #ffffff);
           font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          isolation: isolate;
         }
 
         .v7s-s03 .s03-stage {
           position: absolute;
           inset: 0;
-          background: var(--rf-bg, #08090d);
+          z-index: 0;
+          background: var(--rf-bg, #010102);
+          animation: s03-stage-breathe 1.02s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
+          will-change: filter;
         }
 
-        .v7s-s03 .s03-chrome-label,
-        .v7s-s03 .s03-meter-caption {
+        .v7s-s03 .s03-edge-stripe {
+          position: absolute;
+          z-index: 1;
+          top: 0;
+          bottom: 0;
+          width: 1px;
+          background: var(--rf-hairline, #26272e);
+          opacity: 0.34;
+          transform-origin: 50% 50%;
+          will-change: opacity, transform;
+        }
+
+        .v7s-s03 .s03-edge-stripe--a { left: 17.2%; }
+        .v7s-s03 .s03-edge-stripe--b { left: 31.8%; }
+        .v7s-s03 .s03-edge-stripe--c { left: 54.6%; }
+        .v7s-s03 .s03-edge-stripe--d { left: 82.8%; }
+
+        .v7s-s03 .s03-ghost-x {
+          position: absolute;
+          z-index: 1;
+          top: 15%;
+          left: -5.6%;
+          width: 52vw;
+          height: 70vh;
+          overflow: visible;
+          opacity: 0.48;
+          will-change: opacity, transform;
+        }
+
+        .v7s-s03 .s03-ghost-x path {
+          fill: none;
+          stroke: var(--rf-hairline-strong, #3a3c46);
+          stroke-width: 1;
+          vector-effect: non-scaling-stroke;
+        }
+
+        .v7s-s03 .s03-ghost-words {
+          position: absolute;
+          z-index: 1;
+          top: 12%;
+          left: -2.8%;
+          width: 62%;
+          height: 76%;
+          pointer-events: none;
+          will-change: transform, opacity;
+        }
+
+        .v7s-s03 .s03-ghost-word {
+          position: absolute;
+          margin: 0;
+          color: transparent;
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: 31vw;
+          font-weight: 800;
+          letter-spacing: -0.075em;
+          line-height: 0.82;
+          white-space: nowrap;
+          -webkit-text-stroke: 1px var(--rf-hairline, #26272e);
+          opacity: 0.24;
+        }
+
+        .v7s-s03 .s03-ghost-word--one { top: 6%; left: -3%; }
+        .v7s-s03 .s03-ghost-word--two { top: 47%; left: 9%; opacity: 0.14; }
+
+        .v7s-s03 .s03-chrome,
+        .v7s-s03 .s03-micro,
+        .v7s-s03 .s03-tag {
           margin: 0;
           color: var(--rf-ink-subtle, #8a8f98);
           font-family: var(--rf-font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
@@ -34,207 +103,185 @@
           white-space: nowrap;
         }
 
-        .v7s-s03 .s03-chrome-label {
+        .v7s-s03 .s03-chrome {
           position: absolute;
+          z-index: 5;
           top: 8%;
           left: 7.4%;
+          will-change: opacity, transform;
         }
 
-        .v7s-s03 .s03-verified-label {
+        .v7s-s03 .s03-hero {
           position: absolute;
-          top: calc(64% - 33.4vh);
+          z-index: 4;
+          top: calc(60% - 152px);
+          right: 7.4%;
           left: 7.4%;
           margin: 0;
-          color: var(--rf-ink-subtle, #8a8f98);
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: clamp(120px, 10vw, 190px);
+          font-weight: 800;
+          letter-spacing: -0.045em;
+          line-height: 0.96;
+          text-align: right;
+          white-space: nowrap;
+          word-break: keep-all;
+          will-change: transform;
+        }
+
+        .v7s-s03 .s03-cut-word {
+          position: relative;
+          display: inline-block;
+        }
+
+        .v7s-s03 .s03-strike {
+          position: absolute;
+          z-index: 1;
+          top: 52%;
+          left: -1.8%;
+          width: 104%;
+          height: 18px;
+          color: var(--rf-accent, #5e6ad2);
+          transform: translateY(-50%);
+          will-change: transform, opacity;
+        }
+
+        .v7s-s03 .s03-strike-svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+
+        .v7s-s03 .s03-strike-trace {
+          fill: none;
+          stroke: var(--rf-accent, #5e6ad2);
+          stroke-linecap: square;
+          stroke-width: 2;
+          vector-effect: non-scaling-stroke;
+        }
+
+        .v7s-s03 .s03-strike-fill {
+          fill: var(--rf-accent, #5e6ad2);
+          fill-opacity: 0;
+        }
+
+        .v7s-s03 .s03-subline {
+          position: absolute;
+          z-index: 4;
+          top: calc(60% + 116px);
+          right: 7.4%;
+          margin: 0;
+          color: var(--rf-text, #ffffff);
           font-family: var(--rf-font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
           font-size: 21px;
           font-weight: 600;
           letter-spacing: 0.14em;
           line-height: 1;
+          text-align: right;
           white-space: nowrap;
+          will-change: opacity, transform;
         }
 
-        .v7s-s03 .s03-counter {
+        .v7s-s03 .s03-tag-cluster {
           position: absolute;
-          top: calc(64% - 30.4vh);
-          left: 7.4%;
-          z-index: 2;
-          margin: 0;
-          color: var(--rf-text, #ffffff);
-          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
-          font-size: 38vh;
-          font-weight: 800;
-          font-variant-numeric: tabular-nums;
-          letter-spacing: -0.06em;
-          line-height: 0.96;
-          transform-origin: left 80%;
-          white-space: nowrap;
-          word-break: keep-all;
-          animation: v7s-s03-counter-breathe 1.02s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
-          will-change: filter, transform;
-        }
-
-        .v7s-s03 .s03-energy-column {
-          position: absolute;
-          top: 34.6%;
-          left: 43.8%;
-          width: 28px;
-          height: 34%;
+          z-index: 4;
+          top: calc(60% + 180px);
+          right: 7.4%;
           display: grid;
-          grid-template-rows: repeat(31, 1fr);
-          z-index: 1;
+          justify-items: end;
+          gap: 13px;
+          will-change: opacity, transform;
         }
 
-        .v7s-s03 .s03-energy-tick {
+        .v7s-s03 .s03-tag {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 13px;
+          will-change: opacity, transform;
+        }
+
+        .v7s-s03 .s03-tag::after {
           display: block;
-          align-self: center;
-          width: 28px;
+          width: 34px;
           height: 1px;
-          background: var(--rf-hairline, rgba(255, 255, 255, 0.14));
-          opacity: 0.28;
+          content: "";
+          background: var(--rf-hairline, #26272e);
         }
 
-        .v7s-s03 .s03-meter,
+        .v7s-s03 .s03-x-caption {
+          position: absolute;
+          z-index: 2;
+          top: 78.2%;
+          left: 7.4%;
+          transform-origin: left center;
+          will-change: opacity, transform;
+        }
+
+        .v7s-s03 .s03-x-caption::before {
+          display: inline-block;
+          width: 58px;
+          height: 1px;
+          margin: 0 13px 4px 0;
+          content: "";
+          background: var(--rf-hairline-strong, #3a3c46);
+          vertical-align: middle;
+        }
+
         .v7s-s03 .s03-progress {
           position: absolute;
+          z-index: 5;
+          top: 92%;
           right: 0;
           left: 0;
           height: 1px;
-          background: var(--rf-hairline, rgba(255, 255, 255, 0.14));
+          background: var(--rf-hairline, #26272e);
+          will-change: opacity;
         }
 
-        .v7s-s03 .s03-meter {
-          top: 78%;
-        }
-
-        .v7s-s03 .s03-meter-tick,
-        .v7s-s03 .s03-meter-marker,
         .v7s-s03 .s03-progress-marker {
           position: absolute;
-          display: block;
-          transform: translateX(-50%);
-        }
-
-        .v7s-s03 .s03-meter-tick {
-          top: -4px;
+          top: 50%;
+          left: 37.5%;
           width: 1px;
-          height: 9px;
-          background: var(--rf-hairline, rgba(255, 255, 255, 0.14));
-        }
-
-        .v7s-s03 .s03-meter-marker {
-          top: -8px;
-          left: 0;
-          width: 4px;
-          height: 17px;
-          background: var(--rf-accent, #a98cff);
+          height: 15px;
+          background: var(--rf-text, #ffffff);
+          transform: translate(-50%, -50%);
           will-change: transform;
         }
 
-        .v7s-s03 .s03-meter-caption {
-          position: absolute;
-          top: calc(78% + 18px);
-          left: 7.4%;
-        }
-
-        .v7s-s03 .s03-progress {
-          top: 92%;
-        }
-
-        .v7s-s03 .s03-progress-marker {
-          top: -7px;
-          left: 37.5%;
-          width: 2px;
-          height: 15px;
-          background: var(--rf-text, #ffffff);
-        }
-
-        @keyframes v7s-s03-counter-breathe {
-          from {
-            filter: brightness(1);
-          }
-          to {
-            filter: brightness(1.22);
-          }
+        @keyframes s03-stage-breathe {
+          from { filter: brightness(1); }
+          to { filter: brightness(1.22); }
         }
       </style>
 
       <main class="v7s-s03" data-rf-fragment-version="1.0" data-composition-id="v7s-s03">
         <div class="s03-stage" aria-hidden="true"></div>
-        <p class="s03-chrome-label">03 — GALLERY</p>
-        <p class="s03-verified-label">검증된 안무,</p>
-        <h1 class="s03-counter" data-target="31">0</h1>
+        <span class="s03-edge-stripe s03-edge-stripe--a" aria-hidden="true"></span>
+        <span class="s03-edge-stripe s03-edge-stripe--b" aria-hidden="true"></span>
+        <span class="s03-edge-stripe s03-edge-stripe--c" aria-hidden="true"></span>
+        <span class="s03-edge-stripe s03-edge-stripe--d" aria-hidden="true"></span>
 
-        <div class="s03-energy-column" aria-hidden="true">
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
-          <span class="s03-energy-tick"></span>
+        <svg class="s03-ghost-x" viewBox="0 0 1000 1000" aria-hidden="true">
+          <path d="M92 78L904 922M908 78L96 922" />
+        </svg>
+        <div class="s03-ghost-words" aria-hidden="true">
+          <p class="s03-ghost-word s03-ghost-word--one">죽었다</p>
+          <p class="s03-ghost-word s03-ghost-word--two">죽었다</p>
         </div>
 
-        <div class="s03-meter" aria-hidden="true">
-          <span class="s03-meter-tick" style="left: 0%"></span>
-          <span class="s03-meter-tick" style="left: calc(1 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(2 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(3 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(4 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(5 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(6 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(7 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(8 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(9 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(10 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(11 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(12 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(13 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(14 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(15 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(16 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(17 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(18 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(19 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(20 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(21 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(22 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(23 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(24 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(25 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(26 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(27 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(28 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(29 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: calc(30 * 100% / 31)"></span>
-          <span class="s03-meter-tick" style="left: 100%"></span>
-          <span class="s03-meter-marker"></span>
+        <p class="s03-chrome">03 — BREAK</p>
+        <h1 class="s03-hero"><span class="s03-cut-word">슬라이드는<span class="s03-strike" aria-hidden="true"><svg class="s03-strike-svg" viewBox="0 0 1000 20" preserveAspectRatio="none"><path class="s03-strike-trace" d="M2 11L998 7" /><path class="s03-strike-fill" d="M0 7L1000 3L1000 14L0 18Z" /></svg></span></span> 죽었다</h1>
+        <p class="s03-subline">PRESENTATION / OFFLINE</p>
+        <div class="s03-tag-cluster" aria-label="scene measurements">
+          <span class="s03-tag">DECK / 000</span>
+          <span class="s03-tag">STATE / OFF</span>
+          <span class="s03-tag">CUT / 03</span>
         </div>
-        <p class="s03-meter-caption">0 — 31 VERIFIED</p>
+        <p class="s03-micro s03-x-caption">REJECT / SLIDE</p>
 
         <div class="s03-progress" aria-hidden="true"><span class="s03-progress-marker"></span></div>
       </main>
@@ -245,56 +292,52 @@
           const root = document.querySelector(`[data-composition-id="${compositionId}"]`);
           if (!root) return;
 
-          const chrome = root.querySelector(".s03-chrome-label");
-          const label = root.querySelector(".s03-verified-label");
-          const counter = root.querySelector(".s03-counter");
-          const meter = root.querySelector(".s03-meter");
-          const caption = root.querySelector(".s03-meter-caption");
-          const energyColumn = root.querySelector(".s03-energy-column");
-          const energyTicks = Array.from(root.querySelectorAll(".s03-energy-tick"));
-          const marker = root.querySelector(".s03-meter-marker");
+          const chrome = root.querySelector(".s03-chrome");
+          const hero = root.querySelector(".s03-hero");
+          const trace = root.querySelector(".s03-strike-trace");
+          const fill = root.querySelector(".s03-strike-fill");
+          const strike = root.querySelector(".s03-strike");
+          const subline = root.querySelector(".s03-subline");
+          const tags = Array.from(root.querySelectorAll(".s03-tag"));
+          const xCaption = root.querySelector(".s03-x-caption");
+          const ghostX = root.querySelector(".s03-ghost-x");
+          const ghostWords = root.querySelector(".s03-ghost-words");
+          const stripes = Array.from(root.querySelectorAll(".s03-edge-stripe"));
           const progress = root.querySelector(".s03-progress");
-          const target = Number(counter.getAttribute("data-target")) || 31;
-          const countState = { value: 0 };
-          const markerStops = [0, 495.484, 990.968, 1486.452, 1920];
+          const marker = root.querySelector(".s03-progress-marker");
 
-          const updateCount = () => {
-            const value = Math.max(0, Math.min(target, Math.round(countState.value)));
-            counter.textContent = String(value);
-          };
+          const traceLength = trace.getTotalLength();
+          trace.style.strokeDasharray = traceLength;
+          trace.style.strokeDashoffset = traceLength;
 
-          updateCount();
           window.__timelines = window.__timelines || {};
           const tl = gsap.timeline({ paused: true });
 
-          tl.set([chrome, label, meter, caption, energyColumn, progress], { opacity: 0 })
-            .set(counter, { opacity: 1, y: -43.2, scale: 1, transformOrigin: "left 80%" })
-            .set(marker, { x: markerStops[0] })
-            .set(energyTicks, { opacity: 0.28 })
-            .fromTo(chrome, { opacity: 0, y: -8 }, { opacity: 1, y: 0, duration: 0.2, ease: "power3.out" }, 0)
-            .fromTo(label, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.24, ease: "power3.out" }, 0.04)
-            .to(counter, { y: 0, duration: 0.408, ease: "power3.out" }, 0)
-            .fromTo([meter, caption, energyColumn, progress], { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 0.12)
-            .to(countState, { value: 8, duration: 0.001, ease: "none", onUpdate: updateCount }, 0.5106)
-            .to(marker, { x: markerStops[1], duration: 0.16, ease: "power2.out" }, 0.5106)
-            .to(energyTicks.slice(0, 8), { opacity: 1, duration: 0.001, ease: "none", stagger: 0.022 }, 0.5106)
-            .to(counter, { scale: 1.028, duration: 0.045, ease: "power2.out" }, 0.5106)
-            .to(counter, { scale: 1, duration: 0.13, ease: "expo.out" }, 0.5556)
-            .to(countState, { value: 16, duration: 0.001, ease: "none", onUpdate: updateCount }, 1.0212)
-            .to(marker, { x: markerStops[2], duration: 0.16, ease: "power2.out" }, 1.0212)
-            .to(energyTicks.slice(8, 16), { opacity: 1, duration: 0.001, ease: "none", stagger: 0.022 }, 1.0212)
-            .to(counter, { scale: 1.028, duration: 0.045, ease: "power2.out" }, 1.0212)
-            .to(counter, { scale: 1, duration: 0.13, ease: "expo.out" }, 1.0662)
-            .to(countState, { value: 24, duration: 0.001, ease: "none", onUpdate: updateCount }, 1.5318)
-            .to(marker, { x: markerStops[3], duration: 0.16, ease: "power2.out" }, 1.5318)
-            .to(energyTicks.slice(16, 24), { opacity: 1, duration: 0.001, ease: "none", stagger: 0.022 }, 1.5318)
-            .to(counter, { scale: 1.028, duration: 0.045, ease: "power2.out" }, 1.5318)
-            .to(counter, { scale: 1, duration: 0.13, ease: "expo.out" }, 1.5768)
-            .to(countState, { value: 31, duration: 0.001, ease: "none", onUpdate: updateCount }, 2.0424)
-            .to(marker, { x: markerStops[4], duration: 0.16, ease: "power2.out" }, 2.0424)
-            .to(energyTicks.slice(24, 31), { opacity: 1, duration: 0.001, ease: "none", stagger: 0.022 }, 2.0424)
-            .to(counter, { scale: 1.036, duration: 0.05, ease: "power2.out" }, 2.0424)
-            .to(counter, { scale: 1, duration: 0.18, ease: "expo.out" }, 2.0924);
+          tl.set([chrome, subline, xCaption, progress], { opacity: 0 })
+            .set(tags, { opacity: 0, x: 20 })
+            .set(hero, { opacity: 1, x: 150, transformOrigin: "right 60%" })
+            .set(strike, { opacity: 1, scaleX: 1, transformOrigin: "left center" })
+            .set(fill, { fillOpacity: 0 })
+            .set(ghostX, { opacity: 0, scale: 0.92, transformOrigin: "50% 50%" })
+            .set(ghostWords, { opacity: 0, x: -36 })
+            .set(stripes, { opacity: 0, scaleY: 0.64, transformOrigin: "50% 50%" })
+            .set(marker, { scaleY: 0, transformOrigin: "50% 50%" })
+            .to(hero, { x: 0, duration: 0.4, ease: "power3.out" }, 0)
+            .fromTo(chrome, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.18, ease: "power3.out" }, 0)
+            .to(ghostX, { opacity: 0.48, scale: 1, duration: 0.375, ease: "power2.out" }, 0)
+            .to(ghostWords, { opacity: 1, x: 0, duration: 0.375, ease: "power2.out" }, 0.375)
+            .to(stripes, { opacity: 0.34, scaleY: 1, duration: 0.24, ease: "power2.out", stagger: 0.045 }, 0.375)
+            .to(trace, { strokeDashoffset: 0, duration: 0.375, ease: "power2.out" }, 0.375)
+            .to(fill, { fillOpacity: 1, duration: 0.225, ease: "power1.out" }, 0.75)
+            .to(strike, { scaleY: 1.45, duration: 0.075, ease: "power2.out" }, 0.75)
+            .to(strike, { scaleY: 1, duration: 0.15, ease: "power2.out" }, 0.825)
+            .fromTo(subline, { opacity: 0, x: 36 }, { opacity: 1, x: 0, duration: 0.225, ease: "power3.out" }, 0.75)
+            .to(tags, { opacity: 1, x: 0, duration: 0.15, ease: "power3.out", stagger: 0.075 }, 0.825)
+            .fromTo(xCaption, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.225, ease: "power3.out" }, 0.75)
+            .fromTo(progress, { opacity: 0 }, { opacity: 1, duration: 0.18, ease: "power2.out" }, 0.75)
+            .to(marker, { scaleY: 1, duration: 0.15, ease: "power2.out" }, 0.75)
+            .to(ghostWords, { y: -12, duration: 0.375, ease: "power1.inOut" }, 1.125)
+            .to(ghostWords, { y: 0, duration: 0.375, ease: "power1.inOut" }, 1.5);
 
           window.__timelines[compositionId] = tl;
           tl.seek(0);

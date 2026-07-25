@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1920, height=1080" />
-    <title>v7 showcase — cut on the beat</title>
+    <title>ReelForge v7 — Type Slam</title>
   </head>
   <body>
     <template>
@@ -14,12 +14,14 @@
           overflow: hidden;
           color: var(--rf-text, #f8f7f2);
           font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
-          background: var(--rf-bg, #090a0d);
         }
 
         .v7s-s05 .s05-stage,
-        .v7s-s05 .s05-stage-plane,
-        .v7s-s05 .s05-strobe {
+        .v7s-s05 .s05-ground,
+        .v7s-s05 .s05-flash,
+        .v7s-s05 .s05-axis,
+        .v7s-s05 .s05-ghost-field,
+        .v7s-s05 .s05-whip-field {
           position: absolute;
           inset: 0;
         }
@@ -27,29 +29,138 @@
         .v7s-s05 .s05-stage {
           overflow: hidden;
           isolation: isolate;
-          will-change: transform, filter;
+          will-change: transform;
         }
 
-        .v7s-s05 .s05-stage-plane {
+        .v7s-s05 .s05-ground {
           z-index: 0;
           background: var(--rf-bg, #090a0d);
-          animation: s05-stage-breathe 1.02s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
+          animation: s05-ground-breathe 1.02s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
           will-change: filter, opacity;
         }
 
-        .v7s-s05 .s05-strobe {
-          z-index: 4;
+        .v7s-s05 .s05-axis {
+          z-index: 1;
           pointer-events: none;
-          background: var(--rf-accent, #ff4f87);
-          opacity: 0;
-          will-change: opacity;
         }
 
-        .v7s-s05 .s05-chrome {
+        .v7s-s05 .s05-axis::before,
+        .v7s-s05 .s05-axis::after {
           position: absolute;
-          z-index: 5;
-          top: 8%;
-          left: 7.4%;
+          content: "";
+          background: var(--rf-hairline, #292b31);
+        }
+
+        .v7s-s05 .s05-axis::before {
+          top: 0;
+          bottom: 0;
+          left: 50%;
+          width: 1px;
+        }
+
+        .v7s-s05 .s05-axis::after {
+          top: 60%;
+          right: 0;
+          left: 0;
+          height: 1px;
+        }
+
+        .v7s-s05 .s05-ghost-field {
+          z-index: 1;
+          pointer-events: none;
+          filter: brightness(1);
+          will-change: transform, filter;
+        }
+
+        .v7s-s05 .s05-ghost {
+          position: absolute;
+          left: var(--s05-x);
+          top: var(--s05-y);
+          margin: 0;
+          color: var(--rf-bg, #090a0d);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: var(--s05-size);
+          font-weight: 800;
+          letter-spacing: -0.075em;
+          line-height: 0.96;
+          opacity: var(--s05-opacity);
+          white-space: nowrap;
+          -webkit-text-stroke: 1px var(--rf-hairline, #292b31);
+          transform: rotate(var(--s05-rotate));
+          will-change: transform, opacity;
+        }
+
+        .v7s-s05 .s05-whip-field {
+          z-index: 2;
+          pointer-events: none;
+          will-change: transform, filter;
+        }
+
+        .v7s-s05 .s05-whip-stripe {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          background: var(--rf-surface-2, #121317);
+          opacity: var(--s05-stripe-opacity);
+        }
+
+        .v7s-s05 .s05-whip-stripe--01 {
+          left: 68%;
+          width: 3.2%;
+        }
+
+        .v7s-s05 .s05-whip-stripe--02 {
+          left: 76.4%;
+          width: 8.4%;
+        }
+
+        .v7s-s05 .s05-whip-stripe--03 {
+          left: 91%;
+          width: 9%;
+        }
+
+        .v7s-s05 .s05-hero-frame {
+          position: absolute;
+          z-index: 4;
+          top: calc(60% - 0.75em);
+          left: 50%;
+          width: max-content;
+          transform-origin: center center;
+          will-change: transform, opacity;
+        }
+
+        .v7s-s05 .s05-hero {
+          margin: 0;
+          color: var(--rf-text, #f8f7f2);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: clamp(367px, 38vh, 432px);
+          font-variant-numeric: tabular-nums;
+          font-weight: 800;
+          letter-spacing: -0.06em;
+          line-height: 0.96;
+          white-space: nowrap;
+          word-break: keep-all;
+        }
+
+        .v7s-s05 .s05-subline {
+          position: absolute;
+          z-index: 4;
+          top: 75.8%;
+          left: 50%;
+          margin: 0;
+          color: var(--rf-text, #f8f7f2);
+          font-family: var(--rf-font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+          font-size: 21px;
+          font-weight: 600;
+          letter-spacing: 0.14em;
+          line-height: 1;
+          white-space: nowrap;
+          will-change: transform, opacity;
+        }
+
+        .v7s-s05 .s05-micro {
+          position: absolute;
+          z-index: 3;
           margin: 0;
           color: var(--rf-ink-subtle, #8d929c);
           font-family: var(--rf-font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
@@ -58,54 +169,84 @@
           letter-spacing: 0.14em;
           line-height: 1;
           white-space: nowrap;
-        }
-
-        .v7s-s05 .s05-copy {
-          position: absolute;
-          z-index: 3;
-          top: calc(60% - 1.72em);
-          left: 7.4%;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          margin: 0;
-          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
-          font-size: clamp(120px, 10vw, 190px);
-          font-weight: 800;
-          letter-spacing: -0.045em;
-          line-height: 0.96;
-          white-space: nowrap;
-          word-break: keep-all;
-          transform-origin: left center;
-          will-change: transform;
-        }
-
-        .v7s-s05 .s05-line {
-          display: block;
           will-change: transform, opacity;
+        }
+
+        .v7s-s05 .s05-micro--axis-top {
+          top: 14.2%;
+          left: calc(50% + 1.1%);
+        }
+
+        .v7s-s05 .s05-micro--axis-left {
+          top: calc(60% + 1.4%);
+          left: 7.4%;
+        }
+
+        .v7s-s05 .s05-micro--tag-a {
+          top: 37.1%;
+          left: 7.4%;
+        }
+
+        .v7s-s05 .s05-micro--tag-b {
+          right: 7.4%;
+          bottom: 22.1%;
+        }
+
+        .v7s-s05 .s05-micro--tag-c {
+          right: 7.4%;
+          bottom: 18.8%;
+        }
+
+        .v7s-s05 .s05-chrome {
+          position: absolute;
+          z-index: 6;
+          margin: 0;
+          color: var(--rf-ink-subtle, #8d929c);
+          font-family: var(--rf-font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+          font-size: 13px;
+          font-weight: 400;
+          letter-spacing: 0.14em;
+          line-height: 1;
+          white-space: nowrap;
+          will-change: opacity;
+        }
+
+        .v7s-s05 .s05-chrome--section {
+          top: 8%;
+          left: 7.4%;
         }
 
         .v7s-s05 .s05-progress {
           position: absolute;
-          z-index: 5;
+          z-index: 6;
           top: 92%;
           right: 0;
           left: 0;
           height: 1px;
           background: var(--rf-hairline, #292b31);
+          will-change: opacity;
         }
 
         .v7s-s05 .s05-progress-marker {
           position: absolute;
-          top: -2px;
-          left: calc(62.5% - 1px);
-          width: 2px;
-          height: 5px;
+          top: -6px;
+          left: calc(62.5% - 0.5px);
+          width: 1px;
+          height: 13px;
           background: var(--rf-text, #f8f7f2);
-          will-change: transform;
+          transform-origin: center center;
+          will-change: transform, opacity;
         }
 
-        @keyframes s05-stage-breathe {
+        .v7s-s05 .s05-flash {
+          z-index: 7;
+          pointer-events: none;
+          background: var(--rf-accent, #ff4f87);
+          opacity: 0;
+          will-change: opacity;
+        }
+
+        @keyframes s05-ground-breathe {
           from {
             filter: brightness(1);
             opacity: 0.86;
@@ -117,66 +258,104 @@
           }
         }
       </style>
+
       <main class="v7s-s05" data-rf-fragment-version="1.0" data-composition-id="v7s-s05">
-        <svg aria-hidden="true" style="position: absolute; width: 0; height: 0">
-          <filter id="v7s-s05-whip-blur" x="-55%" y="-55%" width="210%" height="210%">
-            <feGaussianBlur stdDeviation="40 2"></feGaussianBlur>
-          </filter>
-        </svg>
         <div class="s05-stage">
-          <div class="s05-stage-plane" aria-hidden="true"></div>
-          <div class="s05-strobe" aria-hidden="true"></div>
-          <p class="s05-chrome">05 — CUT</p>
-          <h1 class="s05-copy" aria-label="비트 위에서 잘린다">
-            <span class="s05-line s05-line--first">비트 위에서</span>
-            <span class="s05-line s05-line--second">잘린다</span>
-          </h1>
-          <div class="s05-progress" aria-hidden="true">
-            <span class="s05-progress-marker"></span>
+          <div class="s05-ground" aria-hidden="true"></div>
+          <div class="s05-axis" aria-hidden="true"></div>
+          <div class="s05-ghost-field" aria-hidden="true">
+            <span class="s05-ghost" style="--s05-x: -7%; --s05-y: 3%; --s05-size: 278px; --s05-opacity: 0.16; --s05-rotate: -11deg">타이포</span>
+            <span class="s05-ghost" style="--s05-x: 12%; --s05-y: 8%; --s05-size: 390px; --s05-opacity: 0.12; --s05-rotate: 7deg">타이포</span>
+            <span class="s05-ghost" style="--s05-x: 55%; --s05-y: -6%; --s05-size: 244px; --s05-opacity: 0.2; --s05-rotate: -4deg">타이포</span>
+            <span class="s05-ghost" style="--s05-x: 77%; --s05-y: 6%; --s05-size: 322px; --s05-opacity: 0.14; --s05-rotate: 12deg">타이포</span>
+            <span class="s05-ghost" style="--s05-x: -11%; --s05-y: 24%; --s05-size: 360px; --s05-opacity: 0.11; --s05-rotate: 8deg">타이포</span>
+            <span class="s05-ghost" style="--s05-x: 18%; --s05-y: 27%; --s05-size: 246px; --s05-opacity: 0.21; --s05-rotate: -9deg">타이포</span>
+            <span class="s05-ghost" style="--s05-x: 69%; --s05-y: 25%; --s05-size: 410px; --s05-opacity: 0.1; --s05-rotate: 5deg">타이포</span>
+            <span class="s05-ghost" style="--s05-x: 40%; --s05-y: 34%; --s05-size: 286px; --s05-opacity: 0.18; --s05-rotate: -15deg">타이포</span>
+            <span class="s05-ghost" style="--s05-x: -4%; --s05-y: 53%; --s05-size: 248px; --s05-opacity: 0.19; --s05-rotate: 4deg">타이포</span>
+            <span class="s05-ghost" style="--s05-x: 16%; --s05-y: 62%; --s05-size: 386px; --s05-opacity: 0.12; --s05-rotate: -6deg">타이포</span>
+            <span class="s05-ghost" style="--s05-x: 54%; --s05-y: 57%; --s05-size: 300px; --s05-opacity: 0.18; --s05-rotate: 9deg">타이포</span>
+            <span class="s05-ghost" style="--s05-x: 79%; --s05-y: 54%; --s05-size: 252px; --s05-opacity: 0.2; --s05-rotate: -8deg">타이포</span>
+            <span class="s05-ghost" style="--s05-x: -8%; --s05-y: 81%; --s05-size: 352px; --s05-opacity: 0.11; --s05-rotate: 14deg">타이포</span>
+            <span class="s05-ghost" style="--s05-x: 37%; --s05-y: 78%; --s05-size: 278px; --s05-opacity: 0.2; --s05-rotate: -3deg">타이포</span>
+            <span class="s05-ghost" style="--s05-x: 67%; --s05-y: 82%; --s05-size: 406px; --s05-opacity: 0.1; --s05-rotate: 6deg">타이포</span>
           </div>
+          <div class="s05-whip-field" aria-hidden="true">
+            <span class="s05-whip-stripe s05-whip-stripe--01" style="--s05-stripe-opacity: 0.6"></span>
+            <span class="s05-whip-stripe s05-whip-stripe--02" style="--s05-stripe-opacity: 0.82"></span>
+            <span class="s05-whip-stripe s05-whip-stripe--03" style="--s05-stripe-opacity: 0.46"></span>
+          </div>
+
+          <div class="s05-hero-frame">
+            <h1 class="s05-hero">타이포</h1>
+          </div>
+          <p class="s05-subline">TYPE / SLAM</p>
+          <p class="s05-micro s05-micro--axis-top">CENTER / 00</p>
+          <p class="s05-micro s05-micro--axis-left">IMPACT / 0.375</p>
+          <p class="s05-micro s05-micro--tag-a">PUNCH / 160 BPM</p>
+          <p class="s05-micro s05-micro--tag-b">FIELD / 15</p>
+          <p class="s05-micro s05-micro--tag-c">HOLD / 01.550</p>
+          <p class="s05-chrome s05-chrome--section">05 — TYPE</p>
+          <div class="s05-progress" aria-hidden="true"><span class="s05-progress-marker"></span></div>
+          <div class="s05-flash" aria-hidden="true"></div>
         </div>
       </main>
+
       <script>
-        (() => {
-          const compositionId = "v7s-s05";
-          const root = document.querySelector(`[data-composition-id="${compositionId}"]`);
-          if (!root) return;
+          (() => {
+            const compositionId = "v7s-s05";
+            const root = document.querySelector(`[data-composition-id="${compositionId}"]`);
+            if (!root) return;
 
-          const blur = root.querySelector("#v7s-s05-whip-blur feGaussianBlur");
-          const stage = root.querySelector(".s05-stage");
-          const first = root.querySelector(".s05-line--first");
-          const second = root.querySelector(".s05-line--second");
-          const strobe = root.querySelector(".s05-strobe");
+            const stage = root.querySelector(".s05-stage");
+            const ghostField = root.querySelector(".s05-ghost-field");
+            const whipField = root.querySelector(".s05-whip-field");
+            const heroFrame = root.querySelector(".s05-hero-frame");
+            const subline = root.querySelector(".s05-subline");
+            const micro = root.querySelectorAll(".s05-micro");
+            const chrome = root.querySelectorAll(".s05-chrome, .s05-progress");
+            const marker = root.querySelector(".s05-progress-marker");
+            const flash = root.querySelector(".s05-flash");
 
-          window.__timelines = window.__timelines || {};
-          window.__anchors = window.__anchors || {};
-          window.__anchors[compositionId] = {
-            enter: { dir: "right", blurPeak: 40, x: 0.074, y: 0.6, handoffAnchor: "right-whip-in" },
-            exit: { x: 0.074, y: 0.6, handoffAnchor: "hero-baseline-left" }
-          };
+            window.__timelines = window.__timelines || {};
+            window.__anchors = window.__anchors || {};
+            window.__anchors[compositionId] = {
+              enter: { dir: "right", cx: 0.5, cy: 0.6, handoffAnchor: "right-whip-in" },
+              exit: { cx: 0.5, cy: 0.6, handoffAnchor: "center-slam" }
+            };
 
-          const tl = gsap.timeline({ paused: true });
+            const tl = gsap.timeline({ paused: true });
 
-          tl.set(stage, { filter: "url(#v7s-s05-whip-blur)", x: 2360, skewX: -9 })
-            .set(blur, { attr: { stdDeviation: "40 2" } })
-            .set(first, { opacity: 0, x: 104, skewX: -12, transformOrigin: "left center" })
-            .set(second, { opacity: 0, x: 132, y: -22, scale: 0.78, skewX: -12, transformOrigin: "left center" })
-            .set(strobe, { opacity: 0 })
-            .to(stage, { x: 42, skewX: -1.5, duration: 0.21, ease: "power4.out" }, 0)
-            .to(blur, { attr: { stdDeviation: "0 0" }, duration: 0.19, ease: "power4.out" }, 0)
-            .to(stage, { x: 0, skewX: 0, duration: 0.12, ease: "power2.out" }, 0.33)
-            .to(first, { opacity: 1, x: 0, skewX: 0, duration: 0.32, ease: "power4.out" }, 0.12)
-            .to(second, { opacity: 1, x: 0, y: 0, scale: 1, skewX: 0, duration: 0.27, ease: "back.out(1.9)" }, 0.5106)
-            .to(strobe, { opacity: 0.42, duration: 0.055, ease: "none" }, 1.0212)
-            .to(strobe, { opacity: 0, duration: 0.11, ease: "power2.out" }, 1.0762)
-            .to(stage, { x: -14, duration: 0.03, ease: "none" }, 1.0212)
-            .to(stage, { x: 10, duration: 0.03, ease: "none" }, 1.0512)
-            .to(stage, { x: -6, duration: 0.03, ease: "none" }, 1.0812)
-            .to(stage, { x: 0, duration: 0.03, ease: "none" }, 1.1112);
+            tl.addLabel("whip-in", 0)
+              .addLabel("slam", 0.375)
+              .set(stage, { x: 216, skewX: -3, transformOrigin: "right center" }, 0)
+              .set(heroFrame, { xPercent: -50, x: -216, y: 24, scale: 0.66, opacity: 0.88, transformOrigin: "center center" }, 0)
+              .set(ghostField, { x: 540, y: 0, filter: "brightness(0.8)" }, 0)
+              .set(whipField, { x: 680, skewX: -10, filter: "blur(12px)", transformOrigin: "right center" }, 0)
+              .set([subline, micro, chrome], { opacity: 0, y: 12 }, 0)
+              .set(marker, { opacity: 0, scaleY: 0.4, transformOrigin: "center center" }, 0)
+              .set(flash, { opacity: 0 }, 0)
+              .to(stage, { x: 0, skewX: 0, duration: 0.375, ease: "power4.out" }, "whip-in")
+              .to(heroFrame, { x: 0, y: 0, scale: 1, opacity: 1, duration: 0.375, ease: "back.out(2.6)" }, "whip-in")
+              .to(ghostField, { x: 0, duration: 0.375, ease: "power4.out" }, "whip-in")
+              .to(whipField, { x: 0, skewX: 0, filter: "blur(0px)", duration: 0.375, ease: "power4.out" }, "whip-in")
+              .to([subline, micro, chrome], { opacity: 1, y: 0, duration: 0.225, stagger: 0.018, ease: "power3.out" }, 0.075)
+              .to(marker, { opacity: 1, scaleY: 1, duration: 0.18, ease: "power3.out" }, 0.15)
+              .to(flash, { opacity: 0.48, duration: 0.045, ease: "none" }, "slam")
+              .to(flash, { opacity: 0, duration: 0.075, ease: "power2.out" }, 0.42)
+              .to(ghostField, { filter: "brightness(2.1)", duration: 0.045, ease: "none" }, "slam")
+              .to(ghostField, { filter: "brightness(1)", duration: 0.18, ease: "power2.out" }, 0.42)
+              .to(stage, { x: -14, duration: 0.03, ease: "none" }, "slam")
+              .to(stage, { x: 10, duration: 0.03, ease: "none" }, 0.405)
+              .to(stage, { x: -6, duration: 0.03, ease: "none" }, 0.435)
+              .to(stage, { x: 0, duration: 0.03, ease: "none" }, 0.465)
+              .to(ghostField, { y: -16, duration: 0.375, ease: "power1.inOut" }, 0.75)
+              .to(whipField, { x: -54, duration: 0.375, ease: "power1.inOut" }, 0.75)
+              .to([subline, micro], { y: -4, duration: 0.18, ease: "power1.out" }, 1.125);
 
-          window.__timelines[compositionId] = tl;
-          tl.seek(0);
-        })();
+            window.__timelines[compositionId] = tl;
+            tl.seek(0);
+          })();
       </script>
     </template>
   </body>

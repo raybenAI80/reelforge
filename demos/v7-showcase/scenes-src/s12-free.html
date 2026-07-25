@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>ReelForge v7 — Seal</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        #v7s-s12 {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          isolation: isolate;
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+        }
+
+        #v7s-s12 .s12-surface,
+        #v7s-s12 .s12-stage {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+
+        #v7s-s12 .s12-surface {
+          background: var(--rf-bg, #010102);
+        }
+
+        #v7s-s12 .s12-stage {
+          isolation: isolate;
+          will-change: filter, opacity;
+          animation: v7s-s12-breathe 1.02s ease-in-out calc(var(--rf-scene-start, 0s) + 1.2s) infinite alternate;
+        }
+
+        #v7s-s12 .s12-stripe {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: -21%;
+          z-index: 0;
+          width: 36%;
+          background: var(--rf-surface-2, #121317);
+          clip-path: polygon(32% 0, 100% 0, 68% 100%, 0 100%);
+          opacity: 0.18;
+          will-change: transform, opacity;
+        }
+
+        #v7s-s12 .s12-sweep {
+          position: absolute;
+          top: 0;
+          right: -27%;
+          z-index: 0;
+          width: 45%;
+          height: 100%;
+          background: var(--rf-surface-3, #1a1c22);
+          clip-path: polygon(0 0, 100% 0, 75% 100%, 0 100%);
+          opacity: 0.14;
+          will-change: transform, opacity;
+        }
+
+        #v7s-s12 .s12-ghost {
+          position: absolute;
+          z-index: 0;
+          margin: 0;
+          color: var(--rf-bg, #010102);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: clamp(430px, 35vw, 680px);
+          font-weight: 800;
+          letter-spacing: -0.075em;
+          line-height: 0.76;
+          white-space: nowrap;
+          -webkit-text-stroke: 1px var(--rf-hairline-strong, #3a3c46);
+          opacity: 0.36;
+          pointer-events: none;
+          will-change: transform, opacity;
+        }
+
+        #v7s-s12 .s12-ghost--one {
+          top: -9%;
+          left: -12%;
+          transform: rotate(-4deg);
+        }
+
+        #v7s-s12 .s12-ghost--two {
+          right: -15%;
+          bottom: -22%;
+          opacity: 0.2;
+          transform: rotate(-4deg);
+        }
+
+        #v7s-s12 .s12-chrome,
+        #v7s-s12 .s12-url {
+          margin: 0;
+          color: var(--rf-ink-subtle, #8a8f98);
+          font-family: var(--rf-font-mono, "Pretendard Mono Fallback", ui-monospace, monospace);
+          font-size: 13px;
+          font-weight: 400;
+          letter-spacing: 0.14em;
+          line-height: 1;
+          white-space: nowrap;
+          will-change: transform, opacity;
+        }
+
+        #v7s-s12 .s12-chrome {
+          position: absolute;
+          z-index: 4;
+          top: 8%;
+          left: 7.4%;
+        }
+
+        #v7s-s12 .s12-hero-anchor {
+          position: absolute;
+          z-index: 4;
+          top: 60%;
+          left: 7.4%;
+          transform: translateY(-0.76em);
+        }
+
+        #v7s-s12 .s12-hero {
+          margin: 0;
+          color: var(--rf-text, #ffffff);
+          font-family: var(--rf-font-sans, "Pretendard", system-ui, sans-serif);
+          font-size: clamp(120px, 10vw, 190px);
+          font-weight: 800;
+          letter-spacing: -0.045em;
+          line-height: 0.96;
+          white-space: nowrap;
+          word-break: keep-all;
+          will-change: transform, opacity;
+        }
+
+        #v7s-s12 .s12-url {
+          position: absolute;
+          z-index: 4;
+          top: 69.2%;
+          left: 7.4%;
+        }
+
+        #v7s-s12 .s12-seal-anchor {
+          position: absolute;
+          z-index: 3;
+          top: 18.5%;
+          left: 50%;
+          width: min(25vw, 480px);
+          aspect-ratio: 1;
+          transform: translateX(-50%);
+          pointer-events: none;
+        }
+
+        #v7s-s12 .s12-seal {
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+          will-change: transform, opacity;
+        }
+
+        #v7s-s12 .s12-check {
+          fill: none;
+          stroke: var(--rf-success, #3fb950);
+          stroke-linecap: square;
+          stroke-linejoin: miter;
+          stroke-width: 58;
+          vector-effect: non-scaling-stroke;
+          will-change: stroke-dashoffset;
+        }
+
+        #v7s-s12 .s12-strobe {
+          position: absolute;
+          inset: 0;
+          z-index: 5;
+          background: var(--rf-surface-3, #1a1c22);
+          mix-blend-mode: screen;
+          opacity: 0;
+          pointer-events: none;
+          will-change: opacity;
+        }
+
+        #v7s-s12 .s12-progress {
+          position: absolute;
+          right: 0;
+          bottom: 8%;
+          left: 0;
+          z-index: 6;
+          height: 1px;
+          background: var(--rf-hairline, #26272e);
+          transform-origin: left center;
+          will-change: transform, opacity;
+        }
+
+        #v7s-s12 .s12-progress-marker {
+          position: absolute;
+          top: -7px;
+          left: calc(100% - 1px);
+          width: 1px;
+          height: 15px;
+          background: var(--rf-text, #ffffff);
+          transform-origin: center;
+          will-change: transform, opacity;
+        }
+
+        @keyframes v7s-s12-breathe {
+          from {
+            filter: brightness(1);
+            opacity: 0.88;
+          }
+
+          to {
+            filter: brightness(1.22);
+            opacity: 1;
+          }
+        }
+      </style>
+
+      <main id="v7s-s12" data-rf-fragment-version="1.0" data-composition-id="v7s-s12">
+        <div class="s12-surface" aria-hidden="true"></div>
+        <div class="s12-stage">
+          <div class="s12-stripe" aria-hidden="true"></div>
+          <div class="s12-sweep" aria-hidden="true"></div>
+          <p class="s12-ghost s12-ghost--one" aria-hidden="true">ReelForge v7</p>
+          <p class="s12-ghost s12-ghost--two" aria-hidden="true">ReelForge v7</p>
+
+          <p class="s12-chrome">12 — SEAL</p>
+          <div class="s12-hero-anchor"><h1 class="s12-hero">ReelForge v7</h1></div>
+          <p class="s12-url">github.com/kimsh-1/reelforge</p>
+
+          <div class="s12-seal-anchor" aria-hidden="true">
+            <svg class="s12-seal" viewBox="0 0 480 480" preserveAspectRatio="xMidYMid meet">
+              <path class="s12-check" d="M 94 238 L 197 341 L 388 126"></path>
+            </svg>
+          </div>
+
+          <div class="s12-strobe" aria-hidden="true"></div>
+          <div class="s12-progress" aria-hidden="true"><span class="s12-progress-marker"></span></div>
+        </div>
+      </main>
+
+      <script>
+        (() => {
+          const compositionId = "v7s-s12";
+          const root = document.querySelector(`[data-composition-id="${compositionId}"]`);
+          if (!root) return;
+
+          const beat = 0.375;
+          const chrome = root.querySelector(".s12-chrome");
+          const hero = root.querySelector(".s12-hero");
+          const url = root.querySelector(".s12-url");
+          const stripe = root.querySelector(".s12-stripe");
+          const sweep = root.querySelector(".s12-sweep");
+          const ghostOne = root.querySelector(".s12-ghost--one");
+          const ghostTwo = root.querySelector(".s12-ghost--two");
+          const seal = root.querySelector(".s12-seal");
+          const check = root.querySelector(".s12-check");
+          const strobe = root.querySelector(".s12-strobe");
+          const progress = root.querySelector(".s12-progress");
+          const progressMarker = root.querySelector(".s12-progress-marker");
+          const fallbackLength = 520;
+          const measuredLength = typeof check.getTotalLength === "function" ? check.getTotalLength() : fallbackLength;
+          const checkLength = Number.isFinite(measuredLength) && measuredLength > 0 ? measuredLength : fallbackLength;
+
+          window.__timelines = window.__timelines || {};
+          const tl = gsap.timeline({ paused: true });
+
+          tl.addLabel("seal-draw", 0)
+            .addLabel("seal-lock", beat * 2)
+            .set(check, { strokeDasharray: checkLength, strokeDashoffset: checkLength })
+            .set([chrome, url], { opacity: 0 })
+            .set(chrome, { y: -12 })
+            .set(url, { y: 9 })
+            .set(hero, { x: -24, opacity: 0.82 })
+            .set(stripe, { xPercent: -22, opacity: 0.08 })
+            .set(sweep, { xPercent: 24, opacity: 0.06 })
+            .set(ghostOne, { x: -56, opacity: 0.16 })
+            .set(ghostTwo, { x: 48, opacity: 0.08 })
+            .set(seal, { scale: 0.9, opacity: 1, transformOrigin: "50% 50%" })
+            .set(progress, { scaleX: 0, opacity: 0 })
+            .set(progressMarker, { scaleY: 0, opacity: 0, transformOrigin: "50% 50%" })
+            .to(hero, { x: 0, opacity: 1, duration: beat, ease: "power4.out" }, 0)
+            .to(chrome, { opacity: 1, y: 0, duration: 0.24, ease: "power3.out" }, 0)
+            .to(url, { opacity: 1, y: 0, duration: 0.24, ease: "power3.out" }, beat)
+            .to(stripe, { xPercent: 0, opacity: 0.18, duration: beat, ease: "power3.out" }, 0)
+            .to(sweep, { xPercent: 0, opacity: 0.14, duration: beat, ease: "power3.out" }, beat)
+            .to(ghostOne, { x: 0, opacity: 0.36, duration: beat, ease: "power3.out" }, beat)
+            .to(ghostTwo, { x: 0, opacity: 0.2, duration: beat, ease: "power3.out" }, beat * 2)
+            .to(check, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 0)
+            .to(seal, { scale: 1.07, duration: 0.075, ease: "power4.out" }, beat * 2)
+            .to(seal, { scale: 1, duration: beat, ease: "power3.out" }, beat * 2 + 0.075)
+            .to(strobe, { opacity: 0.15, duration: 0.06, ease: "none" }, beat * 2)
+            .to(strobe, { opacity: 0, duration: 0.09, ease: "power2.out" }, beat * 2 + 0.06)
+            .to(progress, { scaleX: 1, opacity: 1, duration: beat, ease: "power3.out" }, beat * 2)
+            .to(progressMarker, { scaleY: 1, opacity: 1, duration: 0.15, ease: "power3.out" }, beat * 2 + 0.15);
+
+          window.__timelines[compositionId] = tl;
+          tl.seek(0);
+        })();
+      </script>
+    </template>
+  </body>
+</html>
