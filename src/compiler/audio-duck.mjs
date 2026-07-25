@@ -167,6 +167,11 @@ export function buildDuckingFromAudioMeta({
 
 export function emitDuckingTimeline({ keyframes, targetId = "rf-bgm" }) {
   if (!Array.isArray(keyframes) || keyframes.length === 0) return [];
+  // Constant-volume keyframes (no real ducking) must not emit timeline lines:
+  // the static data-volume attribute already carries the value, and any scripted
+  // volume tween forces the renderer's composition-probe session, which hangs
+  // in beginframe mode on WSL boxes (probe waits on media readiness forever).
+  if (keyframes.every((keyframe) => keyframe.volume === keyframes[0].volume)) return [];
   const selector = cssString(`#${targetId}`);
   const lines = [`        tl.set(${selector}, { volume: ${keyframes[0].volume} }, 0);`];
   for (let index = 1; index < keyframes.length; index += 1) {
@@ -183,17 +188,17 @@ export function emitDuckingTimeline({ keyframes, targetId = "rf-bgm" }) {
 }
 
 export function applyDuckingToIndexHtml({ html, keyframes, targetId = "rf-bgm" }) {
+  if (!Array.isArray(keyframes) || keyframes.length === 0) return html;
   const lines = emitDuckingTimeline({ keyframes, targetId });
-  if (lines.length === 0) return html;
 
   const volume = keyframes[0].volume;
-  const registrationNeedle = '        window.__timelines["main"] = tl;';
-  if (!html.includes(registrationNeedle)) throw new Error("index HTML is missing main timeline registration");
-
   const audioPattern = new RegExp(`(<audio\\s+[\\s\\S]*?id="${targetId}"[\\s\\S]*?data-volume=")[^"]+("[\\s\\S]*?</audio>)`);
   if (!audioPattern.test(html)) throw new Error(`index HTML is missing #${targetId} audio data-volume`);
   const withVolume = html.replace(audioPattern, `$1${volume}$2`);
+  if (lines.length === 0) return withVolume;
 
+  const registrationNeedle = '        window.__timelines["main"] = tl;';
+  if (!withVolume.includes(registrationNeedle)) throw new Error("index HTML is missing main timeline registration");
   return withVolume.replace(registrationNeedle, `${lines.join("\n")}\n${registrationNeedle}`);
 }
 

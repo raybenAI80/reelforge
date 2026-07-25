@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "projectId": "gallery-harness",
+  "scenes": [
+    {
+      "sceneId": "s01",
+      "sceneNumber": 1,
+      "narration": " ",
+      "narration_tts": " ",
+      "altText": "어두운 전체 화면 중앙의 흰색 '장면은 계속 살아 있다' 문구가 나타나고, 뒤의 청록 빛이 천천히 밝아진다.",
+      "layout": "free",
+      "sourceHtml": "scenes-src/s01-free.html",
+      "mood": "informative",
+      "reveal": "fade_in",
+      "emphasis": "keyword",
+      "headline": "장면은 계속 살아 있다",
+      "items": [],
+      "source": "fixture:gallery-harness",
+      "visual_kind": "none",
+      "kenBurns": {
+        "enabled": false,
+        "zoomFactor": 1,
+        "zoomDirection": "in",
+        "panDirection": "none"
+      },
+      "subtitleMode": "keyword"
+    }
+  ],
+  "transitions": []
+}

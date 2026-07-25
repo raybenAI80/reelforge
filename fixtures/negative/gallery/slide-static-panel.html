@@ -1,0 +1,97 @@
+<!--
+  Expected gallery-verify rejection: frozen-motion.
+  Every panel element enters once and then freezes; the background is intentionally static.
+-->
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Negative fixture — static panel slide</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        .negative-static-panel {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: var(--rf-bg, #111216);
+          color: var(--rf-text, #f8f7f2);
+          font-family: "Pretendard", system-ui, sans-serif;
+        }
+
+        .negative-static-panel .static-panel {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          box-sizing: border-box;
+          width: min(72vw, 1380px);
+          min-height: 440px;
+          padding: 78px 94px;
+          border: 1px solid var(--rf-hairline-strong, rgba(255, 255, 255, 0.22));
+          background: var(--rf-surface-2, #1b1d23);
+          transform: translate(-50%, -50%);
+        }
+
+        .negative-static-panel .eyebrow {
+          margin: 0 0 26px;
+          color: var(--rf-accent, #7dd3fc);
+          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          line-height: 1;
+        }
+
+        .negative-static-panel .headline {
+          margin: 0;
+          font-size: clamp(66px, 5.5vw, 106px);
+          font-weight: 800;
+          letter-spacing: -0.06em;
+          line-height: 1.08;
+        }
+
+        .negative-static-panel .rule {
+          width: 100%;
+          height: 1px;
+          margin: 46px 0 28px;
+          background: var(--rf-hairline, rgba(255, 255, 255, 0.14));
+        }
+
+        .negative-static-panel .detail {
+          margin: 0;
+          color: var(--rf-muted-text, #a6a9b0);
+          font-size: clamp(24px, 1.8vw, 34px);
+          font-weight: 500;
+          letter-spacing: -0.02em;
+          line-height: 1.35;
+        }
+      </style>
+      <main
+        class="negative-static-panel"
+        data-rf-fragment-version="1.0"
+        data-composition-id="negative-slide-static-panel"
+      >
+        <section class="static-panel">
+          <p class="eyebrow">STATUS / COMPLETE</p>
+          <h1 class="headline">이제 실행만 남았습니다</h1>
+          <div class="rule" aria-hidden="true"></div>
+          <p class="detail">모든 준비가 끝난 정적인 안내 패널</p>
+        </section>
+      </main>
+      <script>
+        const root = document.querySelector('[data-composition-id="negative-slide-static-panel"]');
+        const panel = root.querySelector(".static-panel");
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+
+        tl.set(panel, { opacity: 0, y: 24 })
+          .to(panel, { opacity: 1, y: 0, duration: 0.28, ease: "power2.out" }, 0);
+
+        window.__timelines["negative-slide-static-panel"] = tl;
+        tl.seek(0);
+      </script>
+    </template>
+  </body>
+</html>

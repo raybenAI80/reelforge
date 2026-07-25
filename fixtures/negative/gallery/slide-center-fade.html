@@ -1,0 +1,75 @@
+<!--
+  Expected gallery-verify rejection: frozen-motion.
+  The centered headline and subtext fade in once, then deliberately have zero living motion.
+-->
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Negative fixture — center fade slide</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        .negative-center-fade {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: var(--rf-bg, #111216);
+          color: var(--rf-text, #f8f7f2);
+          font-family: "Pretendard", system-ui, sans-serif;
+        }
+
+        .negative-center-fade .slide-copy {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+
+        .negative-center-fade .headline {
+          margin: 0;
+          font-size: clamp(96px, 8.2vw, 158px);
+          font-weight: 800;
+          letter-spacing: -0.065em;
+          line-height: 1.04;
+        }
+
+        .negative-center-fade .subtext {
+          margin: 30px 0 0;
+          color: var(--rf-muted-text, #a6a9b0);
+          font-size: clamp(27px, 2vw, 40px);
+          font-weight: 500;
+          letter-spacing: -0.025em;
+          line-height: 1.35;
+        }
+      </style>
+      <main
+        class="negative-center-fade"
+        data-rf-fragment-version="1.0"
+        data-composition-id="negative-slide-center-fade"
+      >
+        <section class="slide-copy">
+          <h1 class="headline">한 장으로 끝내는 요약</h1>
+          <p class="subtext">핵심만 남기면 충분합니다</p>
+        </section>
+      </main>
+      <script>
+        const root = document.querySelector('[data-composition-id="negative-slide-center-fade"]');
+        const copy = root.querySelector(".slide-copy");
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+
+        tl.set(copy, { opacity: 0 })
+          .to(copy, { opacity: 1, duration: 0.24, ease: "power1.out" }, 0);
+
+        window.__timelines["negative-slide-center-fade"] = tl;
+        tl.seek(0);
+      </script>
+    </template>
+  </body>
+</html>
