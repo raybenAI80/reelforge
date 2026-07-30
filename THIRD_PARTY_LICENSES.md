@@ -28,7 +28,7 @@ Font policy follows the project font-license recheck (2026-07, archived): OFL fo
 
 ## BGM and SFX
 
-`assets/bgm/` is a placeholder only. Future BGM may use verified FreePD CC0 tracks or Incompetech CC-BY 4.0 tracks with required credit text. SFX must not be copied from the hyperframes npm package into this repository; use the npm dependency at runtime unless a track-level redistribution license is proven.
+`assets/bgm/` holds no tracks itself; committed demo BGM (`demos/*/assets/audio/bgm.mp3`) is FreePD CC0 with full per-track provenance (title, composer, source URL, license URL, hashes, processing) recorded in `assets/bgm/PROVENANCE.md`. Future BGM may use verified FreePD CC0 tracks or Incompetech CC-BY 4.0 tracks with required credit text. SFX must not be copied from the hyperframes npm package into this repository; use the npm dependency at runtime unless a track-level redistribution license is proven.
 
 ## Explicitly Forbidden or Restricted
 
