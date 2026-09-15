@@ -325,7 +325,7 @@ function enhancedSubtitleCss(style) {
           text-align: center;
           white-space: normal;
           word-break: keep-all;
-          overflow-wrap: anywhere;
+          overflow-wrap: break-word;
           -webkit-text-stroke: ${strokeWidth}px var(--rf-subtitle-stroke-color);
           text-stroke: ${strokeWidth}px var(--rf-subtitle-stroke-color);
           paint-order: stroke fill;

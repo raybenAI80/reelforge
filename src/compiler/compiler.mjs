@@ -379,7 +379,7 @@ function subtitleCss(tokens) {
           line-height: ${subtitle.lineHeight};
           text-align: center;
           text-wrap: balance;
-          overflow-wrap: anywhere;
+          overflow-wrap: break-word;
           -webkit-text-stroke: ${subtitle.strokeWidth}px ${subtitle.strokeColor};
           paint-order: stroke fill;
           opacity: ${subtitle.visible ? 1 : 0};
@@ -689,7 +689,7 @@ ${fontFaceCss(tokens)}
           line-height: 1.04;
           letter-spacing: 0;
           word-break: keep-all;
-          overflow-wrap: anywhere;
+          overflow-wrap: break-word;
         }
         .scene-content.has-image-asset h1 {
           color: #F8FAFC;
